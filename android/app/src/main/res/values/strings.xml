@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">rsl-az</string>
+    <string name="title_activity_main">rsl-az</string>
+    <string name="package_name">com.turvick.rslaz</string>
+    <string name="fileprovider_authority">com.turvick.rslaz.fileprovider</string>
+    <string name="custom_url_scheme">com.turvick.rslaz</string>
+</resources>
