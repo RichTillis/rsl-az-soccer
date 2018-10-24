@@ -1,0 +1,48 @@
+<ion-header>
+
+  <ion-toolbar color="tertiary">
+    <ion-title text-center>New Account</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding color="primary">
+  <div text-center class="logo"><img src="assets/images/RSL_AZ_logo_smaller.png" /></div>
+
+  <ion-item class="white-background border-radius-top-10">
+    <ion-input type="email" placeholder="Email" [(ngModel)]="registerData.email" name="email"></ion-input>
+  </ion-item>
+  <ion-item class="white-background">
+    <ion-input type="password" placeholder="Password" [(ngModel)]="registerData.password" name="password"></ion-input>
+  </ion-item>
+  <ion-item class="white-background">
+    <ion-input type="password" placeholder="Confirm Password" [(ngModel)]="registerData.confirmPassword" name="password"></ion-input>
+  </ion-item>
+  <ion-button class="border-radius-bottom-10" expand="full" color="secondary" (click)="registerWithEmail()">Sign Up With
+    Email</ion-button>
+
+  <ion-grid class="bottom-padding-2 em">
+    <ion-row align-items-end>
+      <ion-col>
+        <div text-center>
+          <ion-button fill="clear" class="existing-account" (click)="routeToLogin()">Already Have an Account?</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card>
+    <ion-card-content class="white-background">
+      <ion-button expand="full" (click)="loginWithFacebook()">Continue With Facebook</ion-button>
+      <div class="bottom-padding-1em"></div>
+      <ion-button expand="full" (click)="loginWithGoogle()">Continue with Google</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+
+  <!-- <ion-item>
+      <ion-label class="text-color-white">By creating an account you agree to the terms of service here</ion-label>
+    </ion-item> -->
+
+
+</ion-content>

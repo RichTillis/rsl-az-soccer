@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-toolbar color="tertiary">
-    <ion-title text-center>New Account</ion-title>
+    <ion-title text-center>Login</ion-title>
   </ion-toolbar>
 
 </ion-header>
@@ -15,17 +15,20 @@
   <ion-item class="white-background">
     <ion-input type="password" placeholder="Password" [(ngModel)]="loginData.password" name="password"></ion-input>
   </ion-item>
-  <ion-item class="white-background">
-    <ion-input type="password" placeholder="Confirm Password" [(ngModel)]="loginData.confirmPassword" name="password"></ion-input>
-  </ion-item>
-  <ion-button class="border-radius-bottom-10" expand="full" color="secondary" (click)="loginWithEmail()">Sign Up With
+  <ion-button class="border-radius-bottom-10" expand="full" color="secondary" (click)="loginWithEmail()">Login With
     Email</ion-button>
+
 
   <ion-grid class="bottom-padding-2 em">
     <ion-row align-items-end>
       <ion-col>
         <div text-center>
-          <ion-button fill="clear" class="existing-account" (click)="routeToLogin()">Already Have an Account?</ion-button>
+          <ion-button fill="clear" class="new-user" (click)="forgotPassword()">Forgot Password?</ion-button>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div text-center>
+          <ion-button fill="clear" class="new-user" (click)="routeToSignUp()">New User?</ion-button>
         </div>
       </ion-col>
     </ion-row>
@@ -33,16 +36,16 @@
 
   <ion-card>
     <ion-card-content class="white-background">
-      <ion-button expand="full" (click)="loginWithFacebook()">Sign Up With Facebook</ion-button>
+      <ion-button expand="full" (click)="loginWithFacebook()">Login With Facebook</ion-button>
       <div class="bottom-padding-1em"></div>
-      <ion-button expand="full" (click)="loginWithGoogle()">Sign Up with Google</ion-button>
+      <ion-button expand="full" (click)="loginWithGoogle()">Login with Google</ion-button>
     </ion-card-content>
   </ion-card>
 
 
   <!-- <ion-item>
-      <ion-label class="text-color-white">By creating an account you agree to the terms of service here</ion-label>
-    </ion-item> -->
+    <ion-label class="text-color-white">By creating an account you agree to the terms of service here</ion-label>
+  </ion-item> -->
 
 
 </ion-content>

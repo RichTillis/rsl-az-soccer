@@ -10,6 +10,11 @@ import { AppRoutingModule } from "./app-routing.module";
 
 import { AuthGuardService } from "./services/auth-guard.service";
 
+import { Facebook } from "@ionic-native/facebook/ngx";
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -17,11 +22,14 @@ import { AuthGuardService } from "./services/auth-guard.service";
     BrowserModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthGuardService
+    AuthGuardService,
+    Facebook,
+    GooglePlus
   ],
   bootstrap: [AppComponent]
 })
