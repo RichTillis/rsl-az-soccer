@@ -20,9 +20,10 @@ export class LoginPage implements OnInit {
     public navCtrl: NavController,
     private authService: AuthenticationService
   ) {
+
     this.loginForm = new FormGroup({
       email: new FormControl("", Validators.required),
-      password: new FormControl("test", Validators.required)
+      password: new FormControl("", Validators.required)
     });
   }
 
@@ -32,10 +33,14 @@ export class LoginPage implements OnInit {
     this.navCtrl.navigateForward("/register");
   }
 
+  routeToForgotPassword(): void {
+    this.navCtrl.navigateForward("/forgotPassword");
+  }
+
   loginWithEmail() {
     this.authService.login();
   }
-  
+
   loginWithFacebook(): void {}
 
   loginWithGoogle(): void {}

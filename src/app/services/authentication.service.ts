@@ -40,4 +40,7 @@ export class AuthenticationService {
   isAuthenticated(){
     return this.authenticationState.value;
   }
+  resetPassword(){
+    
+  }
 }

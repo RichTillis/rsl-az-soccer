@@ -28,8 +28,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthGuardService,
-    Facebook,
-    GooglePlus
   ],
   bootstrap: [AppComponent]
 })
