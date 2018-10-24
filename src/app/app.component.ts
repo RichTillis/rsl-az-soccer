@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { Plugins } from "@capacitor/core";
+
 const { SplashScreen, StatusBar } = Plugins;
 
 @Component({
