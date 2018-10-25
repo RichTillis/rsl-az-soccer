@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Validators, FormGroup, FormControl } from "@angular/forms";
-import { NavController } from "@ionic/angular";
+import { NavController, AlertController } from "@ionic/angular";
+
+import { AuthenticationService } from "../../services/authentication.service";
 
 @Component({
   selector: "app-register",
@@ -16,7 +18,11 @@ export class RegisterPage implements OnInit {
     confirmPassword: ""
   };
 
-  constructor(public navCtrl: NavController) {
+  constructor(
+    public navCtrl: NavController,
+    private alertController: AlertController,
+    private authService: AuthenticationService
+  ) {
     this.registerForm = new FormGroup({
       email: new FormControl("", Validators.required),
       password: new FormControl("test", Validators.required),
@@ -25,7 +31,7 @@ export class RegisterPage implements OnInit {
   }
 
   ngOnInit() {}
-  
+
   routeToLogin(): void {
     this.navCtrl.navigateBack("/login");
   }
@@ -33,26 +39,38 @@ export class RegisterPage implements OnInit {
   registerWithEmail() {
     if (this.registerData.password != this.registerData.confirmPassword) {
       this.displayAlert(
-        "Password Problem!",
-        "Passwords do not match, please try again."
+        "Whoops",
+        "Password Problem",
+        "Passwords don't match, please try again."
       );
       this.registerData.password = "";
       this.registerData.confirmPassword = "";
     } else {
-      // this.afAuth.auth.createUserWithEmailAndPassword(this.register.email, this.register.password)
-      //   .then(res => this.registerSuccess(res))
-      //   .catch(err => this.displayAlert('Error!', err));
+      this.authService
+        .createUserWithEmailAndPassword(
+          this.registerData.email,
+          this.registerData.password
+        )
+        .then(res => this.registerSuccess(res))
+        .catch(err =>
+          this.displayAlert("Whoops", "Something Bad Happened", err)
+        );
     }
   }
 
-  displayAlert(alertTitle, alertSub) {
-    // let theAlert = this.alertCtrl.create({
-    //   title: alertTitle,
-    //   subTitle: alertSub,
-    //   buttons: ['OK']
-    // });
-    // theAlert.present();
+  async displayAlert(headerTitle, subHeaderTitle, messageBody) {
+    const alert = await this.alertController.create({
+      header: headerTitle,
+      subHeader: subHeaderTitle,
+      message: messageBody,
+      buttons: ["OK"]
+    });
+
+    await alert.present();
   }
 
-  registerSuccess(result) {}
+  registerSuccess(result) {
+    console.log(result);
+    this.displayAlert("Welcome!", null, "Registration Successful");
+  }
 }

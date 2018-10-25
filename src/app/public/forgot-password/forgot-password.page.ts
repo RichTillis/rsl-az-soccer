@@ -29,7 +29,7 @@ export class ForgotPasswordPage implements OnInit {
   ngOnInit() {}
 
   resetPassword(): void {
-    // this.authService.resetPassword();
+    this.authService.resetPassword(this.forgotPasswordData.email);
     this.displayAlert();
     this.navCtrl.navigateBack("/login");
   }

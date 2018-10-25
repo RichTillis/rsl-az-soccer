@@ -14,6 +14,10 @@ import { Facebook } from "@ionic-native/facebook/ngx";
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from "@angular/fire/database";
+
+// firebase auth config
+import { firebaseConfig } from '../../firebase.auth';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +27,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
-
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

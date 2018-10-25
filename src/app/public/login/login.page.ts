@@ -11,6 +11,7 @@ import { AuthenticationService } from "../../services/authentication.service";
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
+  error: string;
 
   loginData = {
     email: "",
@@ -20,7 +21,6 @@ export class LoginPage implements OnInit {
     public navCtrl: NavController,
     private authService: AuthenticationService
   ) {
-
     this.loginForm = new FormGroup({
       email: new FormControl("", Validators.required),
       password: new FormControl("", Validators.required)
@@ -37,8 +37,17 @@ export class LoginPage implements OnInit {
     this.navCtrl.navigateForward("/forgotPassword");
   }
 
-  loginWithEmail() {
-    this.authService.login();
+  async loginWithEmail() {
+    try {
+      await this.authService.doEmailLogin(
+        this.loginData.email,
+        this.loginData.password
+      );
+      this.loginData.email = "";
+      this.loginData.password = "";
+    } catch (err) {
+      this.error = err.message;
+    }
   }
 
   loginWithFacebook(): void {}
