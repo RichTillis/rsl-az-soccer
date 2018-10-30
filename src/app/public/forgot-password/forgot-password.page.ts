@@ -29,9 +29,14 @@ export class ForgotPasswordPage implements OnInit {
   ngOnInit() {}
 
   resetPassword(): void {
-    this.authService.resetPassword(this.forgotPasswordData.email);
-    this.displayAlert();
-    this.navCtrl.navigateBack("/login");
+    this.authService.resetPassword(this.forgotPasswordData.email).then(resp => {
+      if (resp === "auth/user-not-found") {
+        this.displayUserNotFound();
+      } else {
+        this.displayAlert();
+        this.navCtrl.navigateBack("/login");
+      }
+    });
   }
 
   routeToSignUp(): void {
@@ -44,10 +49,19 @@ export class ForgotPasswordPage implements OnInit {
 
   async displayAlert() {
     const alert = await this.alertController.create({
-      header: "Password Reset",
-      subHeader: "Request Submitted",
+      header: "Request Submitted",
       message:
-        "If the email address you submitted exists in our system, you'll receive an email with instructions on how to reset your password",
+        "An email is on the way with instructions to reset your password",
+      buttons: ["OK"]
+    });
+
+    await alert.present();
+  }
+
+  async displayUserNotFound() {
+    const alert = await this.alertController.create({
+      header: "Email Not Found",
+      message: "That email address does not exist in the system",
       buttons: ["OK"]
     });
 
