@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Validators, FormGroup, FormControl } from "@angular/forms";
-import { NavController, AlertController } from "@ionic/angular";
+import { NavController } from "@ionic/angular";
 
 import { AuthenticationService } from "../../services/authentication.service";
+import { UtilService } from "../../services/util.service";
 
 @Component({
   selector: "app-register",
@@ -20,8 +21,8 @@ export class RegisterPage implements OnInit {
 
   constructor(
     public navCtrl: NavController,
-    private alertController: AlertController,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private utilService: UtilService
   ) {
     this.registerForm = new FormGroup({
       email: new FormControl("", Validators.required),
@@ -38,10 +39,10 @@ export class RegisterPage implements OnInit {
 
   registerWithEmail() {
     if (this.registerData.password != this.registerData.confirmPassword) {
-      this.displayAlert(
+      this.utilService.displayOkAlert(
         "Whoops",
         "Password Problem",
-        "Passwords don't match, please try again."
+        "Passwords don't match, please try again"
       );
       this.registerData.password = "";
       this.registerData.confirmPassword = "";
@@ -53,24 +54,17 @@ export class RegisterPage implements OnInit {
         )
         .then(res => this.registerSuccess(res))
         .catch(err =>
-          this.displayAlert("Whoops", "Something Bad Happened", err)
+          this.utilService.displayOkAlert(
+            "Whoops",
+            "Something Bad Happened",
+            err
+          )
         );
     }
   }
 
-  async displayAlert(headerTitle, subHeaderTitle, messageBody) {
-    const alert = await this.alertController.create({
-      header: headerTitle,
-      subHeader: subHeaderTitle,
-      message: messageBody,
-      buttons: ["OK"]
-    });
-
-    await alert.present();
-  }
-
   registerSuccess(result) {
     console.log(result);
-    this.displayAlert("Welcome!", null, "Registration Successful");
+    this.utilService.displayOkAlert("Welcome", null, "Registration Successful");
   }
 }

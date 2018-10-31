@@ -3,6 +3,7 @@ import { NavController } from "@ionic/angular";
 
 import { Validators, FormGroup, FormControl } from "@angular/forms";
 import { AuthenticationService } from "../../services/authentication.service";
+import { formArrayNameProvider } from "@angular/forms/src/directives/reactive_directives/form_group_name";
 
 @Component({
   selector: "app-login",
@@ -22,8 +23,8 @@ export class LoginPage implements OnInit {
     private authService: AuthenticationService
   ) {
     this.loginForm = new FormGroup({
-      email: new FormControl("", Validators.required),
-      password: new FormControl("", Validators.required)
+      email: new FormControl("", Validators.compose([Validators.required])),
+      password: new FormControl("", Validators.compose([Validators.required]))
     });
   }
 

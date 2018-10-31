@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { NavController } from "@ionic/angular";
-import { AlertController } from "@ionic/angular";
 
 import { Validators, FormGroup, FormControl } from "@angular/forms";
 import { AuthenticationService } from "../../services/authentication.service";
+import { UtilService } from "../../services/util.service";
 
 @Component({
   selector: "app-forgot-password",
@@ -18,8 +18,8 @@ export class ForgotPasswordPage implements OnInit {
   };
   constructor(
     public navCtrl: NavController,
-    private alertController: AlertController,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private utilService: UtilService
   ) {
     this.forgotPasswordForm = new FormGroup({
       email: new FormControl("", Validators.required)
@@ -31,9 +31,17 @@ export class ForgotPasswordPage implements OnInit {
   resetPassword(): void {
     this.authService.resetPassword(this.forgotPasswordData.email).then(resp => {
       if (resp === "auth/user-not-found") {
-        this.displayUserNotFound();
+        this.utilService.displayOkAlert(
+          "Email Not Found",
+          null,
+          "That email address does not exist in the system"
+        );
       } else {
-        this.displayAlert();
+        this.utilService.displayOkAlert(
+          "Request Submitted",
+          null,
+          "An email is on the way with instructions to reset your password"
+        );
         this.navCtrl.navigateBack("/login");
       }
     });
@@ -45,26 +53,5 @@ export class ForgotPasswordPage implements OnInit {
 
   routeToLogin(): void {
     this.navCtrl.navigateBack("/login");
-  }
-
-  async displayAlert() {
-    const alert = await this.alertController.create({
-      header: "Request Submitted",
-      message:
-        "An email is on the way with instructions to reset your password",
-      buttons: ["OK"]
-    });
-
-    await alert.present();
-  }
-
-  async displayUserNotFound() {
-    const alert = await this.alertController.create({
-      header: "Email Not Found",
-      message: "That email address does not exist in the system",
-      buttons: ["OK"]
-    });
-
-    await alert.present();
   }
 }

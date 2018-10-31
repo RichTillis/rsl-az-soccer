@@ -1,4 +1,4 @@
-package com.turvick.rslaz;
+package com.richtillis.rslaz;
 
 import android.os.Bundle;
 
