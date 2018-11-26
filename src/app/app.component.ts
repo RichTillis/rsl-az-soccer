@@ -37,4 +37,8 @@ export class AppComponent {
       });
     });
   }
+
+  logout(){
+    this.authenticationService.logoutUser();
+  }
 }

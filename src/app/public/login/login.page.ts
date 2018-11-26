@@ -1,9 +1,13 @@
 import { Component, OnInit } from "@angular/core";
-import { NavController } from "@ionic/angular";
+import {
+  MenuController,
+  NavController,
+  LoadingController,
+  AlertController
+} from "@ionic/angular";
 
 import { Validators, FormGroup, FormControl } from "@angular/forms";
 import { AuthenticationService } from "../../services/authentication.service";
-import { formArrayNameProvider } from "@angular/forms/src/directives/reactive_directives/form_group_name";
 
 @Component({
   selector: "app-login",
@@ -13,6 +17,7 @@ import { formArrayNameProvider } from "@angular/forms/src/directives/reactive_di
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
   error: string;
+  private loading;
 
   loginData = {
     email: "",
@@ -20,7 +25,8 @@ export class LoginPage implements OnInit {
   };
   constructor(
     public navCtrl: NavController,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private loadingCtrl: LoadingController
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl("", Validators.compose([Validators.required])),
@@ -51,7 +57,19 @@ export class LoginPage implements OnInit {
     }
   }
 
-  loginWithFacebook(): void {}
-
   loginWithGoogle(): void {}
+
+  loginWithFacebook(): void {
+    this.loadingCtrl
+      .create({
+        message: "Authenticating..."
+      })
+      .then(overlay => {
+        this.loading = overlay;
+        this.loading.present();
+        this.authService.doFacebookLogin().then(() => {
+          this.loading.dismiss();
+        });
+      });
+  }
 }
