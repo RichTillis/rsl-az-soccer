@@ -35,4 +35,5 @@ UserInterfaceState.xcuserstate
 
 # Config files
 firebase.auth.ts
+facebook.config.ts
 google-services.json

@@ -7,4 +7,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding> </ion-content>
+<ion-content padding>
+  <!-- <ng-container *ngFor="let post of formattedPosts">
+    <ion-card>
+      <ion-item color="secondary">
+        <ion-avatar item-left>
+          <img src="http://graph.facebook.com/{{post.from.id}}/picture" />
+        </ion-avatar>
+        <h2>{{ post.from.name }}</h2>
+        <p>{{ post.time | date: "short" }}</p>
+      </ion-item>
+      <div *ngIf="post.photos.length > 0">
+        <img
+          [src]="post.photos[0].src"
+          (click)="redirectToImage(post.photos[0].src)"
+        />
+      </div>
+      <ion-card-content color="white">
+        <p>{{ post.message }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-container> -->
+</ion-content>
