@@ -20,13 +20,16 @@ const routes: Routes = [
     path: "members",
     canActivate: [AuthGuardService],
     loadChildren: "./members/member-routing.module#MemberRoutingModule"
+  },
+  {
+    path: "tournaments",
+    canActivate: [AuthGuardService],
+    loadChildren: "./members/tournaments/tournaments.module#TournamentsPageModule"
+  },
+  {
+    path: "2019shootout",
+    loadChildren: "./members/tournaments/shootout/shootout.module#ShootoutPageModule"
   }
-
-  // {
-  //   path: "list",
-  //   loadChildren: "./list/list.module#ListPageModule",
-  //   canActivate: [AuthGuardService]
-  // },
 ];
 
 @NgModule({
