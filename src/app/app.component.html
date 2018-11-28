@@ -7,12 +7,24 @@
         <ion-list>
           <ion-menu-toggle auto-hide="false">
             <ion-item button href="/home" routerDirection="root">
-              <ion-icon slot="start" name="chatbubbles"></ion-icon>
-              <ion-label> Chat </ion-label>
+              <ion-icon slot="start" name="home"></ion-icon>
+              <ion-label> Home </ion-label>
             </ion-item>
-            <ion-item button href="/about" routerDirection="root">
-              <ion-icon slot="start" name="information-circle"> </ion-icon>
-              <ion-label> About </ion-label>
+            <ion-item button href="/tournaments" routerDirection="root">
+              <ion-icon slot="start" name="trophy"> </ion-icon>
+              <ion-label> Tournaments </ion-label>
+            </ion-item>
+            <ion-item button href="/teams" routerDirection="root">
+              <ion-icon slot="start" name="football"> </ion-icon>
+              <ion-label> My Teams </ion-label>
+            </ion-item>            
+            <ion-item button href="/fields" routerDirection="root">
+              <ion-icon slot="start" name="map"> </ion-icon>
+              <ion-label> Field Maps </ion-label>
+            </ion-item>
+            <ion-item button href="/venues" routerDirection="root">
+              <ion-icon slot="start" name="compass"> </ion-icon>
+              <ion-label> Venue Locations </ion-label>
             </ion-item>
             <ion-item button (click)="logout()">
               <ion-icon slot="start" name="power"></ion-icon>
