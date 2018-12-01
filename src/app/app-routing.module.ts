@@ -14,21 +14,19 @@ const routes: Routes = [
   },
   {
     path: "forgotPassword",
-    loadChildren: "./public/forgot-password/forgot-password.module#ForgotPasswordPageModule"
+    loadChildren:
+      "./public/forgot-password/forgot-password.module#ForgotPasswordPageModule"
   },
   {
-    path: "members",
+    path: "home",
     canActivate: [AuthGuardService],
-    loadChildren: "./members/member-routing.module#MemberRoutingModule"
+    loadChildren: "./private/home/home.module#HomePageModule"
   },
   {
     path: "tournaments",
     canActivate: [AuthGuardService],
-    loadChildren: "./members/tournaments/tournaments.module#TournamentsPageModule"
-  },
-  {
-    path: "2019shootout",
-    loadChildren: "./members/tournaments/shootout/shootout.module#ShootoutPageModule"
+    loadChildren:
+      "./private/tournaments/tournaments.module#TournamentsPageModule"
   }
 ];
 
