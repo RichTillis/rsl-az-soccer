@@ -3,11 +3,13 @@ import {
   MenuController,
   NavController,
   LoadingController,
-  AlertController
+  AlertController,
+  ToastController
 } from "@ionic/angular";
 
 import { Validators, FormGroup, FormControl } from "@angular/forms";
 import { AuthenticationService } from "../../services/authentication.service";
+import { UtilService } from "../../services/util.service";
 
 @Component({
   selector: "app-login",
@@ -26,7 +28,9 @@ export class LoginPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     private authService: AuthenticationService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private utilService: UtilService,
+    public toastController: ToastController
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl("", Validators.compose([Validators.required])),
@@ -52,8 +56,10 @@ export class LoginPage implements OnInit {
       );
       this.loginData.email = "";
       this.loginData.password = "";
+      this.presentToast();
+      this.navCtrl.navigateForward("");
     } catch (err) {
-      this.error = err.message;
+      this.utilService.displayOkAlert("Whoops", "Something Bad Happened", err);
     }
   }
 
@@ -71,5 +77,15 @@ export class LoginPage implements OnInit {
           this.loading.dismiss();
         });
       });
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Login Successful - Welcome Back!',
+      duration: 2000,
+      color: 'tertiary',
+      animated: true
+    });
+    toast.present();
   }
 }

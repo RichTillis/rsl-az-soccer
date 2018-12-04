@@ -9,8 +9,6 @@ import { IonicStorageModule } from "@ionic/storage";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 
-import { AuthGuardService } from "./services/auth-guard.service";
-
 import { Facebook } from "@ionic-native/facebook/ngx";
 import { GooglePlus } from "@ionic-native/google-plus/ngx";
 import { AngularFireModule } from "@angular/fire";
@@ -35,7 +33,6 @@ import { firebaseConfig } from "../../firebase.auth";
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthGuardService,
     Facebook
   ],
   bootstrap: [AppComponent]

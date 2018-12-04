@@ -1,17 +1,22 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-import { Shootout2019Page } from "./shootout2019.page";
+import { ShootoutPage } from "./shootout.page";
 import { AboutPage } from "./about/about.page";
 import { RulesPage } from "./rules/rules.page";
-import { SchedulePage } from "./schedule/schedule.page";
 import { StandingsPage } from "./standings/standings.page";
+import { SchedulePage } from "./schedule/schedule.page";
 
 const routes: Routes = [
   {
-    path: "",
-    component: Shootout2019Page,
+    path: "shootout",
+    component: ShootoutPage,
     children: [
+      {
+        path: "",
+        redirectTo: "/shootout/(about:about)",
+        pathMatch: "full"
+      },
       {
         path: "about",
         outlet: "about",
@@ -36,12 +41,13 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "/shootout2019/(about:about)",
+    redirectTo: "/shootout/(about:about)",
     pathMatch: "full"
   }
 ];
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class Shootout2019PageRoutingModule {}
+export class ShootoutPageRoutingModule {}

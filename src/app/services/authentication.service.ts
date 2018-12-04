@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
 import { ToastController, MenuController } from "@ionic/angular";
+import { NavController } from "@ionic/angular";
 
 import { Storage } from "@ionic/storage";
-import { BehaviorSubject } from "rxjs";
 
 import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFireDatabase } from "@angular/fire/database";
+
 import * as firebase from "firebase/app";
 
 import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
@@ -21,7 +23,9 @@ export interface User {
   providedIn: "root"
 })
 export class AuthenticationService {
-  authenticationState = new BehaviorSubject(false);
+  // authenticationState = new BehaviorSubject(false);
+
+  authState: any = null;
 
   constructor(
     private storage: Storage,
@@ -29,24 +33,87 @@ export class AuthenticationService {
     private facebook: Facebook,
     public toastController: ToastController,
     private menu: MenuController,
+    private db: AngularFireDatabase,
+    public navCtrl: NavController,
   ) {
     this.afAuth.authState.subscribe(auth => {
-      if (auth) {
-        this.authenticationState.next(true);
-        console.log("user is logged in!");
-      } else {
-        this.authenticationState.next(false);
-        console.log("no user logged in");
-      }
+      this.authState = auth;
     });
+  }
+
+  // Returns true if user is logged in
+  get isAuthenticated(): boolean {
+    return this.authState !== null;
+  }
+
+  // Returns current user UID
+  get currentUserId(): string {
+    return this.isAuthenticated ? this.authState.uid : "";
   }
 
   ngOnInit() {
     this.menu.enable(false);
   }
 
-  isAuthenticated() {
-    return this.authenticationState.value;
+  storageControl(action, key?, value?) {
+    if (action == "set") {
+      return this.storage.set(key, value);
+    }
+    if (action == "get") {
+      return this.storage.get(key);
+    }
+    if (action == "delete") {
+      if (!key) {
+        // this.displayAlert('Warning', 'About to delete all user data');
+        return this.storage.clear();
+      } else {
+        // this.displayAlert(key, 'Deleting this users data');
+        return this.storage.remove(key);
+      }
+    }
+  }
+
+  saveNewUser(username) {
+    let path = `users/${this.currentUserId}`;
+
+    let user = {
+      creation: new Date().toLocaleDateString(),
+      logins: 1,
+      rewardCount: 0,
+      lastLogin: new Date().toLocaleDateString(),
+      id: ""
+    };
+    this.db
+      .object(path)
+      .update({
+        username: username,
+        creation: user.creation,
+        logins: user.logins,
+        rewardCount: user.rewardCount,
+        lastLogin: user.lastLogin
+      })
+      .then(response => {
+        user.id = this.currentUserId;
+        return this.storageControl("set", username, user);
+      });
+
+    return this.storageControl("get", username);
+  }
+
+  updateUser(username, userData) {
+    let path = `users/${this.currentUserId}`;
+
+    let newData = {
+      creation: userData.creation,
+      logins: userData.logins + 1,
+      rewardCount: userData.rewardCount,
+      lastLogin: new Date().toLocaleDateString(),
+      id: userData.id
+    };
+
+    this.db.object(path).update(newData);
+
+    return this.storageControl("set", username, newData);
   }
 
   async resetPassword(email) {
@@ -59,20 +126,33 @@ export class AuthenticationService {
 
   async createUserWithEmailAndPassword(email: string, password: string) {
     await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+    this.navCtrl.navigateForward("");
   }
 
   async logoutUser() {
     await this.afAuth.auth.signOut();
     this.menu.enable(false);
-    // this.storage.remove(TOKEN_KEY).then(() => {
-    //   this.authenticationState.next(false);
-    // });
+    // this.authenticationState.next(false);
+    console.log("user logged out");
   }
 
   async doEmailLogin(email: string, password: string) {
     await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-    this.authenticationState.next(true);
+    // this.authenticationState.next(true);
     this.menu.enable(true);
+    this.storageControl("get", email).then(storedUser => {
+      if (!storedUser) {
+        console.log("No user found in local storage. Saving new user.");
+        this.saveNewUser(email);
+        // .then(res => this.displayAlert(username, 'New account saved for this user'));
+      } else {
+        console.log("User stored in local storage. Updating user.");
+        this.updateUser(email, storedUser).then(updated =>
+          console.log(email, updated)
+        );
+      }
+    });
+    this.navCtrl.navigateForward("");
   }
 
   async doGoogleLogin() {
@@ -80,7 +160,7 @@ export class AuthenticationService {
     provider.addScope("profile");
     provider.addScope("email");
     await this.afAuth.auth.signInWithPopup(provider);
-    this.authenticationState.next(true);
+    // this.authenticationState.next(true);
   }
 
   async doFacebookLogin() {
@@ -96,7 +176,7 @@ export class AuthenticationService {
           .signInWithCredential(facebookCredential)
           .then(success => {
             console.log("Firebase success: " + JSON.stringify(success));
-            this.authenticationState.next(true);
+            // this.authenticationState.next(true);
             this.menu.enable(true);
           })
           .catch(error => {

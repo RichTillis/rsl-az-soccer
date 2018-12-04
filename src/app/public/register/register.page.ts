@@ -39,11 +39,7 @@ export class RegisterPage implements OnInit {
 
   registerWithEmail() {
     if (this.registerData.password != this.registerData.confirmPassword) {
-      this.utilService.displayOkAlert(
-        "Whoops",
-        "Password Problem",
-        "Passwords don't match, please try again"
-      );
+      this.utilService.displayOkAlert("Whoops","Password Problem","Passwords don't match, please try again");
       this.registerData.password = "";
       this.registerData.confirmPassword = "";
     } else {
@@ -54,11 +50,7 @@ export class RegisterPage implements OnInit {
         )
         .then(res => this.registerSuccess(res))
         .catch(err =>
-          this.utilService.displayOkAlert(
-            "Whoops",
-            "Something Bad Happened",
-            err
-          )
+          this.utilService.displayOkAlert("Whoops","Something Bad Happened",err)
         );
     }
   }

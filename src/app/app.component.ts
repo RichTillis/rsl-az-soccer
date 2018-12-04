@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Plugins } from "@capacitor/core";
 import { Router } from "@angular/router";
-import { Platform } from "@ionic/angular";
+import { UtilService } from "./services/util.service";
 
 import { AuthenticationService } from "./services/authentication.service";
 
@@ -13,9 +13,9 @@ const { SplashScreen, StatusBar } = Plugins;
 })
 export class AppComponent {
   constructor(
-    private platform: Platform,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private utilService: UtilService
   ) {
     SplashScreen.hide().catch(err => {
       console.warn(err);
@@ -23,22 +23,15 @@ export class AppComponent {
     StatusBar.hide().catch(err => {
       console.warn(err);
     });
-    this.initializeApp();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.authenticationService.authenticationState.subscribe(state => {
-        if (state) {
-          this.router.navigate(['home']);
-        } else {
-          this.router.navigate(["login"]);
-        }
-      });
-    });
-  }
-
-  logout(){
+  logout() {
     this.authenticationService.logoutUser();
+    this.utilService.displayOkAlert(
+      "Log Out Successful",
+      null,
+      "See ya next time"
+    );
+    this.router.navigateByUrl("/login");
   }
 }
