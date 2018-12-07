@@ -66,17 +66,22 @@ export class LoginPage implements OnInit {
   loginWithGoogle(): void {}
 
   loginWithFacebook(): void {
-    this.loadingCtrl
-      .create({
-        message: "Authenticating..."
-      })
-      .then(overlay => {
-        this.loading = overlay;
-        this.loading.present();
-        this.authService.doFacebookLogin().then(() => {
-          this.loading.dismiss();
-        });
-      });
+
+    this.authService.doFacebookLogin().then(() => {
+      console.log('here I am')
+    })
+  //  this.loadingCtrl
+  //   .create({
+  //      message: "Authenticating..."
+  //  })
+  //  .then(overlay => {
+  //    this.loading = overlay;
+  //    this.loading.present();
+  //    this.authService.doFacebookLogin().then(() => {
+  //      this.loading.dismiss();
+  //      console.log('yo')
+  //    });
+  //  });
   }
 
   async presentToast() {

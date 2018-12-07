@@ -2,8 +2,12 @@ import { Component } from "@angular/core";
 import { Plugins } from "@capacitor/core";
 import { Router } from "@angular/router";
 import { UtilService } from "./services/util.service";
-
+import { FcmService } from "./services/fcm.service";
 import { AuthenticationService } from "./services/authentication.service";
+import { Platform } from "@ionic/angular";
+
+import { ToastController } from "@ionic/angular";
+import { tap } from "rxjs/operators";
 
 const { SplashScreen, StatusBar } = Plugins;
 
@@ -15,7 +19,10 @@ export class AppComponent {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private fcm: FcmService,
+    public toastCtrl: ToastController,
+    platform: Platform
   ) {
     SplashScreen.hide().catch(err => {
       console.warn(err);
@@ -23,6 +30,17 @@ export class AppComponent {
     StatusBar.hide().catch(err => {
       console.warn(err);
     });
+    platform.ready().then(() => {
+      this.fcm.init()
+    });
+  }
+
+  async presentNotifications(msg) {
+    const toast = await this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    })
+    toast.present()
   }
 
   logout() {

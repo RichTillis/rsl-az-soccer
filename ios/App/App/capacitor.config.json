@@ -1,0 +1,7 @@
+{
+  "appId": "io.tillis.rslaz",
+  "appName": "rsl-az",
+  "bundledWebRuntime": false,
+  "webDir": "www",
+  "linuxAndroidStudioPath": "/opt/android-studio/bin/studio.sh"
+}

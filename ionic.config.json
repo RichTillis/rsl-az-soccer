@@ -1,7 +1,8 @@
 {
   "name": "rsl-az",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

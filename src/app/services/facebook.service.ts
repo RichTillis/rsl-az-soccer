@@ -12,7 +12,8 @@ import { map } from "rxjs/operators";
 export class FacebookService {
   private accessToken = facebookConfig.appToken;
   private graphUrl = "https://graph.facebook.com/v2.11/";
-  private pageName = "117766291631543"; //RSLAZsa
+  //private pageName = "117766291631543"; //RSLAZsa
+  private pageName = "228891533895328"; //Shootout
   private graphQuery = `?access_token=${this.accessToken}&date_format=U&fields=posts{from,created_time,message,attachments,link,picture,type}`;
   // private graphQuery = `?access_token=${this.accessToken}&date_format=U&fields=posts{from,created_time,message}`;
 
