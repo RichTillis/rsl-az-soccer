@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { TournamentService } from "../../../services/tournament.service";
+import { TournamentService } from "../../services/tournament.service";
 import * as _ from "lodash";
 
 @Component({
