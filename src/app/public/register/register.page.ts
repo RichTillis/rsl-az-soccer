@@ -59,4 +59,23 @@ export class RegisterPage implements OnInit {
     console.log(result);
     this.utilService.displayOkAlert("Welcome", null, "Registration Successful");
   }
+
+  loginWithFacebook(): void {
+
+    this.authService.doFacebookLogin().then(() => {
+      console.log('here I am')
+    })
+  //  this.loadingCtrl
+  //   .create({
+  //      message: "Authenticating..."
+  //  })
+  //  .then(overlay => {
+  //    this.loading = overlay;
+  //    this.loading.present();
+  //    this.authService.doFacebookLogin().then(() => {
+  //      this.loading.dismiss();
+  //      console.log('yo')
+  //    });
+  //  });
+  }
 }

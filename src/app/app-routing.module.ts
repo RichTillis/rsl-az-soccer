@@ -28,10 +28,19 @@ const routes: Routes = [
     loadChildren:
       "./public/forgot-password/forgot-password.module#ForgotPasswordPageModule"
   },
-  { path: 'shootout', loadChildren: './private/shootout/shootout.module#ShootoutPageModule' },
-  { path: '', loadChildren: './private/shootout/shootout.module#ShootoutPageModule' },
-
-
+  {
+    path: "shootout",
+    loadChildren: "./private/shootout/shootout.module#ShootoutPageModule"
+  },
+  {
+    path: "",
+    loadChildren: "./private/shootout/shootout.module#ShootoutPageModule"
+  },
+  {
+    path: "team",
+    loadChildren: "./private/team/team.module#TeamPageModule",
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({

@@ -23,7 +23,7 @@
       <div *ngIf="post.photos.length > 0">
         <ion-img [src]="post.photos[0].src"></ion-img><!-- (click)="redirectToImage(post.photos[0].src)"></ion-img> -->
       </div>
-      <ion-card-content class="white-background">
+      <ion-card-content >
         <p>{{ post.message }}</p>
       </ion-card-content>
     </ion-card>
