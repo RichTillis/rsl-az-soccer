@@ -32,7 +32,12 @@ export class AppComponent {
     });
     platform.ready().then(() => {
       // if (platform.is("ios") || platform.is("android")) {
+      try {
         this.fcm.init();
+      } catch (err) {
+        console.warn(err);
+      }
+
       // }
     });
   }

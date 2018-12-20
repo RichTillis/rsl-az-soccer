@@ -57,6 +57,11 @@ const routes: Routes = [
     path: "my-teams",
     loadChildren: "./pages/my-teams/my-teams.module#MyTeamsPageModule",
     canActivate: [AuthGuard]
+  },
+  {
+    path: "teams",
+    loadChildren: "./pages/teams/teams.module#TeamsPageModule",
+    canActivate: [AuthGuard]
   }
 ];
 
