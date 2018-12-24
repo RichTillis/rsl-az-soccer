@@ -1,4 +1,11 @@
-ion-list {
-    --ion-background-color: var(--ion-color-primary);
-  }
-  
+// ion-list {
+//   --ion-background-color: var(--ion-color-primary);
+// }
+
+ion-item {
+  font-size: 12px;
+}
+
+ion-card-title {
+  color: var(--ion-color-tertiary) !important;
+}

@@ -15,16 +15,16 @@
   ></ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="light">
   <ion-list>
     <ion-item-group *ngFor="let division of teams">
-      <ion-card color="secondary">
+      <ion-card color="primary">
         <ion-card-header>
           <ion-card-title>
             {{ division.divisionName }}
           </ion-card-title>
         </ion-card-header>
-        <ion-card-content color="light">
+        <ion-card-content>
           <ion-item
             color="light"
             *ngFor="let team of division.divisionTeams"
