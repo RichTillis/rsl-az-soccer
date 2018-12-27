@@ -1,8 +1,11 @@
 import { Component, OnInit } from "@angular/core";
+import { ModalController } from "@ionic/angular";
 import { Router } from "@angular/router";
 
 import { TournamentService } from "../../services/tournament.service";
 import * as _ from "lodash";
+
+import { ScheduleDetailPage } from "../schedule-detail/schedule-detail.page";
 
 @Component({
   selector: "app-schedule",
@@ -17,7 +20,8 @@ export class SchedulePage implements OnInit {
 
   constructor(
     public tournamentService: TournamentService,
-    public router: Router
+    public router: Router,
+    private modalController: ModalController
   ) {
     tournamentService.getTournamentData(68462).subscribe(data => {
       console.log(data);
@@ -53,8 +57,19 @@ export class SchedulePage implements OnInit {
     this.teams = filteredTeams;
   }
 
+  async openModal(team) {
+    const modal = await this.modalController.create({
+      component: ScheduleDetailPage,
+      componentProps: {
+        teamId: team.id
+      }
+    });
+    await modal.present();
+  }
+
   teamTapped($event, team): void {
-    console.log(team);
-    this.router.navigate(['/team',	{	id:	team.id	}]);
+    // console.log(team);
+    this.openModal(team);
+    // this.router.navigate(['/team/teamSchedule',	{	id:	team.id	}]);
   }
 }

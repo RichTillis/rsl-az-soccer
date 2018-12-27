@@ -1,31 +1,18 @@
-<ion-header>
-  <ion-toolbar color="secondary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Team Details</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content color="primary">
-  <ion-list>
-    <ion-item *ngFor="let game of games" (click)="gameClicked($event, game)">
-      <ion-row>
-        <ion-col text-center> {{ game.time | date: "M/d/yy" }} </ion-col>
-        <ion-col text-center>{{ game.time | date: "shortTime" }}</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col text-center> {{ game.homeAway }} {{ game.opponent }} </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col text-center> {{ game.location }} </ion-col>
-        <ion-col text-center>
-          <h4>
-            <!-- <ion-badge [color]="getScoreDisplayBadgeClass(game)">{{getScoreWorL(game)}}</ion-badge> -->
-            {{ game.scoreDisplay }}
-          </h4>
-        </ion-col>
-      </ion-row>
-    </ion-item>
-  </ion-list>
-</ion-content>
+<ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="teamDetails">
+        <ion-icon name="flash"></ion-icon>
+        <ion-label>Details</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="teamSchedule">
+        <ion-icon name="apps"></ion-icon>
+        <ion-label>Schedule</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="teamStandings">
+        <ion-icon name="send"></ion-icon>
+        <ion-label>Standings</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>

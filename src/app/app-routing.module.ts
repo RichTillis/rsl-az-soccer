@@ -33,6 +33,11 @@ const routes: Routes = [
     loadChildren: "./pages/team/team.module#TeamPageModule",
     canActivate: [AuthGuard]
   },
+  // {
+  //   path: "",
+  //   loadChildren: "./pages/team/team.module#TeamPageModule",
+  //   canActivate: [AuthGuard]
+  // },
   {
     path: "rules",
     loadChildren: "./pages/rules/rules.module#RulesPageModule",
@@ -62,7 +67,7 @@ const routes: Routes = [
     path: "teams",
     loadChildren: "./pages/teams/teams.module#TeamsPageModule",
     canActivate: [AuthGuard]
-  }
+  },
 ];
 
 @NgModule({

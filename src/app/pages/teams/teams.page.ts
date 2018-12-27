@@ -5,12 +5,11 @@ import { TournamentService } from "../../services/tournament.service";
 import * as _ from "lodash";
 
 @Component({
-  selector: 'app-teams',
-  templateUrl: './teams.page.html',
-  styleUrls: ['./teams.page.scss'],
+  selector: "app-teams",
+  templateUrl: "./teams.page.html",
+  styleUrls: ["./teams.page.scss"]
 })
 export class TeamsPage implements OnInit {
-
   private allTeams: any;
   private allTeamDivisions: any;
   teams = [];
@@ -55,8 +54,9 @@ export class TeamsPage implements OnInit {
   }
 
   teamTapped($event, team): void {
-    console.log(team);
-    this.router.navigate(['/team',	{	id:	team.id	}]);
+    // console.log(team);
+    console.log(team.id);
+    // this.router.navigate(["/test", { id: team.id }]);
+    this.router.navigate(["/team", { id: team.id }]);
   }
-
 }

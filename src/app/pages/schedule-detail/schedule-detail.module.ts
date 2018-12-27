@@ -5,18 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TeamPage } from './team.page';
-import { TeamPageRoutingModule } from './team.routing.module';
-
+import { ScheduleDetailPage } from './schedule-detail.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: TeamPage
-  },
-  {
-    path: ':id',
-    component: TeamPage
+    component: ScheduleDetailPage
   }
 ];
 
@@ -25,8 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    TeamPageRoutingModule
+    RouterModule.forChild(routes)
   ],
-  declarations: [TeamPage]
+  declarations: [ScheduleDetailPage]
 })
-export class TeamPageModule {}
+export class ScheduleDetailPageModule {}

@@ -1,5 +1,5 @@
 <ion-app>
-    <ion-menu side="start">
+    <ion-menu side="end">
       <ion-header>
         <ion-toolbar color="primary"> <ion-title>Menu</ion-title> </ion-toolbar>
       </ion-header>
@@ -16,19 +16,19 @@
             </ion-item>   
             <ion-item button href="/schedule" routerDirection="root">
               <ion-icon slot="start" name="calendar"> </ion-icon>
-              <ion-label> Schedule </ion-label>
+              <ion-label> Complete Schedule </ion-label>
             </ion-item>  
             <ion-item button href="/standings" routerDirection="root">
               <ion-icon slot="start" name="trophy"> </ion-icon>
-              <ion-label> Standings </ion-label>
+              <ion-label> Complete Standings </ion-label>
             </ion-item> 
             <ion-item button href="/rules" routerDirection="root">
               <ion-icon slot="start" name="alert"> </ion-icon>
-              <ion-label> Rules </ion-label>
+              <ion-label> Tournament Rules </ion-label>
             </ion-item>     
             <ion-item button href="/about" routerDirection="root">
               <ion-icon slot="start" name="information-circle"> </ion-icon>
-              <ion-label> About </ion-label>
+              <ion-label> About the Shootout </ion-label>
             </ion-item>                 
             <ion-item button (click)="logout()">
               <ion-icon slot="start" name="power"></ion-icon>
