@@ -170,29 +170,6 @@ export class AuthenticationService {
 
   async doFacebookLogin() {
     this.facebook.getLoginStatus().then((response: FacebookLoginResponse) => {
-<<<<<<< HEAD
-      console.log("Facebook login status: " + JSON.stringify(response))
-      if (response.status === 'connected') {
-        console.log("user already logged into facebook with this app")
-        const facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken)
-        console.log("facebook credential:" + JSON.stringify(facebookCredential))
-        this.doFirebaseLogin(facebookCredential);
-      } else {
-        console.log("user is not yet logged into facebook to sign in")
-        this.facebook.login(["public_profile", "email"]).then((res: FacebookLoginResponse) => {
-          console.log("facebook login successfull")
-          const facebookCredential = firebase.auth.FacebookAuthProvider.credential(
-            res.authResponse.accessToken
-          );
-          console.log("facebook credential:" + JSON.stringify(facebookCredential))
-          this.doFirebaseLogin(facebookCredential);
-        }, (error) => {
-          console.log("Error logging into Facebook" + JSON.stringify(error))
-        })
-        .catch(error => {
-          console.log("Error logging into Facebook", error);
-        });
-=======
       if (response.status === "connected") {
         console.log("user already logged into facebook with this app");
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(
@@ -220,7 +197,6 @@ export class AuthenticationService {
           .catch(error => {
             console.log("Error logging into Facebook", error);
           });
->>>>>>> a0c972f7c4e5986eec18c61ece466f899dc4912e
       }
     });
   }
