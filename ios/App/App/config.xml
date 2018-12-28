@@ -7,6 +7,11 @@
   </feature>
 
 
+  <feature name="NativeStorage">
+    <param name="ios-package" value="NativeStorage"/>
+  </feature>
+
+
   <feature name="SQLitePlugin">
     <param name="ios-package" value="SQLitePlugin"/>
   </feature>
