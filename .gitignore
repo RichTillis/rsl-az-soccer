@@ -37,3 +37,4 @@ UserInterfaceState.xcuserstate
 firebase.auth.ts
 facebook.config.ts
 google-services.json
+GoogleService-Info.plist

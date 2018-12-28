@@ -31,7 +31,14 @@ export class AppComponent {
       console.warn(err);
     });
     platform.ready().then(() => {
-      this.fcm.init()
+      // if (platform.is("ios") || platform.is("android")) {
+      try {
+        this.fcm.init();
+      } catch (err) {
+        console.warn(err);
+      }
+
+      // }
     });
   }
 
@@ -39,8 +46,8 @@ export class AppComponent {
     const toast = await this.toastCtrl.create({
       message: msg,
       duration: 3000
-    })
-    toast.present()
+    });
+    toast.present();
   }
 
   logout() {

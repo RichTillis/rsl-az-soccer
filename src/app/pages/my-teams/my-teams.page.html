@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>My Favorite Teams</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary">
+  <ion-card *ngIf="!hasFavs()" color="light">
+    <ion-card-header>
+      <ion-card-title>No Followed Teams</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      You are not currently following any teams. First select a team from the
+      teams list, then you can follow teams from their team page.
+      <ion-button expand="full" (click)="goToTeams()" class="padding-top">
+        <ion-icon slot="start" name="search" color="tertiary"></ion-icon>
+        Find a Team
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="hasFavs()">
+    <ion-list>
+      <ion-list-header class="my-teams-header">Followed Teams</ion-list-header>
+      <ion-item
+        *ngFor="let item of (favorites$ | async)"
+        (click)="favoriteTapped($event, item)"
+      >
+        <ion-icon slot="start" name="star"></ion-icon>
+        {{ item.team.name }}
+        <p>{{ item.tournamentName }}</p>
+      </ion-item>
+    </ion-list>
+    <ion-card-content>
+      To follow more teams, select a tournament, then you can follow teams from
+      their team page.
+      <ion-button expand="full" (click)="goToTeams()" class="padding-top">
+        <ion-icon slot="start" name="search"></ion-icon>
+        Find a Team
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -10,9 +10,6 @@ import { AngularFireDatabase } from "@angular/fire/database";
 import * as firebase from "firebase/app";
 
 import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
-import { firebaseConfig } from "../../../firebase.auth";
-
-// const TOKEN_KEY = "firebase-auth-token";
 
 export interface User {
   email: string;
@@ -36,7 +33,7 @@ export class AuthenticationService {
     public toastController: ToastController,
     private menu: MenuController,
     private db: AngularFireDatabase,
-    public navCtrl: NavController,
+    public navCtrl: NavController
   ) {
     this.afAuth.authState.subscribe(auth => {
       this.authState = auth;
@@ -46,6 +43,12 @@ export class AuthenticationService {
   // Returns true if user is logged in
   get isAuthenticated(): boolean {
     return this.authState !== null;
+  }
+
+ onAuthStateChanged() {
+    this.afAuth.auth.onAuthStateChanged(user => {
+      this.authState = user
+    });
   }
 
   // Returns current user UID
@@ -166,8 +169,8 @@ export class AuthenticationService {
   }
 
   async doFacebookLogin() {
-
     this.facebook.getLoginStatus().then((response: FacebookLoginResponse) => {
+<<<<<<< HEAD
       console.log("Facebook login status: " + JSON.stringify(response))
       if (response.status === 'connected') {
         console.log("user already logged into facebook with this app")
@@ -189,21 +192,50 @@ export class AuthenticationService {
         .catch(error => {
           console.log("Error logging into Facebook", error);
         });
+=======
+      if (response.status === "connected") {
+        console.log("user already logged into facebook with this app");
+        const facebookCredential = firebase.auth.FacebookAuthProvider.credential(
+          response.authResponse.accessToken
+        );
+        this.doFirebaseLogin(facebookCredential);
+      } else {
+        console.log("user is not yet logged into facebook to sign in");
+        this.facebook
+          .login(["public_profile", "email"])
+          .then(
+            (res: FacebookLoginResponse) => {
+              console.log("facebook login successfull");
+              const facebookCredential = firebase.auth.FacebookAuthProvider.credential(
+                res.authResponse.accessToken
+              );
+              this.doFirebaseLogin(facebookCredential);
+            },
+            error => {
+              console.log(
+                "Error logging into Facebook" + JSON.stringify(error)
+              );
+            }
+          )
+          .catch(error => {
+            console.log("Error logging into Facebook", error);
+          });
+>>>>>>> a0c972f7c4e5986eec18c61ece466f899dc4912e
       }
-    })
+    });
   }
 
   private doFirebaseLogin(credential) {
-    console.log("Logging in to firebase")
+    console.log("Logging in to firebase");
     firebase
       .auth()
       .signInAndRetrieveDataWithCredential(credential)
       .then(success => {
-        console.log("Firebase login success: " + JSON.stringify(success))
+        console.log("Firebase login success: " + JSON.stringify(success));
         this.menu.enable(true);
       })
       .catch(error => {
         console.log("Firebase login failure: " + JSON.stringify(error));
-      })
+      });
   }
 }

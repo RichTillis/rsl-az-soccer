@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Team Schedule</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()"
+        ><ion-icon slot="icon-only" name="close"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-card color="primary">
+    <ion-card-header>
+      <ion-card-title> {{ team.teamName }} </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item *ngFor="let game of games" (click)="gameClicked($event, game)" color="light">
+        <ion-grid>
+          <ion-row text-center>
+            <ion-col>{{ game.time | date: "M/d/yy" }} - {{ game.time | date: "shortTime" }}</ion-col>
+          </ion-row>
+          <ion-row text-center>
+            <ion-col>{{ game.homeAway }}</ion-col>
+          </ion-row>
+          <ion-row text-center>
+            <ion-col>{{ game.opponent }}</ion-col>
+          </ion-row>
+          <ion-row text-center>
+            <ion-col>{{ game.location }}</ion-col>
+          </ion-row>
+          <!-- <ion-row> -->
+            <!-- <ion-col> -->
+              <!-- <ion-badge [color]="getScoreDisplayBadgeClass(game)">{{getScoreWorL(game)}}</ion-badge> -->
+              <!-- {{ game.scoreDisplay }}</ion-col> -->
+          <!-- </ion-row> -->
+        </ion-grid>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

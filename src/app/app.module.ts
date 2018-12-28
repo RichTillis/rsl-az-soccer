@@ -17,6 +17,8 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { FcmService } from "./services/fcm.service";
 
+import { ScheduleDetailPageModule } from './pages/schedule-detail/schedule-detail.module';
+
 // firebase auth config
 import { firebaseConfig } from "../../firebase.auth";
 
@@ -31,7 +33,8 @@ import { firebaseConfig } from "../../firebase.auth";
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    ScheduleDetailPageModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

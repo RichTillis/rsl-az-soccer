@@ -7,31 +7,67 @@ const routes: Routes = [
 
   {
     path: "",
-    loadChildren: "./private/home/home.module#HomePageModule",
+    loadChildren: "./pages/home/home.module#HomePageModule",
     canActivate: [AuthGuard]
   },
   {
     path: "home",
-    loadChildren: "./private/home/home.module#HomePageModule",
+    loadChildren: "./pages/home/home.module#HomePageModule",
     canActivate: [AuthGuard]
   },
   {
     path: "login",
-    loadChildren: "./public/login/login.module#LoginPageModule"
+    loadChildren: "./pages/auth/login/login.module#LoginPageModule"
   },
   {
     path: "register",
-    loadChildren: "./public/register/register.module#RegisterPageModule"
+    loadChildren: "./pages/auth/register/register.module#RegisterPageModule"
   },
   {
     path: "forgotPassword",
     loadChildren:
-      "./public/forgot-password/forgot-password.module#ForgotPasswordPageModule"
+      "./pages/auth/forgot-password/forgot-password.module#ForgotPasswordPageModule"
   },
-  { path: 'shootout', loadChildren: './private/shootout/shootout.module#ShootoutPageModule' },
-  { path: '', loadChildren: './private/shootout/shootout.module#ShootoutPageModule' },
-
-
+  {
+    path: "team",
+    loadChildren: "./pages/team/team.module#TeamPageModule",
+    canActivate: [AuthGuard]
+  },
+  // {
+  //   path: "",
+  //   loadChildren: "./pages/team/team.module#TeamPageModule",
+  //   canActivate: [AuthGuard]
+  // },
+  {
+    path: "rules",
+    loadChildren: "./pages/rules/rules.module#RulesPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "schedule",
+    loadChildren: "./pages/schedule/schedule.module#SchedulePageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "standings",
+    loadChildren: "./pages/standings/standings.module#StandingsPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "about",
+    loadChildren: "./pages/about/about.module#AboutPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "my-teams",
+    loadChildren: "./pages/my-teams/my-teams.module#MyTeamsPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "teams",
+    loadChildren: "./pages/teams/teams.module#TeamsPageModule",
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({
