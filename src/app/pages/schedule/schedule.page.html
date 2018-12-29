@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="primary">
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Tournament Schedule</ion-title>
   </ion-toolbar>
-  <ion-toolbar color="primary"
+  <ion-toolbar color="secondary"
     ><ion-searchbar
       placeholder="Search"
       [(ngModel)]="queryText"
@@ -15,24 +15,20 @@
   ></ion-toolbar>
 </ion-header>
 
-<ion-content color="light">
+<ion-content color="primary-contrast">
   <ion-list>
     <ion-item-group *ngFor="let division of teams">
-      <ion-card color="primary">
-        <ion-card-header>
-          <ion-card-title>
+      <ion-item-divider color="primary">
+        <ion-label>
             {{ division.divisionName }}
-          </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-item
-            color="light"
-            *ngFor="let team of division.divisionTeams"
-            (click)="teamTapped($event, team)">
-            <ion-label>{{ team.name }}</ion-label>
-          </ion-item>
-        </ion-card-content>
-      </ion-card>
+        </ion-label>
+      </ion-item-divider>
+      <ion-item
+        color="primary-contrast"
+        *ngFor="let team of division.divisionTeams"
+        (click)="teamTapped($event, team)">
+        <ion-label>{{ team.name }}</ion-label>
+      </ion-item>
     </ion-item-group>
   </ion-list>
 </ion-content>

@@ -1,37 +1,30 @@
-/* Shared */
+// /* Shared */
 .loginBtn {
-  box-sizing: border-box;
-  position: relative;
-  margin-bottom: 0.75em;
-  border: none;
-  text-align: left;
-  line-height: 34px;
-  white-space: nowrap;
-  border-radius: 0.2em;
-  font-size: 16px;
-  color: #fff;
-  text-transform: none;
+  margin-top: 0.75em;
 }
-.loginBtn:before {
-  content: "";
-  box-sizing: border-box;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 34px;
-  height: 100%;
-}
-.loginBtn:focus {
-  outline: none;
-}
-.loginBtn:active {
-  box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
-}
-.text-color-white {
-  color: #fff;
-}
-.content-background {
-  background-color: #01459a;
+// .loginBtn:before {
+//   content: "";
+//   box-sizing: border-box;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 34px;
+//   height: 100%;
+// }
+// .loginBtn:focus {
+//   outline: none;
+// }
+// .loginBtn:active {
+//   box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
+// }
+// .text-color-white {
+//   color: #fff;
+// }
+// .content-background {
+//   background-color: #01459a;
+// }
+.align-center {
+  text-align: center;
 }
 .white-background {
   background-color: #fff;
@@ -47,18 +40,12 @@
   padding-bottom: 1em;
 }
 .new-user {
-  color: yellow;
+  color: #022b52;
   font-size: small;
 }
 .forgot-password {
-  color: yellow;
+  color: #022b52;
   font-size: small;
-}
-.border-radius-top-10 {
-  border-radius: 10px 10px 0 0;
-}
-.border-radius-bottom-10 {
-  border-radius: 0 0 10px 10px;
 }
 
 /* Facebook */

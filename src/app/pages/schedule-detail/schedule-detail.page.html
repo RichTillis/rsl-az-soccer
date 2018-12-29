@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="primary">
     <ion-title>Team Schedule</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="closeModal()"
@@ -8,34 +8,24 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content color="light">
-  <ion-card color="primary">
-    <ion-card-header>
-      <ion-card-title> {{ team.teamName }} </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item *ngFor="let game of games" (click)="gameClicked($event, game)" color="light">
-        <ion-grid>
-          <ion-row text-center>
-            <ion-col>{{ game.time | date: "M/d/yy" }} - {{ game.time | date: "shortTime" }}</ion-col>
-          </ion-row>
-          <ion-row text-center>
-            <ion-col>{{ game.homeAway }}</ion-col>
-          </ion-row>
-          <ion-row text-center>
-            <ion-col>{{ game.opponent }}</ion-col>
-          </ion-row>
-          <ion-row text-center>
-            <ion-col>{{ game.location }}</ion-col>
-          </ion-row>
-          <!-- <ion-row> -->
-            <!-- <ion-col> -->
-              <!-- <ion-badge [color]="getScoreDisplayBadgeClass(game)">{{getScoreWorL(game)}}</ion-badge> -->
-              <!-- {{ game.scoreDisplay }}</ion-col> -->
-          <!-- </ion-row> -->
-        </ion-grid>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+  <ion-item-divider color="secondary">
+    <ion-label>
+        {{ team.teamName }}
+    </ion-label>
+  </ion-item-divider>
+  <ion-grid no-padding *ngFor="let game of games">
+      <ion-row class="schedule-row">
+        <ion-col size="2" class="home-away-tag-{{game.homeAway}}"></ion-col>
+        <ion-col size="10">
+          <div class="score-display">
+              <span class="match-result">{{game.scoreDisplay}}</span>
+          </div>
+          <div class="schedule-date">{{ game.time | date: "fullDate" }}</div>
+          <div class="schedule-time">{{ game.time | date: "shortTime" }}</div>
+          <div class="schedule-opponent">{{ game.vsAt }} {{ game.opponent }}</div>
+          <div class="schedule-location">{{ game.location }}</div>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
 </ion-content>

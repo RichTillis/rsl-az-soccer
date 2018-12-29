@@ -70,7 +70,8 @@ export class ScheduleDetailPage implements OnInit {
           location: g.location,
           locationUrl: g.locationUrl,
           scoreDisplay: scoreDisplay,
-          homeAway: isHome ? "vs." : "at"
+          homeAway: isHome ? "home" : "away",
+          vsAt: isHome ? "" : "at"
         };
       })
       .value();
@@ -96,7 +97,10 @@ export class ScheduleDetailPage implements OnInit {
     if (homeScore != null && awayScore != null) {
       var teamScore = isHome ? homeScore : awayScore;
       var opponentScore = isHome ? awayScore : homeScore;
-      var winIndicator = teamScore > opponentScore ? "W: " : "L: ";
+      var winIndicator = teamScore > opponentScore ? "WIN " : "LOSS ";
+      if (teamScore == opponentScore) {
+        winIndicator = "DRAW "
+      }
 
       // console.log("team score:" + teamScore);
       // console.log("opponent score:" + opponentScore);

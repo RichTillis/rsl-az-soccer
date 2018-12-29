@@ -201,13 +201,13 @@ export class AuthenticationService {
     });
   }
 
-  private doFirebaseLogin(credential) {
+  async doFirebaseLogin(credential) {
     console.log("Logging in to firebase");
     firebase
       .auth()
       .signInAndRetrieveDataWithCredential(credential)
       .then(success => {
-        console.log("Firebase login success: " + JSON.stringify(success));
+        console.log("Firebase login success.");
         this.menu.enable(true);
       })
       .catch(error => {

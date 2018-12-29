@@ -1,36 +1,38 @@
 <ion-app>
-    <ion-menu side="end">
+    <ion-menu color="primary" side="end">
       <ion-header>
         <ion-toolbar color="primary"> <ion-title>Menu</ion-title> </ion-toolbar>
       </ion-header>
-      <ion-content>
+      <ion-content color="primary">
         <ion-list>
           <ion-menu-toggle auto-hide="false">
-            <ion-item button href="/home" routerDirection="root">
+            <ion-item color="primary" button href="/home" routerDirection="root">
               <ion-icon slot="start" name="home"></ion-icon>
               <ion-label> Home </ion-label>
             </ion-item>
-            <ion-item button href="/my-teams" routerDirection="root">
+            <!--
+            <ion-item color="primary" button href="/my-teams" routerDirection="root">
               <ion-icon slot="start" name="football"> </ion-icon>
               <ion-label> My Teams </ion-label>
             </ion-item>   
-            <ion-item button href="/schedule" routerDirection="root">
+            -->
+            <ion-item color="primary" button href="/schedule" routerDirection="root">
               <ion-icon slot="start" name="calendar"> </ion-icon>
-              <ion-label> Complete Schedule </ion-label>
+              <ion-label> Schedule </ion-label>
             </ion-item>  
-            <ion-item button href="/standings" routerDirection="root">
+            <ion-item color="primary" button href="/standings" routerDirection="root">
               <ion-icon slot="start" name="trophy"> </ion-icon>
-              <ion-label> Complete Standings </ion-label>
+              <ion-label> Standings </ion-label>
             </ion-item> 
-            <ion-item button href="/rules" routerDirection="root">
+            <ion-item color="primary" button href="/rules" routerDirection="root">
               <ion-icon slot="start" name="alert"> </ion-icon>
               <ion-label> Tournament Rules </ion-label>
             </ion-item>     
-            <ion-item button href="/about" routerDirection="root">
+            <ion-item color="primary" button href="/about" routerDirection="root">
               <ion-icon slot="start" name="information-circle"> </ion-icon>
               <ion-label> About the Shootout </ion-label>
             </ion-item>                 
-            <ion-item button (click)="logout()">
+            <ion-item color="primary" button (click)="logout()">
               <ion-icon slot="start" name="power"></ion-icon>
               <ion-label> Logout </ion-label>
             </ion-item>

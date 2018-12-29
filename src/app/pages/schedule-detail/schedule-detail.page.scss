@@ -1,3 +1,78 @@
 ion-card-title {
   color: var(--ion-color-tertiary) !important;
 }
+
+.home-away-tag-home:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 2em 2em 0 0;
+  border-color: #860900 transparent transparent transparent;
+  position: relative;
+  top: 2.4em;
+}
+.home-away-tag-home:after {
+  content: "H";
+  color: #ffffff;
+  position: relative;
+  top: .3em;
+  left: -2.2em;
+  font-size: .8em;
+  font-weight: 800;
+}
+.home-away-tag-away:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 2em 2em 0 0;
+  border-color: #022b52 transparent transparent transparent;
+  position: relative;
+  top: 2.4em;
+}
+.home-away-tag-away:after {
+  content: "A";
+  color: #ffffff;
+  position: relative;
+  top: .3em;
+  left: -2.2em;
+  font-size: .8em;
+  font-weight: 800;
+}
+
+.score-display {
+  margin: 0.5em 1em 0 0;
+  padding: 0 1.25em 0 0.75em;
+  text-align: center;
+  background-color: #860900;
+  transform: skew(-20deg,0);
+  color: #ffffff;
+  width: 8em;
+  font-size: .8em;
+}
+.match-result {
+  transform: skew(20deg,0);
+  display: block;
+}
+
+.schedule-date {
+  font-size: .8em;
+  font-weight: 600;
+}
+
+.schedule-time {
+  font-size: .8em;
+  font-weight: 600;
+}
+
+.schedule-opponent {
+  font-size: .8em;
+}
+
+.schedule-location {
+  font-size: .8em;
+}
+.schedule-row {
+  border-bottom: 1px solid;
+}

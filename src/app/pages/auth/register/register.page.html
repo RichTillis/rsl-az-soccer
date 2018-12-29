@@ -1,27 +1,26 @@
 <ion-header>
 
-  <ion-toolbar color="tertiary">
+  <ion-toolbar color="primary">
     <ion-title text-center>New Account</ion-title>
   </ion-toolbar>
 
 </ion-header>
 
-<ion-content padding color="primary">
+<ion-content padding color="primary-contrast">
   <div text-center class="logo"><img src="assets/images/RSL_AZ_logo_smaller.png" /></div>
 
-  <ion-item class="white-background border-radius-top-10">
+  <ion-item>
     <ion-input type="email" placeholder="Email" [(ngModel)]="registerData.email" name="email"></ion-input>
   </ion-item>
-  <ion-item class="white-background">
+  <ion-item>
     <ion-input type="password" placeholder="Password" [(ngModel)]="registerData.password" name="password"></ion-input>
   </ion-item>
-  <ion-item class="white-background">
+  <ion-item class="bottom-padding-1em">
     <ion-input type="password" placeholder="Confirm Password" [(ngModel)]="registerData.confirmPassword" name="password"></ion-input>
   </ion-item>
-  <ion-button class="border-radius-bottom-10" expand="full" color="secondary" (click)="registerWithEmail()">Sign Up With
-    Email</ion-button>
+  <ion-button class="border-radius-bottom-10" expand="block" color="primary" (click)="registerWithEmail()">Sign Up With Email</ion-button>
 
-  <ion-grid class="bottom-padding-2 em">
+  <ion-grid class="bottom-padding-2em">
     <ion-row align-items-end>
       <ion-col>
         <div text-center>
@@ -31,13 +30,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-card>
-    <ion-card-content class="white-background">
-      <ion-button fill="clear" (click)="loginWithFacebook()"><img src="assets/images/facebookLoginBtn.png" /></ion-button>
-      <!-- <div class="bottom-padding-1em"></div> -->
-      <!-- <ion-button fill="clear" (click)="loginWithGoogle()"><img src="assets/images/googleLoginBtn.png" /></ion-button> -->
-    </ion-card-content>
-  </ion-card>
+  <ion-button size="large" fill="clear" (click)="loginWithFacebook()"><img src="assets/images/facebookLoginBtn.png" /></ion-button>
 
 
   <!-- <ion-item>

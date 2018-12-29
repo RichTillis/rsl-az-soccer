@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="primary">
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -7,25 +7,32 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="primary">
+<ion-content color="medium">
   <!-- <ion-button (click)="getPosts()">Get Posts</ion-button> -->
-  <ng-container *ngFor="let post of formattedPosts">
-    <ion-card color="light">
-      <ion-item color="secondary">
-        <ion-avatar item-left>
-          <img src="https://graph.facebook.com/{{post.from.id}}/picture" />
-        </ion-avatar>
-        <ion-label>
-          <h4>{{ post.from.name }}</h4>
-          <p>{{ post.time | date: "short" }}</p>
-        </ion-label>       
-      </ion-item>
-      <div *ngIf="post.photos.length > 0">
-        <ion-img [src]="post.photos[0].src"></ion-img><!-- (click)="redirectToImage(post.photos[0].src)"></ion-img> -->
-      </div>
-      <ion-card-content >
-        <p>{{ post.message }}</p>
-      </ion-card-content>
-    </ion-card>
-  </ng-container>
+  <ion-img src="assets/images/tournament-sponsors.png"></ion-img>
+  <ion-item class="post-item" *ngFor="let post of formattedPosts">
+      <ion-grid>
+          <ion-row>
+            <ion-col size="2">
+              <ion-avatar item-left>
+                <img src="https://graph.facebook.com/{{post.from.id}}/picture" />
+              </ion-avatar>
+            </ion-col>
+            <ion-col size="8">
+              <div class="post-from-name">
+                {{ post.from.name }}
+              </div>
+              <div class="post-time">
+                {{ post.time | date: "EEEE" }} at {{ post.time | date: "h:mm a" }}
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+              <p>{{ post.message }}</p>
+          </ion-row>
+          <ion-row *ngIf="post.photos.length > 0">
+              <ion-img [src]="post.photos[0].src"></ion-img>
+          </ion-row>
+        </ion-grid>
+  </ion-item>
 </ion-content>
