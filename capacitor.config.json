@@ -1,5 +1,5 @@
 {
-  "appId": "io.tillis.rslaz",
+  "appId": "com.rslazsoccer.app",
   "appName": "rsl-az",
   "bundledWebRuntime": false,
   "webDir": "www",

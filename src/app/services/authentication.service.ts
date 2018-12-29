@@ -205,7 +205,7 @@ export class AuthenticationService {
     console.log("Logging in to firebase");
     firebase
       .auth()
-      .signInWithCredential(credential)
+      .signInAndRetrieveDataWithCredential(credential)
       .then(success => {
         console.log("Firebase login success: " + JSON.stringify(success));
         this.menu.enable(true);
