@@ -8,14 +8,14 @@
 <ion-content>
   <ion-list>
     <ion-item-group *ngFor="let division of teams">
-      <ion-item color="primary" class="padding-top"
-        ><ion-label>{{ division.divisionName }}</ion-label></ion-item
-      >
+      <ion-item color="primary" class="padding-top">
+        <ion-label class='tertiary'>{{ division.divisionName }}</ion-label>
+      </ion-item>
       <ion-item color="light" *ngFor="let team of division.divisionTeams">
         <ion-grid class="width-100">
-          <ion-row align-self-start
-            ><ion-col align-self-start>{{ team.teamName }}</ion-col></ion-row
-          >
+          <ion-row align-self-start>
+            <ion-col align-self-start>{{ team.teamName }}</ion-col>
+          </ion-row>
           <ion-row>
             <ion-col> MP </ion-col>
             <ion-col> W </ion-col>

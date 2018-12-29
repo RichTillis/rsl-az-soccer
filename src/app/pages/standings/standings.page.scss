@@ -1,11 +1,15 @@
-.width-100{
-    width: 100%;
+.width-100 {
+  width: 100%;
 }
 
-ion-col{
-    font-size: .75em;
+ion-col {
+  font-size: 0.75em;
 }
 
-.padding-top{
-    padding-top: 1em;
+.padding-top {
+  padding-top: 1em;
+}
+
+.tertiary {
+  color: var(--ion-color-tertiary) !important;
 }
