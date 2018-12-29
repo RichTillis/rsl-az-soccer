@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { switchMap } from "rxjs/operators";
+import { ActivatedRoute, Params } from "@angular/router";
+
+import { TournamentService } from "../../../services/tournament.service";
 
 @Component({
   selector: "app-team-details",
@@ -10,17 +11,21 @@ import { switchMap } from "rxjs/operators";
 export class TeamDetailsPage implements OnInit {
   teamId: any;
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    public tournamentService: TournamentService
+  ) {}
 
   ngOnInit() {
-    console.log("someDatasdfsdfdsdf:");
-    this.teamId = this.activatedRoute.snapshot.paramMap.get("id");
-    console.log(this.teamId);
-    // const someData = this.activatedRoute.parent.params.pipe(
-    //   switchMap(params => {
-    //     return params.id;
-    //   })
-    // );
-    // console.log(someData)
+    console.log("team details:");
+    // this.teamId = this.activatedRoute.snapshot.paramMap.get("id");
+    // console.log(this.teamId);
+    const someData = this.activatedRoute.parent.params.subscribe(
+      (params: Params) => {
+        this.teamId = params.teamId;
+        console.log(this.teamId);
+        this.tournamentService.setTeamId(this.teamId);
+      }
+    );
   }
 }

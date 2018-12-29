@@ -26,9 +26,9 @@
         </ion-card-header>
         <ion-card-content>
           <ion-item
+          routerLink="/team/teamDetails/{{team.id}}"
             color="light"
-            *ngFor="let team of division.divisionTeams"
-            (click)="teamTapped($event, team)"
+            *ngFor="let team of division.divisionTeams"            
           >
             <ion-label>{{ team.name }}</ion-label>
           </ion-item>

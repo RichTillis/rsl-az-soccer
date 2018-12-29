@@ -58,5 +58,6 @@ export class TeamsPage implements OnInit {
     console.log(team.id);
     // this.router.navigate(["/test", { id: team.id }]);
     this.router.navigate(["/team", { id: team.id }]);
+    // this.router.navigate(["/team"]);
   }
 }

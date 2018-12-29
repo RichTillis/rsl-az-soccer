@@ -15,9 +15,19 @@ export class TournamentService {
   private tourneyData = {};
   private locations = {};
 
-  // private shootoutId = 68462;
+  teamId;
+
+  private shootoutId = 68462;
 
   constructor(public http: HttpClient) {}
+
+  getTeamId(){
+    return this.teamId;
+  }
+
+  setTeamId(newTeamId){
+    this.teamId = newTeamId;
+  }
 
   getTournaments() {
     return new Promise(resolve => {
@@ -115,6 +125,9 @@ export class TournamentService {
   }
 
   getCurrentTourney() {
+    if(this.currentTourney === null){
+      return this.getTournamentData(this.shootoutId);
+    }
     return this.currentTourney;
   }
 

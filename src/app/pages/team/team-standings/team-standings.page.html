@@ -3,29 +3,36 @@
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Team Schedule</ion-title>
+    <ion-title>Team Standings</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="primary">
+<ion-content padding color="primary">
   <ion-list>
-    <ion-item *ngFor="let game of games" (click)="gameClicked($event, game)">
-      <ion-row>
-        <ion-col text-center> {{ game.time | date: "M/d/yy" }} </ion-col>
-        <ion-col text-center>{{ game.time | date: "shortTime" }}</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col text-center> {{ game.homeAway }} {{ game.opponent }} </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col text-center> {{ game.location }} </ion-col>
-        <ion-col text-center>
-          <h4>
-            <!-- <ion-badge [color]="getScoreDisplayBadgeClass(game)">{{getScoreWorL(game)}}</ion-badge> -->
-            {{ game.scoreDisplay }}
-          </h4>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+      <ion-item color="light" *ngFor="let team of flightStandings">
+          <ion-grid class="width-100">
+            <ion-row align-self-start>
+              <ion-col align-self-start>{{ team.teamName }}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col> MP </ion-col>
+              <ion-col> W </ion-col>
+              <ion-col> L </ion-col>
+              <ion-col> D </ion-col>
+              <ion-col> GF </ion-col>
+              <ion-col> GA </ion-col>
+              <ion-col> Points </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col> {{ team.matchesPlayed }} </ion-col>
+              <ion-col> {{ team.wins }} </ion-col>
+              <ion-col> {{ team.losses }} </ion-col>
+              <ion-col> {{ team.draws }} </ion-col>
+              <ion-col> {{ team.goalsFor }} </ion-col>
+              <ion-col> {{ team.goalsAgainst }} </ion-col>
+              <ion-col> {{ team.points }} </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
   </ion-list>
 </ion-content>

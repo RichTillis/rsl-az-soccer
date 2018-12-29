@@ -1,7 +1,10 @@
-.padding-top{
-    padding-top: 1.5em;
-    color: var(--ion-color-tertiary);
+.padding-top {
+  padding-top: 1.5em;
+  color: var(--ion-color-tertiary);
 }
-ion-content{
-    background: var(--ion-color-primary-tint);
+ion-content {
+  background: var(--ion-color-primary-tint);
+}
+.tertiary {
+  color: var(--ion-color-tertiary) !important;
 }

@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { TeamPage } from "./team.page";
+import { TeamDetailsPage } from './team-details/team-details.page';
 
 const routes: Routes = [
   {
@@ -11,13 +12,12 @@ const routes: Routes = [
       {
         path: "teamDetails",
         children: [
+          // {
+          //   path: '',
+          //   component: TeamDetailsPage
+          // },
           {
-            path: "",
-            loadChildren:
-              "./team-details/team-details.module#TeamDetailsPageModule"
-          },
-          {
-            path: ":id",
+            path: ":teamId",
             loadChildren:
               "./team-details/team-details.module#TeamDetailsPageModule"
           }
@@ -44,16 +44,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: ":id",
-        redirectTo: "/teamDetails/:id",
+        path: "",
+        redirectTo: "team/teamDetails",
         pathMatch: "full"
       }
     ]
-  },
-  {
-    path: ":id",
-    redirectTo: "/teamDetails/:id",
-    pathMatch: "full"
   }
 ];
 
