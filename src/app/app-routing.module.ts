@@ -69,6 +69,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'field-maps', loadChildren: './field-maps/field-maps.module#FieldMapsPageModule' },
+  { path: 'venues', loadChildren: './venues/venues.module#VenuesPageModule' },
 ];
 
 @NgModule({
