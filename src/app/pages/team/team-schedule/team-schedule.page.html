@@ -10,10 +10,10 @@
 <ion-content color="light">
     <ion-card color="primary">
       <ion-card-header>
-        <ion-card-title> {{ team.teamName }} </ion-card-title>
+        <ion-card-title> </ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <ion-item *ngFor="let game of games" (click)="gameClicked($event, game)" color="light">
+        <ion-item *ngFor="let game of games" color="light">
           <ion-grid>
             <ion-row text-center>
               <ion-col>{{ game.time | date: "M/d/yy" }} - {{ game.time | date: "shortTime" }}</ion-col>

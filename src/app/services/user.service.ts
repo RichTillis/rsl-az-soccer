@@ -11,7 +11,6 @@ export class UserService {
 
   constructor(
     private afAuth: AngularFireAuth,
-    private storage: Storage,
     private fbDb: AngularFireDatabase
   ) {
     this.afAuth.authState.subscribe(auth => {

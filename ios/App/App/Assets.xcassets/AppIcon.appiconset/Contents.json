@@ -3,49 +3,49 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "RSL_AZ_Badge_Color-APP-6.png",
+      "filename" : "Spotlight Icon - 40x40.png",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "RSL_AZ_Badge_Color-APP-7.png",
+      "filename" : "App Icon - 60x60.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "RSL_AZ_Badge_Color-APP.png",
+      "filename" : "Spotlight Icon - 58x58.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "RSL_AZ_Badge_Color-APP-1.png",
+      "filename" : "Settings Icon - 87x87.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "RSL_AZ_Badge_Color-APP-2.png",
+      "filename" : "Spotlight Icon - 80x80.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "RSL_AZ_Badge_Color-APP-3.png",
+      "filename" : "Spotlight Icon - 120x120.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "RSL_AZ_Badge_Color-APP-4.png",
+      "filename" : "Spotlight Icon - 120x120-1.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "RSL_AZ_Badge_Color-APP-5.png",
+      "filename" : "App Icon - 180x180.png",
       "scale" : "3x"
     },
     {
@@ -105,7 +105,7 @@
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "AppIcon-512@2x.png",
+      "filename" : "App Icon Main - 1024x1024.png",
       "scale" : "1x"
     }
   ],
