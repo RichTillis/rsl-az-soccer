@@ -68,6 +68,7 @@ const routes: Routes = [
     loadChildren: "./pages/teams/teams.module#TeamsPageModule",
     canActivate: [AuthGuard]
   },
+  { path: 'field-maps', loadChildren: './field-maps/field-maps.module#FieldMapsPageModule' },
 ];
 
 @NgModule({
