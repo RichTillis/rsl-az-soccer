@@ -70,6 +70,7 @@ const routes: Routes = [
   },
   { path: 'field-maps', loadChildren: './field-maps/field-maps.module#FieldMapsPageModule' },
   { path: 'venues', loadChildren: './venues/venues.module#VenuesPageModule' },
+  { path: 'check-in', loadChildren: './check-in/check-in.module#CheckInPageModule' },
 ];
 
 @NgModule({
