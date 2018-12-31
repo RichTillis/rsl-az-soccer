@@ -209,6 +209,8 @@ export class AuthenticationService {
       .then(success => {
         console.log("Firebase login success.");
         this.menu.enable(true);
+        console.log("navigating to the home page.");
+        this.navCtrl.navigateForward("");
       })
       .catch(error => {
         console.log("Firebase login failure: " + JSON.stringify(error));

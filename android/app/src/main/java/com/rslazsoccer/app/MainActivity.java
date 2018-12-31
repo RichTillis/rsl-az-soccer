@@ -1,4 +1,4 @@
-package io.tillis.rslaz;
+package com.rslazsoccer.app;
 
 import android.os.Bundle;
 

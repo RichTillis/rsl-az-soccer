@@ -18,7 +18,7 @@ export class MyTeamsPage implements OnInit {
 
   hasFavs() {
     // return this.favoritesService.hasFavs();
-    // return false;
+    return false;
   }
 
   goToTeams() {

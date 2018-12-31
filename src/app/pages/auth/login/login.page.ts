@@ -68,7 +68,9 @@ export class LoginPage implements OnInit {
   loginWithFacebook(): void {
 
     this.authService.doFacebookLogin().then(() => {
-      console.log('here I am')
+      console.log('here I am');
+      this.presentToast();
+      this.navCtrl.navigateForward("");
     })
   //  this.loadingCtrl
   //   .create({
