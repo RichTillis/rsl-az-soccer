@@ -15,13 +15,13 @@
   <!-- <ion-button (click)="getPosts()">Get Posts</ion-button> -->
   <ion-item class="post-item" *ngFor="let post of formattedPosts">
       <ion-grid>
-          <ion-row>
-            <ion-col size="2">
+          <ion-row align-items-center class="header-background-color">
+            <ion-col size="3">
               <ion-avatar item-left>
                 <img src="https://graph.facebook.com/{{post.from.id}}/picture" />
               </ion-avatar>
             </ion-col>
-            <ion-col size="8">
+            <ion-col size="9">
               <div class="post-from-name">
                 {{ post.from.name }}
               </div>
