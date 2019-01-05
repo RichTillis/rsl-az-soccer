@@ -9,16 +9,15 @@ import { FavoritesService } from "../../services/favorites.service";
   styleUrls: ["./my-teams.page.scss"]
 })
 export class MyTeamsPage implements OnInit {
+  favorites$: any;
+
   constructor(
     public favoritesService: FavoritesService,
     public router: Router
   ) {}
 
-  ngOnInit() {}
-
-  hasFavs() {
-    // return this.favoritesService.hasFavs();
-    return false;
+  ngOnInit() {
+    this.favorites$ = this.favoritesService.getFavorites()
   }
 
   goToTeams() {

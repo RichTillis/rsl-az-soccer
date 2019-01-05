@@ -1,38 +1,47 @@
 <ion-header>
-  <ion-toolbar color="secondary">
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end"> <ion-menu-button></ion-menu-button> </ion-buttons>
     <ion-title>Team Standings</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding color="primary">
+<ion-content color="light">
+  <ion-item-divider color="secondary">
+    <ion-label> {{ team?.name }} </ion-label>
+  </ion-item-divider>
+  <!-- <ion-button color="primary" (click)="addToFavs()" *ngIf="!isFollowing">
+      <ion-icon slot="start" name="star"></ion-icon>
+      Add To My Teams
+      <ion-icon slot="end" name="star"></ion-icon>
+    </ion-button>
+    <ion-button color="primary" (click)="removeFromFavs()" *ngIf="isFollowing">
+      Unfollow
+    </ion-button> -->
   <ion-list>
-      <ion-item color="light" *ngFor="let team of flightStandings">
-          <ion-grid class="width-100">
-            <ion-row align-self-start>
-              <ion-col align-self-start>{{ team.teamName }}</ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col> MP </ion-col>
-              <ion-col> W </ion-col>
-              <ion-col> L </ion-col>
-              <ion-col> D </ion-col>
-              <ion-col> GF </ion-col>
-              <ion-col> GA </ion-col>
-              <ion-col> Points </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col> {{ team.matchesPlayed }} </ion-col>
-              <ion-col> {{ team.wins }} </ion-col>
-              <ion-col> {{ team.losses }} </ion-col>
-              <ion-col> {{ team.draws }} </ion-col>
-              <ion-col> {{ team.goalsFor }} </ion-col>
-              <ion-col> {{ team.goalsAgainst }} </ion-col>
-              <ion-col> {{ team.points }} </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
+    <ion-item color="light" *ngFor="let team of flightStandings">
+      <ion-grid class="width-100">
+        <ion-row align-self-start>
+          <ion-col align-self-start>{{ team?.teamName }}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col> MP </ion-col>
+          <ion-col> W </ion-col>
+          <ion-col> L </ion-col>
+          <ion-col> D </ion-col>
+          <ion-col> GF </ion-col>
+          <ion-col> GA </ion-col>
+          <ion-col> Points </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col> {{ team?.matchesPlayed }} </ion-col>
+          <ion-col> {{ team?.wins }} </ion-col>
+          <ion-col> {{ team?.losses }} </ion-col>
+          <ion-col> {{ team?.draws }} </ion-col>
+          <ion-col> {{ team?.goalsFor }} </ion-col>
+          <ion-col> {{ team?.goalsAgainst }} </ion-col>
+          <ion-col> {{ team?.points }} </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
   </ion-list>
 </ion-content>

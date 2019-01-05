@@ -2,32 +2,17 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { TeamPage } from "./team.page";
-import { TeamDetailsPage } from './team-details/team-details.page';
 
 const routes: Routes = [
   {
-    path: "",
+    path: "tabs",
     component: TeamPage,
     children: [
-      {
-        path: "teamDetails",
-        children: [
-          // {
-          //   path: '',
-          //   component: TeamDetailsPage
-          // },
-          {
-            path: ":teamId",
-            loadChildren:
-              "./team-details/team-details.module#TeamDetailsPageModule"
-          }
-        ]
-      },
       {
         path: "teamSchedule",
         children: [
           {
-            path: "",
+            path: ":teamId",
             loadChildren:
               "./team-schedule/team-schedule.module#TeamSchedulePageModule"
           }
@@ -45,7 +30,7 @@ const routes: Routes = [
       },
       {
         path: "",
-        redirectTo: "team/teamDetails",
+        redirectTo: "app/tabs/teamSchedule",
         pathMatch: "full"
       }
     ]

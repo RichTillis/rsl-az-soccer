@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import { AngularFireDatabase } from "@angular/fire/database";
 
 import { Subscription } from "rxjs/Subscription";
@@ -14,26 +13,22 @@ export class FavoritesService {
   teamSubscriptions: Map<string, Subscription> = new Map();
 
   constructor(
-    // public http: HttpClient,
     private afDb: AngularFireDatabase,
     public authService: AuthenticationService
   ) {
-    console.log("current user id is:");
-    console.log(this.authService.currentUserId);
     let path = `/users/${this.authService.currentUserId}/favorites`;
-    console.log("getting favorites for path " + path);
     this.afDb.database.ref(path).on("value", snapshot => {
       this.favs = snapshot.val() || [];
-      this.favs.map(favorite => this.watchTeam(favorite.team.id));
     });
   }
 
-  hasFavs() {
-    return this.favs.length > 0;
+  getFavorites() {
+    let path = `/users/${this.authService.currentUserId}/favorites`;
+    return this.afDb.list(path).valueChanges();
   }
 
   watchTeam(team) {
-    let path = `/tournaments/tournaments-data/58671/gamesByTeamId/${team.id}`;
+    let path = `/tournaments/tournaments-data/68462/gamesByTeamId/${team.id}`;
     console.log("watching path " + path);
     let sub = this.afDb
       .list(path)
@@ -41,5 +36,40 @@ export class FavoritesService {
       .subscribe();
 
     this.teamSubscriptions.set(team.id, sub);
+  }
+
+  isFav(team) {
+    let favReducer = (accumulator, currentVal) =>
+      accumulator ? true : team.teamId === currentVal.team.teamId;
+    return this.favs.reduce(favReducer, false);
+  }
+
+  removeFav(team) {
+    let teamFilter = item => {
+      return team.teamId !== item.team.teamId;
+    };
+
+    let newFavs = this.favs.filter(teamFilter);
+
+    let path = `/users/${this.authService.currentUserId}/favorites`;
+    this.afDb.database.ref(path).set(newFavs);
+  }
+
+  addFav(team, tournamentId, tournamentName) {
+    let item = {
+      team: team,
+      tournamentId: tournamentId,
+      tournamentName: tournamentName
+    };
+
+    this.favs.push(item);
+    let path = `/users/${this.authService.currentUserId}/favorites`;
+    this.afDb
+      .object(path)
+      .set(this.favs)
+      .catch(er => {
+        console.log("error:");
+        console.log(er);
+      });
   }
 }

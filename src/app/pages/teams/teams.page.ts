@@ -53,11 +53,11 @@ export class TeamsPage implements OnInit {
     this.teams = filteredTeams;
   }
 
-  teamTapped($event, team): void {
-    // console.log(team);
-    console.log(team.id);
-    // this.router.navigate(["/test", { id: team.id }]);
-    this.router.navigate(["/team", { id: team.id }]);
-    // this.router.navigate(["/team"]);
-  }
+  // teamTapped($event, team): void {
+  //   // console.log(team);
+  //   console.log(team.id);
+  //   // this.router.navigate(["/test", { id: team.id }]);
+  //   this.router.navigate(["/team", { id: team.id }]);
+  //   // this.router.navigate(["/team"]);
+  // }
 }

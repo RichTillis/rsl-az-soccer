@@ -29,7 +29,7 @@ const routes: Routes = [
       "./pages/auth/forgot-password/forgot-password.module#ForgotPasswordPageModule"
   },
   {
-    path: "team",
+    path: "app",
     loadChildren: "./pages/team/team.module#TeamPageModule",
     canActivate: [AuthGuard]
   },
