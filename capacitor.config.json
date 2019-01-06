@@ -1,6 +1,6 @@
 {
   "appId": "com.rslazsoccer.app",
-  "appName": "rsl-az",
+  "appName": "RSL AZ",
   "bundledWebRuntime": false,
   "webDir": "www",
   "linuxAndroidStudioPath": "/opt/android-studio/bin/studio.sh"

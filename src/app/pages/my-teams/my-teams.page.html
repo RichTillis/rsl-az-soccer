@@ -8,21 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngIf="!favorites$">
-    <ion-card-header>
-      <ion-card-title>No Followed Teams</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      You are not currently following any teams. First select a team from the
-      teams list, then you can follow teams from their team page.
-      <ion-button expand="full" (click)="goToTeams()" >
-        <ion-icon slot="start" name="search"></ion-icon>
-        <ion-label class='tertiary'>Find a Team</ion-label>
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card *ngIf="favorites$">
+  <ion-card>
     <ion-list>
       <ion-list-header class="my-teams-header">Followed Teams</ion-list-header>
       <ion-item *ngFor="let item of favorites$ | async" routerLink="/app/tabs/teamSchedule/{{item.team.teamId}}" >

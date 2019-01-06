@@ -17,10 +17,7 @@ export class MyTeamsPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.favorites$ = this.favoritesService.getFavorites()
-  }
-
-  goToTeams() {
-    this.router.navigate(["/teams"]);
+    this.favorites$ = this.favoritesService.getFavorites();
+    console.log(this.favorites$.length);
   }
 }

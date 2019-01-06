@@ -38,3 +38,5 @@ firebase.auth.ts
 facebook.config.ts
 google-services.json
 GoogleService-Info.plist
+
+android/app/release/
