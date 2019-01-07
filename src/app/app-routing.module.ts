@@ -68,10 +68,26 @@ const routes: Routes = [
     loadChildren: "./pages/teams/teams.module#TeamsPageModule",
     canActivate: [AuthGuard]
   },
-  { path: 'field-maps', loadChildren: './field-maps/field-maps.module#FieldMapsPageModule' },
-  { path: 'venues', loadChildren: './venues/venues.module#VenuesPageModule' },
-  { path: 'check-in', loadChildren: './check-in/check-in.module#CheckInPageModule' },
-  { path: 'contact-us', loadChildren: './contact-us/contact-us.module#ContactUsPageModule' },
+  {
+    path: "field-maps",
+    loadChildren: "./pages/field-maps/field-maps.module#FieldMapsPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "venues",
+    loadChildren: "./pages/venues/venues.module#VenuesPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "check-in",
+    loadChildren: "./pages/check-in/check-in.module#CheckInPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "contact-us",
+    loadChildren: "./pages/contact-us/contact-us.module#ContactUsPageModule",
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
