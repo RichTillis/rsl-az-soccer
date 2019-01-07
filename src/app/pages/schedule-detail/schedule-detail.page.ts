@@ -4,7 +4,7 @@ import { NavParams, ModalController } from "@ionic/angular";
 
 import _ from "lodash";
 
-import { TournamentService } from "../../services/tournament.service";
+import { TournamentService } from "../../services/tournament/tournament.service";
 import { t } from "tar";
 
 @Component({

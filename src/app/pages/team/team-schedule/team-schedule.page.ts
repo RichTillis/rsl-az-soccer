@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Params } from "@angular/router";
 import _ from "lodash";
 
-import { TournamentService } from "../../../services/tournament.service";
-import { FavoritesService } from "../../../services/favorites.service";
+import { TournamentService } from "../../../services/tournament/tournament.service";
+import { FavoritesService } from "../../../services/favorites/favorites.service";
 
 @Component({
   selector: "app-team-schedule",

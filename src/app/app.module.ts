@@ -15,7 +15,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { Firebase } from '@ionic-native/firebase/ngx';
-import { FcmService } from "./services/fcm.service";
+import { FcmService } from "./services/push-notifications/fcm.service";
 
 import { ScheduleDetailPageModule } from './pages/schedule-detail/schedule-detail.module';
 

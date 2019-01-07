@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { NavController } from "@ionic/angular";
 
 import { Validators, FormGroup, FormControl } from "@angular/forms";
-import { AuthenticationService } from "../../../services/authentication.service";
-import { UtilService } from "../../../services/util.service";
+import { AuthenticationService } from "../../../services/auth/authentication.service";
+import { UtilService } from "../../../services/util/util.service";
 
 @Component({
   selector: "app-forgot-password",

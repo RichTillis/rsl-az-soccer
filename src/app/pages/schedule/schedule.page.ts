@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ModalController } from "@ionic/angular";
 import { Router } from "@angular/router";
 
-import { TournamentService } from "../../services/tournament.service";
+import { TournamentService } from "../../services/tournament/tournament.service";
 import * as _ from "lodash";
 
 import { ScheduleDetailPage } from "../schedule-detail/schedule-detail.page";

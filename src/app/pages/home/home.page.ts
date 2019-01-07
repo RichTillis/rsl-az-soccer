@@ -3,7 +3,7 @@ import { LoadingController } from "@ionic/angular";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
-import { FacebookService } from "../../services/facebook.service";
+import { FacebookService } from "../../services/facebook/facebook.service";
 
 @Component({
   selector: "app-home",

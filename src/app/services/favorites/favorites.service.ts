@@ -3,7 +3,7 @@ import { AngularFireDatabase } from "@angular/fire/database";
 
 import { Subscription } from "rxjs/Subscription";
 
-import { AuthenticationService } from "./authentication.service";
+import { AuthenticationService } from "../auth/authentication.service";
 
 @Injectable({
   providedIn: "root"

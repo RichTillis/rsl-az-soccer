@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import * as _ from "lodash";
 
-import { TournamentService } from "../../services/tournament.service";
+import { TournamentService } from "../../services/tournament/tournament.service";
 
 @Component({
   selector: "app-standings",

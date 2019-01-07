@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
 import { Plugins } from "@capacitor/core";
 import { Router } from "@angular/router";
-import { UtilService } from "./services/util.service";
-import { FcmService } from "./services/fcm.service";
-import { AuthenticationService } from "./services/authentication.service";
+import { UtilService } from "./services/util/util.service";
+import { FcmService } from "./services/push-notifications/fcm.service";
+import { AuthenticationService } from "./services/auth/authentication.service";
 import { Platform } from "@ionic/angular";
 
 import { ToastController } from "@ionic/angular";
