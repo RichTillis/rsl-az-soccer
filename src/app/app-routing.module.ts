@@ -87,6 +87,11 @@ const routes: Routes = [
     path: "contact-us",
     loadChildren: "./pages/contact-us/contact-us.module#ContactUsPageModule",
     canActivate: [AuthGuard]
+  },
+  {
+    path: "venue-map",
+    loadChildren: "./pages/venue-map/venue-map.module#VenueMapPageModule",
+    canActivate: [AuthGuard]
   }
 ];
 

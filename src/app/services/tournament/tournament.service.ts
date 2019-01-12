@@ -21,11 +21,11 @@ export class TournamentService {
 
   constructor(public http: HttpClient) {}
 
-  getTeamId(){
+  getTeamId() {
     return this.teamId;
   }
 
-  setTeamId(newTeamId){
+  setTeamId(newTeamId) {
     this.teamId = newTeamId;
   }
 
@@ -57,9 +57,7 @@ export class TournamentService {
     );
     console.log("**about to make HTTP call");
     return this.http
-      .get(
-        `${this.baseUrl}/tournaments/tournaments-data/${tourneyId}.json`
-      )
+      .get(`${this.baseUrl}/tournaments/tournaments-data/${tourneyId}.json`)
       .pipe(
         map(response => {
           this.tourneyData[tourneyId] = response;
@@ -70,7 +68,7 @@ export class TournamentService {
   }
 
   getTournamentGameLocations(
-    tourneyId,
+    tourneyId: number,
     forceRefresh: boolean = false
   ): Observable<any> {
     console.log("Getting tournament game location data for: " + tourneyId);
@@ -114,7 +112,7 @@ export class TournamentService {
     ];
   }
 
-  getTournamentLocation() {
+  getTournamentLocation(venueLocation){
     return this.http.get(`${this.baseUrl}/tournaments/venues.json`).pipe(
       map(response => {
         this.locations[0] = response;
@@ -125,7 +123,7 @@ export class TournamentService {
   }
 
   getCurrentTourney() {
-    if(this.currentTourney === null){
+    if (this.currentTourney === null) {
       return this.getTournamentData(this.shootoutId);
     }
     return this.currentTourney;
