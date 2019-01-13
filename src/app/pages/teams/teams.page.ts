@@ -12,6 +12,8 @@ import * as _ from "lodash";
 export class TeamsPage implements OnInit {
   private allTeams: any;
   private allTeamDivisions: any;
+  divisionFilter = "all";
+
   teams = [];
   queryText: string;
 
@@ -49,15 +51,24 @@ export class TeamsPage implements OnInit {
         });
       }
     });
-
     this.teams = filteredTeams;
   }
 
-  // teamTapped($event, team): void {
-  //   // console.log(team);
-  //   console.log(team.id);
-  //   // this.router.navigate(["/test", { id: team.id }]);
-  //   this.router.navigate(["/team", { id: team.id }]);
-  //   // this.router.navigate(["/team"]);
-  // }
+  segmentChanged(ev: any) {
+    console.log("Segment changed", ev.detail.value);
+    this.filterDivisions(ev.detail.value);
+  }
+
+  filterDivisions(filter: string) {
+    if (filter !== "All") {
+      let filteredTeams = _.filter(this.allTeamDivisions, division => {
+        return division.divisionName.includes(filter);
+      });
+      this.teams = filteredTeams;
+    } else {
+      this.teams = this.allTeamDivisions;
+    }
+
+    console.log("division teams", this.teams);
+  }
 }

@@ -72,4 +72,22 @@ export class SchedulePage implements OnInit {
     this.openModal(team);
     // this.router.navigate(['/team/teamSchedule',	{	id:	team.id	}]);
   }
+
+  segmentChanged(ev: any) {
+    console.log("Segment changed", ev.detail.value);
+    this.filterDivisions(ev.detail.value);
+  }
+  
+  filterDivisions(filter: string) {
+    if (filter !== "All") {
+      let filteredTeams = _.filter(this.allTeamDivisions, division => {
+        return division.divisionName.includes(filter);
+      });
+      this.teams = filteredTeams;
+    } else {
+      this.teams = this.allTeamDivisions;
+    }
+
+    console.log("division teams", this.teams);
+  }
 }

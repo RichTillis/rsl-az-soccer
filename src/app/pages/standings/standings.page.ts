@@ -10,18 +10,39 @@ import { TournamentService } from "../../services/tournament/tournament.service"
 })
 export class StandingsPage implements OnInit {
   TOURNAMENT_ID = 68462;
+  private allTeamDivisions: any;
   teams = [];
 
   constructor(private tournamentService: TournamentService) {
     tournamentService.getTournamentData(this.TOURNAMENT_ID).subscribe(data => {
-      this.teams = _.chain(data.standings)
+      this.allTeamDivisions = _.chain(data.standings)
         .groupBy("flight")
         .toPairs()
         .map(item => _.zipObject(["divisionName", "divisionTeams"], item))
         .value();
+
+      this.teams = this.allTeamDivisions;
       console.log("teams", this.teams);
     });
   }
 
   ngOnInit() {}
+
+  segmentChanged(ev: any) {
+    console.log("Segment changed", ev.detail.value);
+    this.filterDivisions(ev.detail.value);
+  }
+  
+  filterDivisions(filter: string) {
+    if (filter !== "All") {
+      let filteredTeams = _.filter(this.allTeamDivisions, division => {
+        return division.divisionName.includes(filter);
+      });
+      this.teams = filteredTeams;
+    } else {
+      this.teams = this.allTeamDivisions;
+    }
+
+    console.log("division teams", this.teams);
+  }
 }

@@ -13,7 +13,19 @@
       (ionInput)="updateTeams()"
     >
     </ion-searchbar
-  ></ion-toolbar>
+  >
+  <ion-segment scrollable (ionChange)="segmentChanged($event)">
+      <ion-segment-button checked value="All">
+        <ion-label>All Teams</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Boys">
+        <ion-label>Boys</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Girls">
+        <ion-label>Girls</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content color="primary-contrast">
