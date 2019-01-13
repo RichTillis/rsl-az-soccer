@@ -35,13 +35,15 @@ export class TeamStandingsPage implements OnInit {
         this.team = _.filter(data.teams, t => t.id === this.teamId);
         this.team = this.team[0];
 
+        this.isFollowing = this.favoritesService.isFav(this.team);
+
         this.flightStandings = _.filter(
           data.standings,
           s => s.flight === this.team.flight
         );
-      });
 
-    this.isFollowing = this.favoritesService.isFav(this.team);
+        console.log(this.flightStandings)
+      });
   }
 
   getScoreDisplay(isHome, homeScore, awayScore) {

@@ -14,9 +14,5 @@ export class TeamPage implements OnInit {
 
   ngOnInit() {
     this.teamId = this.activatedRoute.snapshot.paramMap.get("id");
-    // this.teamId = this.activatedRoute.snapshot.paramMap.getAll;
-
-    console.log("team ID:");
-    console.log(this.teamId);
   }
 }

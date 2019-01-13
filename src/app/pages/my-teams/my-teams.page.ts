@@ -18,6 +18,6 @@ export class MyTeamsPage implements OnInit {
 
   ngOnInit() {
     this.favorites$ = this.favoritesService.getFavorites();
-    console.log(this.favorites$.length);
+    // console.log(this.favorites$.length);
   }
 }

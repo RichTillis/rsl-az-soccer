@@ -12,7 +12,7 @@
       <ion-item color="secondary" class="padding-top">
         <ion-label>{{ division.divisionName }}</ion-label>
       </ion-item>
-      <ion-item color="light" *ngFor="let team of division.divisionTeams">
+      <ion-item color="light" *ngFor="let team of division.divisionTeams" routerLink="/app/tabs/teamSchedule/{{team.teamId}}">
         <ion-grid class="width-100">
           <ion-row align-self-start>
             <ion-col align-self-start>{{ team.teamName }}</ion-col>

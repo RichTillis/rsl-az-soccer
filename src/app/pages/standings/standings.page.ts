@@ -19,7 +19,7 @@ export class StandingsPage implements OnInit {
         .toPairs()
         .map(item => _.zipObject(["divisionName", "divisionTeams"], item))
         .value();
-      // console.log("teams", this.teams);
+      console.log("teams", this.teams);
     });
   }
 
