@@ -33,11 +33,9 @@ export class ScheduleDetailPage implements OnInit {
   ngOnInit() {
     // this.teamId = this.activatedRoute.snapshot.paramMap.get("id");
     this.teamId = this.navParams.get("teamId");
-    console.log(this.teamId);
 
     console.log("loading team data for " + this.teamId);
     this.tourneyData = this.tournamentService.getCurrentTourney();
-
     console.log(this.tourneyData);
 
     let team = _.chain(this.tourneyData.teams)
@@ -80,8 +78,6 @@ export class ScheduleDetailPage implements OnInit {
     this.teamStanding = _.find(this.tourneyData.standings, {
       teamId: this.teamId
     });
-    // console.log(this.teamStanding);
-    // this.isFollowing = this.favoriteService.isFav(this.team);
   }
 
   closeModal() {
@@ -89,11 +85,6 @@ export class ScheduleDetailPage implements OnInit {
   }
 
   getScoreDisplay(isHome, homeScore, awayScore) {
-    // console.log("getting score display");
-    // console.log("home score:" + homeScore);
-    // console.log("away score:" + awayScore);
-    // console.log("is home: " + isHome);
-
     if (homeScore != null && awayScore != null) {
       var teamScore = isHome ? homeScore : awayScore;
       var opponentScore = isHome ? awayScore : homeScore;
@@ -101,11 +92,6 @@ export class ScheduleDetailPage implements OnInit {
       if (teamScore == opponentScore) {
         winIndicator = "DRAW "
       }
-
-      // console.log("team score:" + teamScore);
-      // console.log("opponent score:" + opponentScore);
-      // console.log("win indicator:" + winIndicator);
-
       return winIndicator + teamScore + "-" + opponentScore;
     } else {
       return "";
