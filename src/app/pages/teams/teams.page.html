@@ -7,7 +7,7 @@
     ><ion-searchbar
       placeholder="Search"
       [(ngModel)]="queryText"
-      (ionInput)="updateTeams()"
+      (ionChange)="updateTeams()"
     >
     </ion-searchbar>
     <ion-segment scrollable (ionChange)="segmentChanged($event)">

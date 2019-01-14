@@ -92,6 +92,12 @@ const routes: Routes = [
     path: "venue-map",
     loadChildren: "./pages/venue-map/venue-map.module#VenueMapPageModule",
     canActivate: [AuthGuard]
+  },
+  {
+    path: "inclement-weather",
+    loadChildren:
+      "./pages/inclement-weather/inclement-weather.module#InclementWeatherPageModule",
+    canActivate: [AuthGuard]
   }
 ];
 
