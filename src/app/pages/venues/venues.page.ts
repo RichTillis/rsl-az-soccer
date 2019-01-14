@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { LoadingController } from "@ionic/angular";
 
 import * as _ from "lodash";
 
@@ -13,14 +14,29 @@ export class VenuesPage implements OnInit {
   private SHOOTOUT_ID = 68462;
   locations: any;
 
-  constructor(public tournamentService: TournamentService) {}
+  constructor(
+    public loadingController: LoadingController,
+    public tournamentService: TournamentService
+  ) {}
 
   ngOnInit() {
-    this.tournamentService
-      .getTournamentGameLocations(this.SHOOTOUT_ID)
-      .subscribe(data => {
-        this.locations = _.map(_.uniqBy(data, "location"), "location").sort();
-        console.log("locations", this.locations);
-      });
+    this.displayLoader().then(async (loader: any) => {
+      await this.tournamentService
+        .getTournamentGameLocations(this.SHOOTOUT_ID)
+        .subscribe(data => {
+          this.locations = _.map(_.uniqBy(data, "location"), "location").sort();
+          console.log("locations", this.locations);
+        });
+    });
+  }
+
+  async displayLoader() {
+    const loading = await this.loadingController.create({
+      message: "Getting Venues...",
+      spinner: "crescent",
+      duration: 1000
+    });
+    await loading.present();
+    return loading;
   }
 }

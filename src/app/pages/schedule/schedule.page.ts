@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ModalController } from "@ionic/angular";
+import { ModalController, LoadingController } from "@ionic/angular";
 import { Router } from "@angular/router";
 
 import { TournamentService } from "../../services/tournament/tournament.service";
@@ -20,24 +20,37 @@ export class SchedulePage implements OnInit {
 
   constructor(
     public tournamentService: TournamentService,
+    public loadingController: LoadingController,
     public router: Router,
     private modalController: ModalController
-  ) {
-    tournamentService.getTournamentData(68462).subscribe(data => {
-      console.log(data);
-      this.allTeams = data.teams;
-      this.allTeamDivisions = _.chain(data.teams)
-        .groupBy("flight")
-        .toPairs()
-        .map(item => _.zipObject(["divisionName", "divisionTeams"], item))
-        .value();
+  ) {}
 
-      this.teams = this.allTeamDivisions;
-      console.log("division teams", this.teams);
+  ngOnInit() {
+    this.displayLoader().then(async (loader: any) => {
+      await this.tournamentService.getTournamentData(68462).subscribe(data => {
+        console.log(data);
+        this.allTeams = data.teams;
+        this.allTeamDivisions = _.chain(data.teams)
+          .groupBy("flight")
+          .toPairs()
+          .map(item => _.zipObject(["divisionName", "divisionTeams"], item))
+          .value();
+
+        this.teams = this.allTeamDivisions;
+        console.log("division teams", this.teams);
+      });
     });
   }
 
-  ngOnInit() {}
+  async displayLoader() {
+    const loading = await this.loadingController.create({
+      message: "Getting Teams...",
+      spinner: "crescent",
+      duration: 1000
+    });
+    await loading.present();
+    return loading;
+  }
 
   updateTeams() {
     let queryTextLower = this.queryText.toLowerCase();
@@ -68,16 +81,14 @@ export class SchedulePage implements OnInit {
   }
 
   teamTapped($event, team): void {
-    // console.log(team);
     this.openModal(team);
-    // this.router.navigate(['/team/teamSchedule',	{	id:	team.id	}]);
   }
 
   segmentChanged(ev: any) {
     console.log("Segment changed", ev.detail.value);
     this.filterDivisions(ev.detail.value);
   }
-  
+
   filterDivisions(filter: string) {
     if (filter !== "All") {
       let filteredTeams = _.filter(this.allTeamDivisions, division => {

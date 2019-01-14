@@ -17,24 +17,27 @@ export class HomePage implements OnInit {
   constructor(
     public loadingController: LoadingController,
     private facebookService: FacebookService
-  ) {
-    // this.facebookService.getPosts().pipe(map(
-    //   data => data.map(this.mapPosts)));
-  }
+  ) {}
 
   ngOnInit() {
-    // this.gettingActivityLoader().then(() => {
-      this.facebookService.getPosts().subscribe(data => {
+    this.displayLoader().then(async (loader: any) => {
+      await this.facebookService.getPosts().subscribe(data => {
         this.posts = data;
         this.formattedPosts = data.map(this.mapPosts);
         console.log(this.formattedPosts);
       });
-    // });
+    });
   }
 
-  // getPosts(){
-  //   this.facebookService.getPosts();
-  // }
+  async displayLoader() {
+    const loading = await this.loadingController.create({
+      message: "Getting Activity Data...",
+      spinner: "crescent",
+      duration: 1500
+    });
+    await loading.present();
+    return loading;
+  }
 
   async gettingActivityLoader() {
     const loading = await this.loadingController.create({
