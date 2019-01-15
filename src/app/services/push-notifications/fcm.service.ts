@@ -29,9 +29,15 @@ export class FcmService {
     })
     PushNotifications.addListener('registration', (token: PushNotificationToken) => {
       console.log('token ' + token.value)
-      PushNotifications.addListener('pushNotificationReceived', (notification: PushNotification) => this.presentNotifications(notification))
+      PushNotifications.addListener('pushNotificationReceived', (notification: PushNotification) => {
+        console.log('notification ' + JSON.stringify(notification));
+        this.presentNotifications(notification)
+      })
     })
     PushNotifications.register();
+    PushNotifications.getDeliveredNotifications().then((res) => {
+      JSON.stringify(res);
+    })
   }
 
   // async getToken() {
@@ -63,7 +69,9 @@ export class FcmService {
 
     const toast = await this.toastController.create({
       message: notification.body,
-      duration: 3000
+      showCloseButton: true,
+      closeButtonText: 'Got it',
+      position: 'middle'
     })
     toast.present()
   }

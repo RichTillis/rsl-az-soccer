@@ -22,15 +22,11 @@ android {
         // but continue the build even when errors are found:
         abortOnError false
     }
+    buildToolsVersion '28.0.3'
 }
 
 repositories {
-    maven {
-        url  "https://dl.bintray.com/ionic-team/capacitor"
-    }
-    flatDir{
-        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
-    }
+maven { url 'https://dl.bintray.com/ionic-team/capacitor' }
 }
 
 dependencies {
@@ -42,7 +38,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':capacitor-cordova-android-plugins')
+    //noinspection GradleCompatible
     implementation 'com.google.firebase:firebase-messaging:17.1.0'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.android.support:support-v4:27.1.1'
 }
 
@@ -56,3 +54,4 @@ try {
 } catch(Exception e) {
     logger.warn("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
 }
+apply plugin: 'com.google.gms.google-services'
