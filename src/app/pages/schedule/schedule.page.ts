@@ -1,11 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { ModalController, LoadingController } from "@ionic/angular";
 import { Router } from "@angular/router";
+import { Capacitor, Plugins, KeyboardPlugin } from "@capacitor/core";
 
 import { TournamentService } from "../../services/tournament/tournament.service";
 import * as _ from "lodash";
 
 import { ScheduleDetailPage } from "../schedule-detail/schedule-detail.page";
+
+const { Keyboard } = Capacitor.Plugins;
+
 
 @Component({
   selector: "app-schedule",
@@ -100,5 +104,15 @@ export class SchedulePage implements OnInit {
     }
 
     console.log("division teams", this.teams);
+  }
+
+  hideKeyboard(){
+    Keyboard.hide();
+  }
+
+  onKey(event:any){
+    if(event.key ==='Enter'){
+      Keyboard.hide();
+    }
   }
 }

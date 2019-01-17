@@ -11,6 +11,10 @@
       placeholder="Search"
       [(ngModel)]="queryText"
       (ionChange)="updateTeams()"
+      (ionBlur)="hideKeyboard()"
+      (ionCancel)="hideKeyboard()"
+      (ionClear)="hideKeyboard()"
+      (window:keydown)="onKey($event)"
     >
     </ion-searchbar
   >
