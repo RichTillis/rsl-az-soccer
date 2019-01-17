@@ -114,7 +114,8 @@ const routes: Routes = [
   {
     path: 'olympic-rules', loadChildren: './pages/olympic-rules/olympic-rules.module#OlympicRulesPageModule',
     canActivate: [AuthGuard]
-  }
+  },
+  { path: 'announcements', loadChildren: './pages/announcements/announcements.module#AnnouncementsPageModule' }
 ];
 
 @NgModule({

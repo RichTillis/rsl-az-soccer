@@ -32,38 +32,22 @@ export class FcmService {
       PushNotifications.addListener('pushNotificationReceived', (notification: PushNotification) => {
         console.log('notification ' + JSON.stringify(notification));
         this.presentNotifications(notification)
+        this.saveTokenToFirebase(token.value)
       })
     })
     PushNotifications.register();
-    PushNotifications.getDeliveredNotifications().then((res) => {
-      JSON.stringify(res);
-    })
   }
 
-  // async getToken() {
-  //   let token;
-  //   PushNotifications.register();
-  //   PushNotifications.addListener('registration', (token: PushNotificationToken) => {
-  //     console.log('token ' + token.value);
-  //     return this.saveTokenToFirebase(token.value)
-  //   });
-  // }
+  async saveTokenToFirebase(token) {
+    console.log("saving token to firebase: " + token)
+    if (!token) return;
+    let path = `devices/${token}`
+    this.db.object(path).update({
+      token,
+      userId: this.afAuth.auth.currentUser.uid
+    });
+  }
 
-  // private saveTokenToFirebase(token) {
-  //   console.log("saving token to firebase: " + token)
-  //   if (!token) return;
-  //   let path = `devices/${token}`
-  //   this.db.object(path).update({
-  //     token,
-  //     userId: this.afAuth.auth.currentUser.uid
-  //   });
-  // }
-
-  // async listenToNotifications() {
-  //   PushNotifications.addListener('registrationError', (error: any) => this.presentNotifications(error));
-  //   PushNotifications.addListener('pushNotificationReceived', (notification: PushNotification) => this.presentNotifications(notification));
-  //   //return this.firebaseNative.onNotificationOpen()
-  // }
   async presentNotifications(notification) {
     console.log('notification: ' + JSON.stringify(notification));
 
