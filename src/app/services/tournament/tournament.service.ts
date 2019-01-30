@@ -19,7 +19,7 @@ export class TournamentService {
 
   private shootoutId = 68462;
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient) { }
 
   getTeamId() {
     return this.teamId;
@@ -91,28 +91,22 @@ export class TournamentService {
 
   getTournamentLocations() {
     return [
-      {
-        name: "Kino Sports Park Headquarters",
-        latitude: 32.175515,
-        longitude: -110.934761
-      },
-      {
-        name: "Townsend Middle School",
-        latitude: 32.248369,
-        longitude: -110.878146
-      },
+      { name: "Kino Sports Park Headquarters", latitude: 32.175515, longitude: -110.934761 },
+      { name: "Townsend Middle School", latitude: 32.248369, longitude: -110.878146 },
       { name: "Udall Park", latitude: 32.249524, longitude: -110.838629 },
-      {
-        name: "Doolen Middle School",
-        latitude: 32.251202,
-        longitude: -110.925589
-      },
+      { name: "Doolen Middle School", latitude: 32.251202, longitude: -110.925589 },
       { name: "Freedom Park", latitude: 32.1995, longitude: -110.885816 },
-      { name: "Golf Links Park", latitude: 32.19517, longitude: -110.877023 }
+      { name: "Golf Links Park", latitude: 32.19517, longitude: -110.877023 },
+      { name: "Jacobs Park", latitude: 32.2761846, longitude: -111.0132731 }, 
+      { name: "Ochoa Park", latitude: 32.2696305, longitude: -110.9877275 }, 
+      { name: "Doolen Middle School", latitude: 32.2507277, longitude: -110.9285953 }, 
+      { name: "Freedom Park", latitude: 32.199299, longitude: -110.888453 },
+      { name: "Willie Blake Community Park", latitude: 32.1837732, longitude: -110.9404694 },
+      { name: "Himmel Park", latitude: 32.2339533, longitude: -110.9353475 },
     ];
   }
 
-  getTournamentLocation(venueLocation){
+  getTournamentLocation(venueLocation) {
     return this.http.get(`${this.baseUrl}/tournaments/venues.json`).pipe(
       map(response => {
         this.locations[0] = response;
