@@ -41,23 +41,23 @@ export class VenueMapPage implements OnInit {
   }
 
   ngOnInit() {
-    this.displayLoader()
-      .then(async (loader: any) => {
-        try {
-          const position = await this.getCurrentPosition();
-          loader.dismiss();
-          return position;
-        } catch (err) {
-          loader.dismiss();
-          return null;
-        }
-      })
-      .then(position =>
-        position instanceof Error ? this.presentAlert(position.message) : null
-      )
-      .catch(err => {
-        this.presentAlert(err.message);
-      });
+    // this.displayLoader()
+    //   .then(async (loader: any) => {
+    //     try {
+    //       const position = await this.getCurrentPosition();
+    //       loader.dismiss();
+    //       return position;
+    //     } catch (err) {
+    //       loader.dismiss();
+    //       return null;
+    //     }
+    //   })
+    //   .then(position =>
+    //     position instanceof Error ? this.presentAlert(position.message) : null
+    //   )
+    //   .catch(err => {
+    //     this.presentAlert(err.message);
+    //   });
   }
 
   async displayLoader() {

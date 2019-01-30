@@ -99,22 +99,6 @@ const routes: Routes = [
       "./pages/inclement-weather/inclement-weather.module#InclementWeatherPageModule",
     canActivate: [AuthGuard]
   },
-  {
-    path: 'olympic-schedule', loadChildren: './pages/olympic-schedule/olympic-schedule.module#OlympicSchedulePageModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'olympic-volunteers', loadChildren: './pages/olympic-volunteers/olympic-volunteers.module#OlympicVolunteersPageModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'olympic-maps', loadChildren: './pages/olympic-maps/olympic-maps.module#OlympicMapsPageModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'olympic-rules', loadChildren: './pages/olympic-rules/olympic-rules.module#OlympicRulesPageModule',
-    canActivate: [AuthGuard]
-  },
   { path: 'announcements', loadChildren: './pages/announcements/announcements.module#AnnouncementsPageModule' }
 ];
 
