@@ -23,7 +23,7 @@ export class AppComponent {
     {name:'Standings', route:'/standings', icon:'trophy'},
     {name:'Field Maps', route:'/field-maps', icon:'map'},
     {name:'Venues', route:'/venues', icon:'pin'},
-    {name:'Tournament Info', route:'about', icon:'information-circle'},
+    {name:'Tournament Info', route:'https://rslazsoccer.com/jacobs-classic/', icon:'information-circle'},
     {name:'Inclement Weather', route:'/inclement-weather', icon:'rainy'},
     {name:'Contact Us', route:'/contact-us', icon:'mail'}
   ];
