@@ -16,6 +16,17 @@ const { SplashScreen, StatusBar } = Plugins;
   templateUrl: "app.component.html"
 })
 export class AppComponent {
+  public menuItems = [
+    {name:'Home', route:'/home', icon:'home'},
+    {name:'My Teams', route:'/my-teams', icon:'star'},
+    {name:'Schedule', route:'/schedule', icon:'calendar'},
+    {name:'Standings', route:'/standings', icon:'trophy'},
+    {name:'Field Maps', route:'/field-maps', icon:'map'},
+    {name:'Venues', route:'/venues', icon:'pin'},
+    {name:'Tournament Info', route:'about', icon:'information-circle'},
+    {name:'Inclement Weather', route:'/inclement-weather', icon:'rainy'},
+    {name:'Contact Us', route:'/contact-us', icon:'mail'}
+  ];
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
