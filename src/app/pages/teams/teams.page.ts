@@ -29,7 +29,8 @@ export class TeamsPage implements OnInit {
 
   ngOnInit() {
     this.displayLoader().then(async (loader: any) => {
-      await this.tournamentService.getTournamentData(68462).subscribe(data => {
+      let tournamentId = this.tournamentService.getCurrentTournamentId();
+      await this.tournamentService.getTournamentData(tournamentId).subscribe(data => {
         console.log(data);
         this.allTeams = data.teams;
         this.allTeamDivisions = _.chain(data.teams)

@@ -11,7 +11,7 @@ import { TournamentService } from "../../services/tournament/tournament.service"
   styleUrls: ["./venues.page.scss"]
 })
 export class VenuesPage implements OnInit {
-  private SHOOTOUT_ID = 68462;
+  private SHOOTOUT_ID = this.tournamentService.getCurrentTournamentId();
   locations: any;
 
   constructor(

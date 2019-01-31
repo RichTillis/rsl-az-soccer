@@ -4,6 +4,7 @@ import { AngularFireDatabase } from "@angular/fire/database";
 import { Subscription } from "rxjs/Subscription";
 
 import { AuthenticationService } from "../auth/authentication.service";
+import { TournamentService } from "../tournament/tournament.service";
 
 @Injectable({
   providedIn: "root"
@@ -11,15 +12,18 @@ import { AuthenticationService } from "../auth/authentication.service";
 export class FavoritesService {
   favs = [];
   teamSubscriptions: Map<string, Subscription> = new Map();
+  private tournamentId: any;
 
   constructor(
     private afDb: AngularFireDatabase,
-    public authService: AuthenticationService
+    public authService: AuthenticationService,
+    private tournamentService: TournamentService
   ) {
     let path = `/users/${this.authService.currentUserId}/favorites`;
     this.afDb.database.ref(path).on("value", snapshot => {
       this.favs = snapshot.val() || [];
     });
+    this.tournamentId = this.tournamentService.getCurrentTournamentId();
   }
 
   getFavorites() {
@@ -28,7 +32,7 @@ export class FavoritesService {
   }
 
   watchTeam(team) {
-    let path = `/tournaments/tournaments-data/68462/gamesByTeamId/${team.id}`;
+    let path = `/tournaments/tournaments-data/${this.tournamentId}/gamesByTeamId/${team.id}`;
     console.log("watching path " + path);
     let sub = this.afDb
       .list(path)

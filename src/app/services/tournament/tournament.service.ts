@@ -16,13 +16,17 @@ export class TournamentService {
   private locations = {};
 
   teamId;
-
-  private shootoutId = 68462;
+  
+  private readonly CURRENT_TOURNAMENT_ID = 70432;
 
   constructor(public http: HttpClient) { }
 
   getTeamId() {
     return this.teamId;
+  }
+
+  getCurrentTournamentId() {
+    return this.CURRENT_TOURNAMENT_ID;
   }
 
   setTeamId(newTeamId) {
@@ -118,7 +122,7 @@ export class TournamentService {
 
   getCurrentTourney() {
     if (this.currentTourney === null) {
-      return this.getTournamentData(this.shootoutId);
+      return this.getTournamentData(this.CURRENT_TOURNAMENT_ID);
     }
     return this.currentTourney;
   }

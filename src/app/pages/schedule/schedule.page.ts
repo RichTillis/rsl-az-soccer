@@ -31,7 +31,7 @@ export class SchedulePage implements OnInit {
 
   ngOnInit() {
     this.displayLoader().then(async (loader: any) => {
-      await this.tournamentService.getTournamentData(68462).subscribe(data => {
+      await this.tournamentService.getTournamentData(this.tournamentService.getCurrentTournamentId()).subscribe(data => {
         console.log(data);
         this.allTeams = data.teams;
         this.allTeamDivisions = _.chain(data.teams)

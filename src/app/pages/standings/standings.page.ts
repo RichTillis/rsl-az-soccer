@@ -10,7 +10,7 @@ import { TournamentService } from "../../services/tournament/tournament.service"
   styleUrls: ["./standings.page.scss"]
 })
 export class StandingsPage implements OnInit {
-  TOURNAMENT_ID = 68462;
+  TOURNAMENT_ID = this.tournamentService.getCurrentTournamentId();
   private allTeamDivisions: any;
   teams = [];
 

@@ -30,7 +30,7 @@ export class TeamSchedulePage implements OnInit {
       this.tournamentService.setTeamId(this.teamId);
     });
     console.log("loading team data for " + this.teamId);
-    this.tournamentService.getTournamentData(68462).subscribe(data => {
+    this.tournamentService.getTournamentData(this.tournamentService.getCurrentTournamentId()).subscribe(data => {
       console.log(data);
       this.tourneyData = data;
 
