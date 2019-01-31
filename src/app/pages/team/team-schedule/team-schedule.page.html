@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-icon slot="start" src="assets/images/rsl_az_logo.svg" size="large"></ion-icon>
-    <ion-buttons slot="end"> <ion-menu-button></ion-menu-button> </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Team Schedule</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,16 +12,22 @@
   <ion-item-divider color="secondary">
     <ion-label> {{ team?.teamName }} </ion-label>
   </ion-item-divider>
-  <ion-item *ngIf="!isFollowing">
-    <ion-button color="primary" (click)="addToFavs()">
-      <ion-icon slot="start" name="star"></ion-icon>
-      Add To My Teams <ion-icon slot="end" name="star"></ion-icon> 
-    </ion-button>
+
+  <ion-item *ngIf="!isFollowing" text-center>
+    <div class="center-button">
+      <ion-button color="primary" (click)="addToFavs()" expand="full">
+        <ion-icon slot="start" name="star"></ion-icon>
+        Add To My Teams <ion-icon slot="end" name="star"></ion-icon>
+      </ion-button>
+    </div>
   </ion-item>
+
   <ion-item *ngIf="isFollowing">
-    <ion-button color="primary" (click)="removeFromFavs()">
-      Unfollow
-    </ion-button>
+    <div class="center-button">
+      <ion-button color="primary" (click)="removeFromFavs()" expand="full">
+        Unfollow
+      </ion-button>
+    </div>
   </ion-item>
   <ion-grid no-padding *ngFor="let game of games" routerLink="/venue-map/{{game.location}}">
     <ion-row class="schedule-row">

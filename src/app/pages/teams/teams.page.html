@@ -1,18 +1,13 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons slot="end"> <ion-menu-button></ion-menu-button> </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Tournament Schedule</ion-title>
   </ion-toolbar>
-  <ion-toolbar color="secondary"
-    ><ion-searchbar
-      placeholder="Search"
-      [(ngModel)]="queryText"
-      (ionChange)="updateTeams()"
-      (ionBlur)="hideKeyboard()"
-      (ionCancel)="hideKeyboard()"
-      (ionClear)="hideKeyboard()"
-      (window:keydown)="onKey($event)"
-    >
+  <ion-toolbar color="secondary">
+    <ion-searchbar placeholder="Search" [(ngModel)]="queryText" (ionChange)="updateTeams()" (ionBlur)="hideKeyboard()"
+      (ionCancel)="hideKeyboard()" (ionClear)="hideKeyboard()" (window:keydown)="onKey($event)">
     </ion-searchbar>
     <ion-segment scrollable (ionChange)="segmentChanged($event)">
       <ion-segment-button checked value="All">
@@ -34,11 +29,7 @@
       <ion-item-divider color="primary">
         <ion-label> {{ division.divisionName }} </ion-label>
       </ion-item-divider>
-      <ion-item
-        color="primary-contrast"
-        *ngFor="let team of division.divisionTeams"
-        routerLink="/app/tabs/teamSchedule/{{ team.id }}"
-      >
+      <ion-item color="primary-contrast" *ngFor="let team of division.divisionTeams" routerLink="/app/tabs/teamSchedule/{{ team.id }}">
         <ion-label>{{ team.name }}</ion-label>
       </ion-item>
     </ion-item-group>

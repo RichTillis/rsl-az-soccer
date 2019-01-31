@@ -19,7 +19,7 @@ export class AppComponent {
   public menuItems = [
     {name:'Home', route:'/home', icon:'home'},
     {name:'My Teams', route:'/my-teams', icon:'star'},
-    {name:'Schedule', route:'/schedule', icon:'calendar'},
+    {name:'Schedule', route:'/teams', icon:'calendar'},
     {name:'Standings', route:'/standings', icon:'trophy'},
     {name:'Field Maps', route:'/field-maps', icon:'map'},
     {name:'Venues', route:'/venues', icon:'pin'},

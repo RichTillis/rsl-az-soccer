@@ -3,8 +3,6 @@ import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "./guards/auth.guard";
 
 const routes: Routes = [
-  // { path: "", redirectTo: "home", pathMatch: "full" },
-
   {
     path: "",
     loadChildren: "./pages/home/home.module#HomePageModule",
@@ -33,11 +31,6 @@ const routes: Routes = [
     loadChildren: "./pages/team/team.module#TeamPageModule",
     canActivate: [AuthGuard]
   },
-  // {
-  //   path: "",
-  //   loadChildren: "./pages/team/team.module#TeamPageModule",
-  //   canActivate: [AuthGuard]
-  // },
   {
     path: "rules",
     loadChildren: "./pages/rules/rules.module#RulesPageModule",
@@ -79,11 +72,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: "check-in",
-    loadChildren: "./pages/check-in/check-in.module#CheckInPageModule",
-    canActivate: [AuthGuard]
-  },
-  {
     path: "contact-us",
     loadChildren: "./pages/contact-us/contact-us.module#ContactUsPageModule",
     canActivate: [AuthGuard]
@@ -95,11 +83,12 @@ const routes: Routes = [
   },
   {
     path: "inclement-weather",
-    loadChildren:
-      "./pages/inclement-weather/inclement-weather.module#InclementWeatherPageModule",
+    loadChildren: "./pages/inclement-weather/inclement-weather.module#InclementWeatherPageModule",
     canActivate: [AuthGuard]
   },
-  { path: 'announcements', loadChildren: './pages/announcements/announcements.module#AnnouncementsPageModule' }
+  { path: 'announcements', 
+    loadChildren: './pages/announcements/announcements.module#AnnouncementsPageModule', 
+    canActivate: [AuthGuard] }
 ];
 
 @NgModule({
