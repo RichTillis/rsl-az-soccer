@@ -27,30 +27,30 @@ const routes: Routes = [
       "./pages/auth/forgot-password/forgot-password.module#ForgotPasswordPageModule"
   },
   {
-    path: "app",
+    path: "app", //TODO change to team
     loadChildren: "./pages/team/team.module#TeamPageModule",
     canActivate: [AuthGuard]
   },
-  {
-    path: "rules",
-    loadChildren: "./pages/rules/rules.module#RulesPageModule",
-    canActivate: [AuthGuard]
-  },
-  {
-    path: "schedule",
-    loadChildren: "./pages/schedule/schedule.module#SchedulePageModule",
-    canActivate: [AuthGuard]
-  },
+  // {
+  //   path: "rules",
+  //   loadChildren: "./pages/rules/rules.module#RulesPageModule",
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: "schedule",
+  //   loadChildren: "./pages/schedule/schedule.module#SchedulePageModule",
+  //   canActivate: [AuthGuard]
+  // },
   {
     path: "standings",
     loadChildren: "./pages/standings/standings.module#StandingsPageModule",
     canActivate: [AuthGuard]
   },
-  {
-    path: "about",
-    loadChildren: "./pages/about/about.module#AboutPageModule",
-    canActivate: [AuthGuard]
-  },
+  // {
+  //   path: "about",
+  //   loadChildren: "./pages/about/about.module#AboutPageModule",
+  //   canActivate: [AuthGuard]
+  // },
   {
     path: "my-teams",
     loadChildren: "./pages/my-teams/my-teams.module#MyTeamsPageModule",
@@ -88,7 +88,8 @@ const routes: Routes = [
   },
   { path: 'announcements', 
     loadChildren: './pages/announcements/announcements.module#AnnouncementsPageModule', 
-    canActivate: [AuthGuard] }
+    canActivate: [AuthGuard] 
+  }
 ];
 
 @NgModule({
