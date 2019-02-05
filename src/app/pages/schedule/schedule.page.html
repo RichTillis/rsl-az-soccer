@@ -6,7 +6,7 @@
     </ion-buttons>
     <ion-title>Tournament Schedule</ion-title>
   </ion-toolbar>
-  <ion-toolbar color="secondary"></ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-searchbar placeholder="Search" [(ngModel)]="queryText" (ionChange)="updateTeams()" (ionBlur)="hideKeyboard()"
       (ionCancel)="hideKeyboard()" (ionClear)="hideKeyboard()" (window:keydown)="onKey($event)">
     </ion-searchbar>
