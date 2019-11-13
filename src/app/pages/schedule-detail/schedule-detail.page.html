@@ -3,30 +3,30 @@
     <ion-icon slot="start" src="assets/images/rsl_az_logo.svg" size="large"></ion-icon>
     <ion-title>Team Schedule</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="closeModal()"
-        ><ion-icon slot="icon-only" name="close"></ion-icon
-      ></ion-button>
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content color="light">
   <ion-item-divider color="secondary">
     <ion-label>
-        {{ team.teamName }}
+      {{ team.teamName }}
     </ion-label>
   </ion-item-divider>
   <ion-grid no-padding *ngFor="let game of games" (click)="closeModal()" routerLink="/venue-map/{{game.location}}">
-      <ion-row class="schedule-row">
-        <ion-col size="2" class="home-away-tag-{{game.homeAway}}"></ion-col>
-        <ion-col size="10">
-          <div class="score-display">
-              <span class="match-result">{{game.scoreDisplay}}</span>
-          </div>
-          <div class="schedule-date">{{ game.time | date: "fullDate" }}</div>
-          <div class="schedule-time">{{ game.time | date: "shortTime" }}</div>
-          <div class="schedule-opponent">{{ game.vsAt }} {{ game.opponent }}</div>
-          <div class="schedule-location">{{ game.location }}</div>
-        </ion-col>
-      </ion-row>
+    <ion-row class="schedule-row">
+      <ion-col size="2" class="home-away-tag-{{game.homeAway}}"></ion-col>
+      <ion-col size="10">
+        <div class="score-display">
+          <span class="match-result">{{game.scoreDisplay}}</span>
+        </div>
+        <div class="schedule-date">{{ game.time | date: "fullDate" }}</div>
+        <div class="schedule-time">{{ game.time | date: "shortTime" }}</div>
+        <div class="schedule-opponent">{{ game.vsAt }} {{ game.opponent }}</div>
+        <div class="schedule-location">{{ game.location }}</div>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>

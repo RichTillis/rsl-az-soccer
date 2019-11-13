@@ -24,6 +24,7 @@ export class StandingsPage implements OnInit {
       await this.tournamentService
         .getTournamentData(this.TOURNAMENT_ID)
         .subscribe(data => {
+          console.log(data);
           this.allTeamDivisions = _.chain(data.standings)
             .groupBy("flight")
             .toPairs()

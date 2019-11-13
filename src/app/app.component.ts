@@ -33,7 +33,7 @@ export class AppComponent {
     private utilService: UtilService,
     private fcm: FcmService,
     public toastCtrl: ToastController,
-    platform: Platform
+    public platform: Platform
   ) {
     SplashScreen.hide().catch(err => {
       console.warn(err);
@@ -42,14 +42,13 @@ export class AppComponent {
       console.warn(err);
     });
     platform.ready().then(() => {
-      // if (platform.is("ios") || platform.is("android")) {
-      try {
-        this.fcm.init();
-      } catch (err) {
-        console.warn(err);
-      }
-
-      // }
+      // if(this.platform.is('ios') || this.platform.is('android')){
+      //   try {
+      //     this.fcm.init();
+      //   } catch (err) {
+      //     console.warn(err);
+      //   }
+      // }    
     });
   }
 
