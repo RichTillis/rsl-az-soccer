@@ -17,15 +17,19 @@ const { SplashScreen, StatusBar } = Plugins;
 })
 export class AppComponent {
   public menuItems = [
-    {name:'Home', route:'/home', icon:'home'},
-    {name:'My Teams', route:'/my-teams', icon:'star'},
-    {name:'Schedule', route:'/teams', icon:'calendar'},
-    {name:'Standings', route:'/standings', icon:'trophy'},
+    { title: "Home", route: "/home", icon: "home" },
+    { title: "My Teams", route: "/my-teams", icon: "star" },
+    { title: "Schedule", route: "/teams", icon: "calendar" },
+    { title: "Standings", route: "/standings", icon: "trophy" },
     // {name:'Field Maps', route:'/field-maps', icon:'map'},
-    {name:'Venues', route:'/venues', icon:'pin'},
-    {name:'Tournament Info', route:'https://rslazsoccer.com/jacobs-classic/', icon:'information-circle'},
-    {name:'Inclement Weather', route:'/inclement-weather', icon:'rainy'},
-    {name:'Contact Us', route:'/contact-us', icon:'mail'}
+    { title: "Venues", route: "/venues", icon: "pin" },
+    {
+      title: "Tournament Info",
+      route: "https://rslazsoccer.com/jacobs-classic/",
+      icon: "information-circle"
+    },
+    { title: "Inclement Weather", route: "/inclement-weather", icon: "rainy" },
+    { title: "Contact Us", route: "/contact-us", icon: "mail" }
   ];
   constructor(
     private router: Router,
@@ -48,7 +52,7 @@ export class AppComponent {
       //   } catch (err) {
       //     console.warn(err);
       //   }
-      // }    
+      // }
     });
   }
 
