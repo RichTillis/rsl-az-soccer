@@ -157,7 +157,6 @@ export class AuthenticationService {
         );
       }
     });
-    this.navCtrl.navigateForward("");
   }
 
   async doGoogleLogin() {

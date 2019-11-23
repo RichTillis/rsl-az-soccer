@@ -8,12 +8,16 @@
     <ion-content color="primary">
 
       <ion-list>
-        <ion-menu-toggle auto-hide="false" *ngFor="let menuItem of menuItems">
-          <ion-item color="primary"  [routerDirection]="'root'"  [routerLink]="[menuItem.route]">
+        <ion-menu-toggle auto-hide="false" >
+          <ion-item *ngFor="let menuItem of menuItems" color="primary"  [routerDirection]="'root'"  [routerLink]="[menuItem.route]">
             <ion-icon slot="start" [name]="menuItem.icon" color="light"></ion-icon>
             <ion-label> {{menuItem.title}} </ion-label>
           </ion-item>
-        </ion-menu-toggle>
+          <ion-item color="primary" (click)="logout()">
+              <ion-icon slot="start" name="log-out" color="light"></ion-icon>
+              <ion-label> Logout </ion-label>
+          </ion-item>
+        </ion-menu-toggle>        
       </ion-list>
       
     </ion-content>

@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule, RouteReuseStrategy, Routes } from "@angular/router";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { IonicModule, IonicRouteStrategy } from "@ionic/angular";
 import { IonicStorageModule } from "@ionic/storage";
@@ -34,7 +35,9 @@ import { firebaseConfig } from "../../firebase.auth";
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    ScheduleDetailPageModule
+    ScheduleDetailPageModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

@@ -1,15 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  MenuController,
-  NavController,
-  LoadingController,
-  AlertController,
-  ToastController
-} from "@ionic/angular";
+import { Router } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
-import { Validators, FormGroup, FormControl } from "@angular/forms";
 import { AuthenticationService } from "../../../services/auth/authentication.service";
-import { UtilService } from "../../../services/util/util.service";
+import { ToastService } from "../../../services/toast/toast.service";
+import { LoadingService } from "../../../services/loading/loading.service";
+import { AlertService } from '../../../services/alert/alert.service';
 
 @Component({
   selector: "app-login",
@@ -18,81 +14,101 @@ import { UtilService } from "../../../services/util/util.service";
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
-  error: string;
-  private loading;
 
-  loginData = {
-    email: "",
-    password: ""
+  validation_messages = {
+    email: [
+      { type: "required", message: "Email address is required." },
+      { type: "email", message: "The format of the email address invalid." }
+    ],
+    password: [{ type: "required", message: "Password is required." }]
   };
+
   constructor(
-    public navCtrl: NavController,
+    public formBuilder: FormBuilder,
+    private router: Router,
     private authService: AuthenticationService,
-    private loadingCtrl: LoadingController,
-    private utilService: UtilService,
-    public toastController: ToastController
-  ) {
-    this.loginForm = new FormGroup({
-      email: new FormControl("", Validators.compose([Validators.required])),
-      password: new FormControl("", Validators.compose([Validators.required]))
+    private loadingService: LoadingService,
+    private toastService: ToastService,
+    private alertService: AlertService
+  ) {}
+
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ["", Validators.compose([Validators.required, Validators.email])],
+      password: ["", Validators.required]
     });
   }
 
-  ngOnInit() {}
-
   routeToSignUp(): void {
-    this.navCtrl.navigateForward("/register");
+    this.resetLoginForm();
+    this.router.navigateByUrl("/register");
   }
 
   routeToForgotPassword(): void {
-    this.navCtrl.navigateForward("/forgotPassword");
+    this.resetLoginForm();
+    this.router.navigateByUrl("/forgotPassword");
   }
 
   async loginWithEmail() {
-    try {
-      await this.authService.doEmailLogin(
-        this.loginData.email,
-        this.loginData.password
-      );
-      this.loginData.email = "";
-      this.loginData.password = "";
-      this.presentToast();
-      this.navCtrl.navigateForward("");
-    } catch (err) {
-      this.utilService.displayOkAlert("Whoops", "Something Bad Happened", err);
-    }
-  }
+    let email: string = this.loginForm.get("email").value;
+    let password: string = this.loginForm.get("password").value;
 
-  loginWithGoogle(): void {}
+    this.loginPocessing();
+
+    this.authService
+      .doEmailLogin(email, password)
+      .then(() => {
+        this.resetLoginForm();
+        this.loginSuccess();
+        this.router.navigateByUrl("/home");
+      })
+      .catch(error => {
+        this.loginFailed(error);
+      });
+  }
 
   loginWithFacebook(): void {
+    this.loginPocessing();
 
     this.authService.doFacebookLogin().then(() => {
-      console.log('here I am');
-      this.presentToast();
-      this.navCtrl.navigateForward("");
-    })
-  //  this.loadingCtrl
-  //   .create({
-  //      message: "Authenticating..."
-  //  })
-  //  .then(overlay => {
-  //    this.loading = overlay;
-  //    this.loading.present();
-  //    this.authService.doFacebookLogin().then(() => {
-  //      this.loading.dismiss();
-  //      console.log('yo')
-  //    });
-  //  });
+      this.resetLoginForm();
+      this.loginSuccess();
+      this.router.navigateByUrl("/home");
+    });
   }
 
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'Login Successful - Welcome Back!',
-      duration: 2000,
-      color: 'tertiary',
-      animated: true
+  /* 
+  Maybe everything below goes into a login service?
+  */
+  resetLoginForm() {
+    this.loginForm.get("email").setValue("");
+    this.loginForm.get("password").setValue("");
+    this.loginForm.reset(this.loginForm.value);
+    this.loginForm.markAsPristine();
+  }
+
+  loginPocessing() {
+    this.loadingService.present({
+      message: "Logging in . . ."
     });
-    toast.present();
+  }
+
+  loginSuccess() {
+    this.loadingService.dismiss();
+    this.toastService.present({
+      message: "Welcome back!",
+      duration: 3000,
+      color: "tertiary"
+    });
+  }
+
+  loginFailed(error: any) {
+    this.loadingService.dismiss();
+    this.alertService.present({
+      header: 'Login Error',
+      subHeader: error.code,
+      message: error.message,
+      buttons: ['OK']
+    });
   }
 }

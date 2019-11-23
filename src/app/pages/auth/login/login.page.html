@@ -1,53 +1,56 @@
 <ion-header>
-
   <ion-toolbar color="primary">
-    <ion-title class="ion-text-center">Login</ion-title>
+    <ion-title>Login</ion-title>
   </ion-toolbar>
-
 </ion-header>
 
-<ion-content padding color="primary-contrast">
-  <div class="ion-text-center" class="logo"><img src="assets/images/RSL_AZ_logo_smaller.png" /></div>
+<ion-content class="ion-padding">
+  <div class="ion-text-center logo"><img src="assets/images/RSL_AZ_logo_smaller.png" /></div>
 
-  <ion-item-divider>
-    <ion-label>
-      login with email account
-    </ion-label>
-  </ion-item-divider>
-  <ion-item>
-    <ion-input type="email" placeholder="Email" [(ngModel)]="loginData.email" name="email"></ion-input>
-  </ion-item>
-  <ion-item class="bottom-padding-1em">
-    <ion-input type="password" placeholder="Password" [(ngModel)]="loginData.password" name="password"></ion-input>
-  </ion-item>
-  <ion-button expand="block" color="primary" (click)="loginWithEmail()">Login</ion-button>
+  <form [formGroup]="loginForm" novalidate>
+    <ion-item>
+      <ion-input formControlName="email" placeholder="Email" type="text"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <div class="error-message"
+          *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-input formControlName="password" placeholder="Password" type="password"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <div class="error-message"
+          *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+  </form>
+
+  <ion-button color="primary" expand="block" (click)="loginWithEmail()" [disabled]="loginForm.invalid">Login</ion-button>
 
   <ion-grid class="bottom-padding-2em">
-    <ion-row align-items-end>
+    <ion-row>
       <ion-col>
         <div class="ion-text-center">
-          <ion-button fill="clear" class="new-user" (click)="routeToForgotPassword()">Forgot Password?</ion-button>
+          <ion-button fill="clear" class="auth-routes" (click)="routeToForgotPassword()">Forgot Password?</ion-button>
         </div>
       </ion-col>
       <ion-col>
         <div class="ion-text-center">
-          <ion-button fill="clear" class="new-user" (click)="routeToSignUp()">New User?</ion-button>
+          <ion-button fill="clear" class="auth-routes" (click)="routeToSignUp()">New User?</ion-button>
         </div>
       </ion-col>
     </ion-row>
   </ion-grid>
-  
-  <ion-button size="large" fill="clear" (click)="loginWithFacebook()"><img src="assets/images/facebookLoginBtn.png" /></ion-button>
 
-
-  
-      <!-- <div class="bottom-padding-1em"></div> -->
-      <!-- <ion-button size="large" fill="clear" disabled="true" (click)="loginWithGoogle()"><img src="assets/images/googleLoginBtn.png" /></ion-button> -->
-
-
-  <!-- <ion-item>
-    <ion-label class="text-color-white">By creating an account you agree to the terms of service here</ion-label>
-  </ion-item> -->
-
+  <ion-button size="large" fill="clear" (click)="loginWithFacebook()"><img src="assets/images/facebookLoginBtn.png" />
+  </ion-button>
 
 </ion-content>
