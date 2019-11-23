@@ -17,15 +17,19 @@ const { SplashScreen, StatusBar } = Plugins;
 })
 export class AppComponent {
   public menuItems = [
-    {name:'Home', route:'/home', icon:'home'},
-    {name:'My Teams', route:'/my-teams', icon:'star'},
-    {name:'Schedule', route:'/teams', icon:'calendar'},
-    {name:'Standings', route:'/standings', icon:'trophy'},
+    { title: "Home", route: "/home", icon: "home" },
+    { title: "My Teams", route: "/my-teams", icon: "star" },
+    { title: "Schedule", route: "/teams", icon: "calendar" },
+    { title: "Standings", route: "/standings", icon: "trophy" },
     // {name:'Field Maps', route:'/field-maps', icon:'map'},
-    {name:'Venues', route:'/venues', icon:'pin'},
-    {name:'Tournament Info', route:'https://rslazsoccer.com/jacobs-classic/', icon:'information-circle'},
-    {name:'Inclement Weather', route:'/inclement-weather', icon:'rainy'},
-    {name:'Contact Us', route:'/contact-us', icon:'mail'}
+    { title: "Venues", route: "/venues", icon: "pin" },
+    {
+      title: "Tournament Info",
+      route: "https://rslazsoccer.com/jacobs-classic/",
+      icon: "information-circle"
+    },
+    { title: "Inclement Weather", route: "/inclement-weather", icon: "rainy" },
+    { title: "Contact Us", route: "/contact-us", icon: "mail" }
   ];
   constructor(
     private router: Router,
@@ -33,7 +37,7 @@ export class AppComponent {
     private utilService: UtilService,
     private fcm: FcmService,
     public toastCtrl: ToastController,
-    platform: Platform
+    public platform: Platform
   ) {
     SplashScreen.hide().catch(err => {
       console.warn(err);
@@ -42,13 +46,12 @@ export class AppComponent {
       console.warn(err);
     });
     platform.ready().then(() => {
-      // if (platform.is("ios") || platform.is("android")) {
-      try {
-        this.fcm.init();
-      } catch (err) {
-        console.warn(err);
-      }
-
+      // if(this.platform.is('ios') || this.platform.is('android')){
+      //   try {
+      //     this.fcm.init();
+      //   } catch (err) {
+      //     console.warn(err);
+      //   }
       // }
     });
   }

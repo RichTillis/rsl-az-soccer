@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-menu color="primary" side="end">
+  <ion-menu color="primary" side="end" contentId="mainContent">
     <ion-header>
       <ion-toolbar color="primary">
         <ion-title>Menu</ion-title>
@@ -8,15 +8,15 @@
     <ion-content color="primary">
 
       <ion-list>
-        <ion-menu-toggle auto-hide="false">
-          <ion-item color="primary" *ngFor="let menuItem of menuItems" button routerDirection="root" href="{{menuItem.route}}">
-            <ion-icon slot="start" name="{{menuItem.icon}}" color="light"></ion-icon>
-            <ion-label> {{menuItem.name}} </ion-label>
+        <ion-menu-toggle auto-hide="false" *ngFor="let menuItem of menuItems">
+          <ion-item color="primary"  [routerDirection]="'root'"  [routerLink]="[menuItem.route]">
+            <ion-icon slot="start" [name]="menuItem.icon" color="light"></ion-icon>
+            <ion-label> {{menuItem.title}} </ion-label>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
       
     </ion-content>
   </ion-menu>
-  <ion-router-outlet main></ion-router-outlet>
+  <ion-router-outlet id="mainContent" ></ion-router-outlet>
 </ion-app>

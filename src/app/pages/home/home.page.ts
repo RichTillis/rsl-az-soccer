@@ -20,13 +20,13 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.displayLoader().then(async (loader: any) => {
-      await this.facebookService.getPosts().subscribe(data => {
-        this.posts = data;
-        this.formattedPosts = data.map(this.mapPosts);
-        console.log(this.formattedPosts);
-      });
-    });
+    // this.displayLoader().then(async (loader: any) => {
+    //   await this.facebookService.getPosts().subscribe(data => {
+    //     this.posts = data;
+    //     this.formattedPosts = data.map(this.mapPosts);
+    //     console.log(this.formattedPosts);
+    //   });
+    // });
   }
 
   async displayLoader() {
