@@ -1,41 +1,67 @@
 <ion-header>
-
   <ion-toolbar color="primary">
-    <ion-title class="ion-text-center">New Account</ion-title>
+    <ion-title>New Account</ion-title>
   </ion-toolbar>
-
 </ion-header>
 
-<ion-content padding color="primary-contrast">
-  <div class="ion-text-center" class="logo"><img src="assets/images/RSL_AZ_logo_smaller.png" /></div>
+<ion-content class="ion-padding">
+  <div class="ion-text-center logo"><img src="assets/images/RSL_AZ_logo_smaller.png" /></div>
 
-  <ion-item>
-    <ion-input type="email" placeholder="Email" [(ngModel)]="registerData.email" name="email"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input type="password" placeholder="Password" [(ngModel)]="registerData.password" name="password"></ion-input>
-  </ion-item>
-  <ion-item class="bottom-padding-1em">
-    <ion-input type="password" placeholder="Confirm Password" [(ngModel)]="registerData.confirmPassword" name="password"></ion-input>
-  </ion-item>
-  <ion-button class="border-radius-bottom-10" expand="block" color="primary" (click)="registerWithEmail()">Sign Up With Email</ion-button>
+  <form [formGroup]="registrationForm">
+
+    <ion-item>
+      <ion-input formControlName="email" placeholder="Email" type="text"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <div class="error-message"
+          *ngIf="registrationForm.get('email').hasError(validation.type) && (registrationForm.get('email').dirty || registrationForm.get('email').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-input formControlName="password" placeholder="Password" type="password"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <div class="error-message"
+          *ngIf="registrationForm.get('password').hasError(validation.type) && (registrationForm.get('password').dirty || registrationForm.get('password').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-input formControlName="confirmPassword" placeholder="Confirm Password" type="password"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.confirmPassword">
+        <div class="error-message"
+          *ngIf="registrationForm.get('confirmPassword').hasError(validation.type) && (registrationForm.get('confirmPassword').dirty || registrationForm.get('confirmPassword').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+  </form>
+
+  <ion-button expand="block" color="primary" (click)="registerWithEmail()"
+    [disabled]="registrationForm.invalid">Sign Up With Email</ion-button>
 
   <ion-grid class="bottom-padding-2em">
     <ion-row align-items-end>
       <ion-col>
         <div class="ion-text-center">
-          <ion-button fill="clear" class="existing-account" (click)="routeToLogin()">Already Have an Account?</ion-button>
+          <ion-button fill="clear" class="auth-options" (click)="routeToLogin()">Already Have an Account?
+          </ion-button>
         </div>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-button size="large" fill="clear" (click)="loginWithFacebook()"><img src="assets/images/facebookLoginBtn.png" /></ion-button>
-
-
-  <!-- <ion-item>
-      <ion-label class="text-color-white">By creating an account you agree to the terms of service here</ion-label>
-    </ion-item> -->
-
+  <ion-button size="large" fill="clear" (click)="loginWithFacebook()"><img src="assets/images/facebookLoginBtn.png" />
+  </ion-button>
 
 </ion-content>

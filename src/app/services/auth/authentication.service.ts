@@ -131,7 +131,6 @@ export class AuthenticationService {
 
   async createUserWithEmailAndPassword(email: string, password: string) {
     await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
-    this.navCtrl.navigateForward("");
   }
 
   async logoutUser() {
