@@ -7,7 +7,6 @@ import { AuthenticationService } from "./services/auth/authentication.service";
 import { Platform } from "@ionic/angular";
 
 import { ToastController } from "@ionic/angular";
-import { tap } from "rxjs/operators";
 
 const { SplashScreen, StatusBar } = Plugins;
 
@@ -64,7 +63,11 @@ export class AppComponent {
     toast.present();
   }
 
-  logout() {
+  isLoggedIn(): boolean {
+    return true;
+  }
+
+  logout(): void {
     this.authenticationService.logoutUser();
     this.utilService.displayOkAlert(
       "Log Out Successful",

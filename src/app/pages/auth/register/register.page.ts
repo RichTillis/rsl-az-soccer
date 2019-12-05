@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { Validators, FormGroup, FormControl } from "@angular/forms";
-import { NavController } from "@ionic/angular";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
 import { AuthenticationService } from "../../../services/auth/authentication.service";
-import { UtilService } from "../../../services/util/util.service";
+import { LoadingService } from "../../../services/loading/loading.service";
+import { ToastService } from "../../../services/toast/toast.service";
+import { AlertService } from "../../../services/alert/alert.service";
 
 @Component({
   selector: "app-register",
@@ -11,71 +13,107 @@ import { UtilService } from "../../../services/util/util.service";
   styleUrls: ["./register.page.scss"]
 })
 export class RegisterPage implements OnInit {
-  registerForm: FormGroup;
+  registrationForm: FormGroup;
 
-  registerData = {
-    email: "",
-    password: "",
-    confirmPassword: ""
+  validation_messages = {
+    email: [
+      { type: "required", message: "Email address is required." },
+      { type: "email", message: "The format of the email address invalid." }
+    ],
+    password: [
+      { type: "required", message: "Password is required." },
+      {
+        type: "minlength",
+        message: "Password must be at least 8 characters long."
+      }
+    ]
   };
 
   constructor(
-    public navCtrl: NavController,
+    public formBuilder: FormBuilder,
+    private router: Router,
     private authService: AuthenticationService,
-    private utilService: UtilService
-  ) {
-    this.registerForm = new FormGroup({
-      email: new FormControl("", Validators.required),
-      password: new FormControl("test", Validators.required),
-      confirm_password: new FormControl("test", Validators.required)
+    private loadingService: LoadingService,
+    private toastService: ToastService,
+    private alertService: AlertService
+  ) {}
+
+  ngOnInit() {
+    this.registrationForm = this.formBuilder.group({
+      email: ["", Validators.compose([Validators.required, Validators.email])],
+      password: [
+        "",
+        Validators.compose([Validators.required, Validators.minLength(8)])
+      ],
+      //TODO: validator - validate password and confirmPassord match
+      confirmPassword: [""]
     });
   }
 
-  ngOnInit() {}
-
   routeToLogin(): void {
-    this.navCtrl.navigateBack("/login");
+    this.resetRegistrationForm();
+    this.router.navigateByUrl("/login");
   }
 
   registerWithEmail() {
-    if (this.registerData.password != this.registerData.confirmPassword) {
-      this.utilService.displayOkAlert("Whoops","Password Problem","Passwords don't match, please try again");
-      this.registerData.password = "";
-      this.registerData.confirmPassword = "";
-    } else {
-      this.authService
-        .createUserWithEmailAndPassword(
-          this.registerData.email,
-          this.registerData.password
-        )
-        .then(res => this.registerSuccess(res))
-        .catch(err =>
-          this.utilService.displayOkAlert("Whoops","Something Bad Happened",err)
-        );
-    }
-  }
+    let email: string = this.registrationForm.get("email").value;
+    let password: string = this.registrationForm.get("password").value;
 
-  registerSuccess(result) {
-    console.log(result);
-    this.utilService.displayOkAlert("Welcome", null, "Registration Successful");
+    this.registrationProcessing();
+
+    this.authService
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        this.registrationSuccess();
+        this.router.navigateByUrl("/home");
+      })
+      .catch(error => {
+        this.registerFailed(error);
+      });
   }
 
   loginWithFacebook(): void {
+    this.registrationProcessing();
 
     this.authService.doFacebookLogin().then(() => {
-      console.log('here I am')
-    })
-  //  this.loadingCtrl
-  //   .create({
-  //      message: "Authenticating..."
-  //  })
-  //  .then(overlay => {
-  //    this.loading = overlay;
-  //    this.loading.present();
-  //    this.authService.doFacebookLogin().then(() => {
-  //      this.loading.dismiss();
-  //      console.log('yo')
-  //    });
-  //  });
+      this.resetRegistrationForm();
+      this.registrationSuccess();
+      this.router.navigateByUrl("/home");
+    });
+  }
+
+  registrationProcessing() {
+    this.loadingService.present({
+      message: "Registering. . ."
+    });
+  }
+
+  registrationSuccess() {
+    this.loadingService.dismiss();
+
+    this.toastService.present({
+      message: "All registered, welcome aboard!",
+      duration: 3000,
+      color: "tertiary"
+    });
+  }
+
+  registerFailed(error: any) {
+    this.loadingService.dismiss();
+
+    this.alertService.present({
+      header: "Registration Error",
+      subHeader: error.code,
+      message: error.message,
+      buttons: ["OK"]
+    });
+  }
+
+  resetRegistrationForm() {
+    this.registrationForm.get("email").setValue("");
+    this.registrationForm.get("password").setValue("");
+    this.registrationForm.get("confirmPassword").setValue("");
+    this.registrationForm.reset(this.registrationForm.value);
+    this.registrationForm.markAsPristine();
   }
 }
