@@ -18,10 +18,14 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { FcmService } from "./services/push-notifications/fcm.service";
 
+// Why is this here??
 import { ScheduleDetailPageModule } from './pages/schedule-detail/schedule-detail.module';
+
+import { ImageModalPageModule } from "./components/image-modal/image-modal.module";
 
 // firebase auth config
 import { firebaseConfig } from "../../firebase.auth";
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +41,8 @@ import { firebaseConfig } from "../../firebase.auth";
     AngularFireDatabaseModule,
     ScheduleDetailPageModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ImageModalPageModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

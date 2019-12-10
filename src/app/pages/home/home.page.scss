@@ -1,14 +1,13 @@
-.post-from-name {
-    font-size: .8em;
-    font-weight: 700;
+.card-content-background{
+    background: white;
 }
-.post-time {
-    font-size: .6em;
-}
-.post-item {
-    margin-top: .6em;
-}
-.header-background-color{
-    background: var(--ion-color-primary);
-    color: var(--ion-color-light);
+
+ion-slides {
+    margin-top: 30%;
+    background: #e6e6e6;
+
+    img {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
 }
