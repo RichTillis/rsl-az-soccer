@@ -10,23 +10,16 @@
 
 <ion-content color="light">
 
-  <!-- <ion-card *ngFor="let post of posts">
+  <ion-card *ngFor="let post of posts">
 
     <ion-card-header color="primary">
       <ion-card-title>{{post.title}}</ion-card-title>
     </ion-card-header>
-    <img src="assets/images/{{post.img}}.jpg" tappable (click)=presentModal() />
+    <img src="assets/images/{{post.img}}.jpg" tappable (click)=openPreview(post.img) />
 
     <ion-card-content class="card-content-background">
       {{post.body}}
     </ion-card-content>
-  </ion-card> -->
-
-  <ion-slides [options]="sliderOpts">
-    <ion-slide *ngFor="let post of posts">
-      <img src="assets/images/{{post.img}}.jpg" tappable (click)="openPreview(post.img)">
-    </ion-slide>
-
-  </ion-slides>
+  </ion-card>
 
 </ion-content>

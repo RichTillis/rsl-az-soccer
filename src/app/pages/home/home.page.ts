@@ -13,7 +13,7 @@ export class HomePage implements OnInit {
     {
       title: "Welcome to the 2020 Shootout!",
       img: "shootout2020logo",
-      body: " This year the Tucson Association of Realtors® Shootout is proudly presented by RSL-AZ Southern Arizona SoccervClub. We are honored to celebrate our 30th year of this amazing event.<br/><br/>We look forward to hosting new and returning teams for another great soccer weekend in Tucson, AZ."
+      body: " This year the Tucson Association of Realtors® Shootout is proudly presented by RSL-AZ Southern Arizona SoccervClub. We are honored to celebrate our 30th year of this amazing event. We look forward to hosting new and returning teams for another great soccer weekend in Tucson, AZ."
     },
     {
       title: "Soccer Olympics",
