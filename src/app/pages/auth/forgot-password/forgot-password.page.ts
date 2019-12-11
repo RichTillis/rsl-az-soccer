@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { NavController } from "@ionic/angular";
+import { Router } from "@angular/router";
 
-import { Validators, FormGroup, FormControl } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthenticationService } from "../../../services/auth/authentication.service";
 import { UtilService } from "../../../services/util/util.service";
 
@@ -13,23 +13,30 @@ import { UtilService } from "../../../services/util/util.service";
 export class ForgotPasswordPage implements OnInit {
   forgotPasswordForm: FormGroup;
 
-  forgotPasswordData = {
-    email: ""
+  validation_messages = {
+    email: [
+      { type: "required", message: "Email address is required." },
+      { type: "email", message: "The format of the email address invalid." }
+    ]
   };
+
   constructor(
-    public navCtrl: NavController,
+    private router: Router,
     private authService: AuthenticationService,
-    private utilService: UtilService
-  ) {
-    this.forgotPasswordForm = new FormGroup({
-      email: new FormControl("", Validators.required)
+    private utilService: UtilService,
+    public formBuilder: FormBuilder
+  ) {  }
+
+  ngOnInit() {
+    this.forgotPasswordForm = this.formBuilder.group({
+      email: ["", Validators.compose([Validators.required, Validators.email])]
     });
   }
 
-  ngOnInit() {}
-
   resetPassword(): void {
-    this.authService.resetPassword(this.forgotPasswordData.email).then(resp => {
+    let email: string = this.forgotPasswordForm.get("email").value;
+
+    this.authService.resetPassword(email).then(resp => {
       if (resp === "auth/user-not-found") {
         this.utilService.displayOkAlert(
           "Email Not Found",
@@ -42,16 +49,24 @@ export class ForgotPasswordPage implements OnInit {
           null,
           "An email is on the way with instructions to reset your password"
         );
-        this.navCtrl.navigateBack("/login");
+        this.routeToLogin();
       }
     });
   }
 
   routeToSignUp(): void {
-    this.navCtrl.navigateForward("/register");
+    this.resetForgotPasswordForm();
+    this.router.navigateByUrl("/register");
   }
 
   routeToLogin(): void {
-    this.navCtrl.navigateBack("/login");
+    this.resetForgotPasswordForm();
+    this.router.navigateByUrl("/login");
+  }
+
+  resetForgotPasswordForm() {
+    this.forgotPasswordForm.get("email").setValue("");
+    this.forgotPasswordForm.reset(this.forgotPasswordForm.value);
+    this.forgotPasswordForm.markAsPristine();
   }
 }

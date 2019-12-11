@@ -21,11 +21,7 @@ export class RegisterPage implements OnInit {
       { type: "email", message: "The format of the email address invalid." }
     ],
     password: [
-      { type: "required", message: "Password is required." },
-      {
-        type: "minlength",
-        message: "Password must be at least 8 characters long."
-      }
+      { type: "required", message: "Password is required." }
     ]
   };
 
@@ -36,15 +32,12 @@ export class RegisterPage implements OnInit {
     private loadingService: LoadingService,
     private toastService: ToastService,
     private alertService: AlertService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.registrationForm = this.formBuilder.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
-      password: [
-        "",
-        Validators.compose([Validators.required, Validators.minLength(8)])
-      ],
+      password: [""],
       //TODO: validator - validate password and confirmPassord match
       confirmPassword: [""]
     });
