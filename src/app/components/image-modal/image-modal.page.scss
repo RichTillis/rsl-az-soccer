@@ -1,0 +1,25 @@
+.close-fake {
+    --background: transparent;
+
+    ion-icon {
+        font-size: 2rem;
+    }
+
+    margin-top: 40px;
+}
+
+// .swiper-zoom-container {
+//     --background: (44, 39, 45, 0.84) !important;
+// }
+
+ion-slides {
+    height: 80%;
+}
+
+ion-content {
+    --background: rgba(44, 39, 45, 0.84);
+}
+
+// ion-content {
+//     background-color: rgba(44, 39, 45, 0.84);
+// }

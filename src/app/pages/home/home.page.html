@@ -4,35 +4,22 @@
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>RSL AZ Activity Page</ion-title>
+    <ion-title>2020 Shootout</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="medium">
-  <p>new feed here</p>
-  <!-- <ion-item class="post-item" *ngFor="let post of formattedPosts">
-      <ion-grid>
-          <ion-row align-items-center class="header-background-color">
-            <ion-col size="3">
-              <ion-avatar item-left>
-                <img src="https://graph.facebook.com/{{post.from.id}}/picture" />
-              </ion-avatar>
-            </ion-col>
-            <ion-col size="9">
-              <div class="post-from-name">
-                {{ post.from.name }}
-              </div>
-              <div class="post-time">
-                {{ post.time | date: "EEEE" }} at {{ post.time | date: "h:mm a" }}
-              </div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-              <p>{{ post.message }}</p>
-          </ion-row>
-          <ion-row *ngIf="post.photos.length > 0">
-              <ion-img [src]="post.photos[0].src"></ion-img>
-          </ion-row>
-        </ion-grid>
-  </ion-item> -->
+<ion-content color="light">
+
+  <ion-card *ngFor="let post of posts">
+
+    <ion-card-header color="primary">
+      <ion-card-title>{{post.title}}</ion-card-title>
+    </ion-card-header>
+    <img src="assets/images/{{post.img}}.jpg" tappable (click)=openPreview(post.img) />
+
+    <ion-card-content class="card-content-background">
+      {{post.body}}
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

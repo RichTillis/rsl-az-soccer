@@ -89,7 +89,9 @@ const routes: Routes = [
   { path: 'announcements', 
     loadChildren: './pages/announcements/announcements.module#AnnouncementsPageModule', 
     canActivate: [AuthGuard] 
-  }
+  },
+  // { path: 'image-modal', loadChildren: './components/image-modal/image-modal.module#ImageModalPageModule' }
+
 ];
 
 @NgModule({
