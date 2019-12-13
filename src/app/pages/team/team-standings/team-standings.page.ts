@@ -29,7 +29,7 @@ export class TeamStandingsPage implements OnInit {
 
     console.log("loading team data for " + this.teamId);
     this.tournamentService
-      .getTournamentData(this.TOURNAMENT_ID)
+      .getTournamentData()
       .subscribe(data => {
         this.tourneyData = data;
         this.team = _.filter(data.teams, t => t.id === this.teamId);

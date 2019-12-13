@@ -13,10 +13,10 @@
       <ion-segment-button checked value="All">
         <ion-label>All Teams</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="Boys">
+      <ion-segment-button value="Boy">
         <ion-label>Boys</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="Girls">
+      <ion-segment-button value="Girl">
         <ion-label>Girls</ion-label>
       </ion-segment-button>
     </ion-segment>
@@ -24,7 +24,17 @@
 </ion-header>
 
 <ion-content color="primary-contrast">
-  <ion-list>
+  <div *ngIf="tournamentTeams$ | async as tournamentTeams">
+    <ion-item-group *ngFor="let division of tournamentTeams">
+      <ion-item-divider color="primary">
+        <ion-label> {{ division[0] }} </ion-label>
+      </ion-item-divider>
+      <ion-item color="primary-contrast" *ngFor="let team of division[1]" routerLink="/app/tabs/teamSchedule/{{ team.id }}">
+        <ion-label>{{ team.name }}</ion-label>
+      </ion-item>
+    </ion-item-group>
+  </div>
+  <!-- <ion-list>
     <ion-item-group *ngFor="let division of teams">
       <ion-item-divider color="primary">
         <ion-label> {{ division.divisionName }} </ion-label>
@@ -33,5 +43,5 @@
         <ion-label>{{ team.name }}</ion-label>
       </ion-item>
     </ion-item-group>
-  </ion-list>
+  </ion-list> -->
 </ion-content>

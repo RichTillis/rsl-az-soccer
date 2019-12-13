@@ -22,7 +22,7 @@ export class StandingsPage implements OnInit {
   ngOnInit() {
     this.displayLoader().then(async (loader: any) => {
       await this.tournamentService
-        .getTournamentData(this.TOURNAMENT_ID)
+        .getTournamentData()
         .subscribe(data => {
           console.log(data);
           this.allTeamDivisions = _.chain(data.standings)
