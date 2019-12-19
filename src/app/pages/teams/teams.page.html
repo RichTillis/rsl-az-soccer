@@ -24,17 +24,34 @@
 </ion-header>
 
 <ion-content color="primary-contrast">
-  <div *ngIf="tournamentTeams$ | async as tournamentTeams">
+  <ion-item color="primary-contrast" *ngFor="let team of tournamentTeams"
+    routerLink="/app/tabs/teamSchedule/{{ team.id }}">
+    team.name
+  </ion-item>
+  <!-- <div *ngIf="tournamentTeams$ | async as tournamentTeams"> -->
+  <!-- <ion-item-group *ngFor="let division of tournamentTeams">
+      <ion-item-divider color="primary">
+        <ion-label> {{ division[0] }} </ion-label>
+      </ion-item-divider>-->
+  <!-- <ion-item color="primary-contrast" *ngFor="let team of tournamentTeams" routerLink="/app/tabs/teamSchedule/{{ team.id }}">
+        <ion-label>{{ team.name }}</ion-label>
+      </ion-item> -->
+  <!-- </ion-item-group> -->
+  <!-- </div> -->
+
+  <!-- <div *ngIf="tournamentTeams$ | async as tournamentTeams">
     <ion-item-group *ngFor="let division of tournamentTeams">
       <ion-item-divider color="primary">
         <ion-label> {{ division[0] }} </ion-label>
-      </ion-item-divider>
-      <ion-item color="primary-contrast" *ngFor="let team of division[1]" routerLink="/app/tabs/teamSchedule/{{ team.id }}">
+      </ion-item-divider> -->
+  <!-- <ion-item color="primary-contrast" *ngFor="let team of division[1]" routerLink="/app/tabs/teamSchedule/{{ team.id }}">
         <ion-label>{{ team.name }}</ion-label>
-      </ion-item>
-    </ion-item-group>
-  </div>
-  <!-- <ion-list>
+      </ion-item> -->
+  <!-- </ion-item-group>
+  </div> -->
+
+
+  <ion-list>
     <ion-item-group *ngFor="let division of teams">
       <ion-item-divider color="primary">
         <ion-label> {{ division.divisionName }} </ion-label>
@@ -43,5 +60,5 @@
         <ion-label>{{ team.name }}</ion-label>
       </ion-item>
     </ion-item-group>
-  </ion-list> -->
+  </ion-list>
 </ion-content>

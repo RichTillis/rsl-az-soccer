@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-
 import { Observable, throwError } from "rxjs";
 import { map, groupBy, tap, catchError, filter, mergeMap } from "rxjs/operators";
 import "rxjs/add/observable/of";
@@ -18,6 +17,8 @@ export class TournamentService {
   private tourneyData = {};
   private locations = {};
 
+  teams: Observable<any[]>;
+
   private tournamentData: any = {};
   currentTournament: Observable<any>;
 
@@ -25,6 +26,7 @@ export class TournamentService {
 
   private readonly CURRENT_TOURNAMENT_ID = 70432;
   // private readonly CURRENT_TOURNAMENT_ID = 74306;
+  private dbPath = this.baseUrl + '/tournaments/tournaments-data/' + this.CURRENT_TOURNAMENT_ID + '/teams';
 
   tournamentTeams$ = this.http.get<Team[]>(`${this.baseUrl}/tournaments/tournaments-data/${this.CURRENT_TOURNAMENT_ID}/teams.json`)
     .pipe(
@@ -35,12 +37,14 @@ export class TournamentService {
       //     ({
       //       ...team
       //     }) as Team)),
+      //     tap(items => console.log(items)),
 
       // tap(data => console.log('Teams: ', JSON.stringify(data))),
       catchError(this.handleError)
     );
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) { 
+  }
 
   getTeamId() {
     return this.teamId;
