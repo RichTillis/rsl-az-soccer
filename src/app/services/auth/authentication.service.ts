@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ToastController, MenuController } from "@ionic/angular";
+import { MenuController } from "@ionic/angular";
 import { NavController } from "@ionic/angular";
 
 import { Storage } from "@ionic/storage";
@@ -24,13 +24,12 @@ export class AuthenticationService {
   // authenticationState = new BehaviorSubject(false);
 
   authState: any = null;
-  authToken: any = null;
+  // authToken: any = null;
 
   constructor(
     private storage: Storage,
     private afAuth: AngularFireAuth,
     private facebook: Facebook,
-    public toastController: ToastController,
     private menu: MenuController,
     private db: AngularFireDatabase,
     public navCtrl: NavController
@@ -84,7 +83,8 @@ export class AuthenticationService {
     let user = {
       creation: new Date().toLocaleDateString(),
       logins: 1,
-      rewardCount: 0,
+      // rewardCount: 0,
+      
       lastLogin: new Date().toLocaleDateString(),
       id: ""
     };
@@ -94,7 +94,7 @@ export class AuthenticationService {
         username: username,
         creation: user.creation,
         logins: user.logins,
-        rewardCount: user.rewardCount,
+        // rewardCount: user.rewardCount,
         lastLogin: user.lastLogin
       })
       .then(response => {
@@ -111,7 +111,7 @@ export class AuthenticationService {
     let newData = {
       creation: userData.creation,
       logins: userData.logins + 1,
-      rewardCount: userData.rewardCount,
+      // rewardCount: userData.rewardCount,
       lastLogin: new Date().toLocaleDateString(),
       id: userData.id
     };
@@ -156,14 +156,6 @@ export class AuthenticationService {
         );
       }
     });
-  }
-
-  async doGoogleLogin() {
-    let provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope("profile");
-    provider.addScope("email");
-    await this.afAuth.auth.signInWithPopup(provider);
-    // this.authenticationState.next(true);
   }
 
   async doFacebookLogin() {

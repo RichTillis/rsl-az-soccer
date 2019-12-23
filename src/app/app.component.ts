@@ -33,9 +33,9 @@ export class AppComponent {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
-    private utilService: UtilService,
-    private fcm: FcmService,
-    public toastCtrl: ToastController,
+    // private utilService: UtilService,
+    // private fcm: FcmService,
+    // public toastCtrl: ToastController,
     public platform: Platform
   ) {
     SplashScreen.hide().catch(err => {
@@ -55,25 +55,25 @@ export class AppComponent {
     });
   }
 
-  async presentNotifications(msg) {
-    const toast = await this.toastCtrl.create({
-      message: msg,
-      duration: 3000
-    });
-    toast.present();
-  }
+  // async presentNotifications(msg) {
+  //   const toast = await this.toastCtrl.create({
+  //     message: msg,
+  //     duration: 3000
+  //   });
+  //   toast.present();
+  // }
 
-  isLoggedIn(): boolean {
-    return true;
-  }
+  // isLoggedIn(): boolean {
+  //   return true;
+  // }
 
   logout(): void {
     this.authenticationService.logoutUser();
-    this.utilService.displayOkAlert(
-      "Log Out Successful",
-      null,
-      "See ya next time"
-    );
+    // this.utilService.displayOkAlert(
+    //   "Log Out Successful",
+    //   null,
+    //   "See ya next time"
+    // );
     this.router.navigateByUrl("/login");
   }
 }
