@@ -20,10 +20,8 @@ export class RegisterPage implements OnInit {
       { type: "required", message: "Email address is required." },
       { type: "email", message: "The format of the email address invalid." }
     ],
-    password: [{ type: "required", message: "Password is required." }],
-    confirmPassword: [
-      { type: "required", message: "Password confirmation is required." }
-    ]
+    password: [ { type: "required", message: "Password is required." } ],
+    confirmPassword: [ { type: "email", message: "The format of the email address is invalid." } ]
   };
 
   constructor(
