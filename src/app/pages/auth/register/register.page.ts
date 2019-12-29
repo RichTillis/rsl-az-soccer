@@ -20,8 +20,9 @@ export class RegisterPage implements OnInit {
       { type: "required", message: "Email address is required." },
       { type: "email", message: "The format of the email address invalid." }
     ],
-    password: [
-      { type: "required", message: "Password is required." }
+    password: [{ type: "required", message: "Password is required." }],
+    confirmPassword: [
+      { type: "required", message: "Password confirmation is required." }
     ]
   };
 
@@ -32,13 +33,13 @@ export class RegisterPage implements OnInit {
     private loadingService: LoadingService,
     private toastService: ToastService,
     private alertService: AlertService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.registrationForm = this.formBuilder.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
       password: [""],
-      //TODO: validator - validate password and confirmPassord match
+      //TODO: validator - validate password and confirmPassword match
       confirmPassword: [""]
     });
   }
@@ -66,13 +67,18 @@ export class RegisterPage implements OnInit {
   }
 
   loginWithFacebook(): void {
-    this.registrationProcessing();
+    // this.registrationProcessing();
 
-    this.authService.doFacebookLogin().then(() => {
-      this.resetRegistrationForm();
-      this.registrationSuccess();
-      this.router.navigateByUrl("/home");
-    });
+    this.authService.doFacebookLogin();
+    // .then(() => {
+    //   this.resetRegistrationForm();
+    //   this.registrationSuccess();
+    //   this.router.navigateByUrl("/home");
+    // })
+    // .catch(error => {
+    //   console.log("Error logging into Facebook", error);
+    //   this.loadingService.dismiss();
+    // });
   }
 
   registrationProcessing() {
@@ -85,7 +91,7 @@ export class RegisterPage implements OnInit {
     this.loadingService.dismiss();
 
     this.toastService.present({
-      message: "All registered, welcome aboard!",
+      message: "All registered, welcome to RSL-AZ!",
       duration: 3000,
       color: "tertiary"
     });
@@ -98,6 +104,17 @@ export class RegisterPage implements OnInit {
       header: "Registration Error",
       subHeader: error.code,
       message: error.message,
+      buttons: ["OK"]
+    });
+  }
+
+  facebookLoginFailed() {
+    this.loadingService.dismiss();
+
+    this.alertService.present({
+      header: "Facebook Login Error",
+      message:
+        "Sorry, we were unable to log you in using Facebook. Please use email/password to login.",
       buttons: ["OK"]
     });
   }

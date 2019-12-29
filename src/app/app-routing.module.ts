@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "./guards/auth.guard";
+import { AdminGuard } from "./guards/admin.guard";
 
 const routes: Routes = [
   {
@@ -83,19 +84,34 @@ const routes: Routes = [
   },
   {
     path: "inclement-weather",
-    loadChildren: "./pages/inclement-weather/inclement-weather.module#InclementWeatherPageModule",
+    loadChildren:
+      "./pages/inclement-weather/inclement-weather.module#InclementWeatherPageModule",
     canActivate: [AuthGuard]
   },
-  { path: 'announcements', 
-    loadChildren: './pages/announcements/announcements.module#AnnouncementsPageModule', 
-    canActivate: [AuthGuard] 
+  {
+    path: "announcements",
+    loadChildren:
+      "./pages/announcements/announcements.module#AnnouncementsPageModule",
+    canActivate: [AuthGuard]
   },
-  // { path: 'image-modal', loadChildren: './components/image-modal/image-modal.module#ImageModalPageModule' }
-
+  {
+    path: "notifications",
+    loadChildren:
+      "./pages/notifications/notifications.module#NotificationsPageModule",
+    canActivate: [AuthGuard,AdminGuard]
+  },
+  // {
+  //   path: "notifications",
+  //   loadChildren: () =>
+  //     import("./pages/notifications/notifications.module").then(
+  //       m => m.NotificationsPageModule
+  //     ),
+  //   canActivate: [AuthGuard, AdminGuard]
+  // }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

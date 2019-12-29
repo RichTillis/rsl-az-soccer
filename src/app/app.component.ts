@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
 import { Plugins } from "@capacitor/core";
 import { Router } from "@angular/router";
-import { UtilService } from "./services/util/util.service";
-import { FcmService } from "./services/push-notifications/fcm.service";
+// import { UtilService } from "./services/util/util.service";
+// import { FcmService } from "./services/push-notifications/fcm.service";
 import { AuthenticationService } from "./services/auth/authentication.service";
 import { Platform } from "@ionic/angular";
 
-import { ToastController } from "@ionic/angular";
+// import { ToastController } from "@ionic/angular";
 
 const { SplashScreen, StatusBar } = Plugins;
 
@@ -16,19 +16,31 @@ const { SplashScreen, StatusBar } = Plugins;
 })
 export class AppComponent {
   public menuItems = [
-    { title: "Home", route: "/home", icon: "home" },
-    { title: "My Teams", route: "/my-teams", icon: "star" },
-    { title: "Schedule", route: "/teams", icon: "calendar" },
-    { title: "Standings", route: "/standings", icon: "trophy" },
+    { title: "Home", route: "/home", icon: "home", role: "user" },
+    { title: "My Teams", route: "/my-teams", icon: "star", role: "user" },
+    { title: "Schedule", route: "/teams", icon: "calendar", role: "user" },
+    { title: "Standings", route: "/standings", icon: "trophy", role: "user" },
     // {name:'Field Maps', route:'/field-maps', icon:'map'},
-    { title: "Venues", route: "/venues", icon: "pin" },
+    { title: "Venues", route: "/venues", icon: "pin", role: "user" },
     {
       title: "Tournament Info",
       route: "https://rslazsoccer.com/jacobs-classic/",
-      icon: "information-circle"
+      icon: "information-circle",
+      role: "user"
     },
-    { title: "Inclement Weather", route: "/inclement-weather", icon: "rainy" },
-    { title: "Contact Us", route: "/contact-us", icon: "mail" }
+    {
+      title: "Inclement Weather",
+      route: "/inclement-weather",
+      icon: "rainy",
+      role: "user"
+    },
+    { title: "Contact Us", route: "/contact-us", icon: "mail", role: "user" },
+    {
+      title: "Notifications",
+      route: "/notifications",
+      icon: "notifications",
+      role: "admin"
+    }
   ];
   constructor(
     private router: Router,
@@ -68,12 +80,18 @@ export class AppComponent {
   // }
 
   logout(): void {
-    this.authenticationService.logoutUser();
+    const logout = this.authenticationService.logoutUser();
+    logout
+      .then(() => {
+        this.router.navigateByUrl("/login");
+      })
+      .catch(error => {
+        console.log("FAIL! ", error);
+      });
     // this.utilService.displayOkAlert(
     //   "Log Out Successful",
     //   null,
     //   "See ya next time"
     // );
-    this.router.navigateByUrl("/login");
   }
 }
