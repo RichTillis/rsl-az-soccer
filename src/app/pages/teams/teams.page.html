@@ -24,7 +24,7 @@
 </ion-header>
 
 <ion-content color="primary-contrast">
-  <ion-item color="primary-contrast" *ngFor="let team of tournamentTeams"
+  <ion-item color="primary-contrast" *ngFor="let team of tournamentTeams$"
     routerLink="/app/tabs/teamSchedule/{{ team.id }}">
     team.name
   </ion-item>
