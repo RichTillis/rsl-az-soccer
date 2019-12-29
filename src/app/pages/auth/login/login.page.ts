@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthenticationService } from "../../../services/auth/authentication.service";
 import { ToastService } from "../../../services/toast/toast.service";
 import { LoadingService } from "../../../services/loading/loading.service";
-import { AlertService } from '../../../services/alert/alert.service';
+import { AlertService } from "../../../services/alert/alert.service";
 
 @Component({
   selector: "app-login",
@@ -53,14 +53,15 @@ export class LoginPage implements OnInit {
     let email: string = this.loginForm.get("email").value;
     let password: string = this.loginForm.get("password").value;
 
-    this.loginPocessing();
+    // this.loginPocessing();
 
     this.authService
       .doEmailLogin(email, password)
       .then(() => {
         this.resetLoginForm();
-        this.loginSuccess();
-        this.router.navigateByUrl("/home");
+        // this.loginSuccess();
+        //put menu enable here
+        // this.router.navigateByUrl("/home");
       })
       .catch(error => {
         this.loginFailed(error);
@@ -68,13 +69,16 @@ export class LoginPage implements OnInit {
   }
 
   loginWithFacebook(): void {
-    this.loginPocessing();
+    // this.loginPocessing();
 
-    this.authService.doFacebookLogin().then(() => {
-      this.resetLoginForm();
-      this.loginSuccess();
-      this.router.navigateByUrl("/home");
-    });
+    this.authService.doFacebookLogin();
+    // .then(response => {
+    //   console.log("login successful?");
+    //   console.log("loggin in response: ", response);
+    //   this.resetLoginForm();
+    //   this.loginSuccess();
+    //   this.router.navigateByUrl("/home");
+    // });
   }
 
   /* 
@@ -95,6 +99,7 @@ export class LoginPage implements OnInit {
 
   loginSuccess() {
     this.loadingService.dismiss();
+    //put menu enable here
     this.toastService.present({
       message: "Welcome back!",
       duration: 3000,
@@ -105,10 +110,10 @@ export class LoginPage implements OnInit {
   loginFailed(error: any) {
     this.loadingService.dismiss();
     this.alertService.present({
-      header: 'Login Error',
+      header: "Login Error",
       subHeader: error.code,
       message: error.message,
-      buttons: ['OK']
+      buttons: ["OK"]
     });
   }
 }

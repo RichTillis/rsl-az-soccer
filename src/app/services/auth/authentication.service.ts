@@ -1,21 +1,20 @@
 import { Injectable } from "@angular/core";
 import { MenuController } from "@ionic/angular";
-import { NavController } from "@ionic/angular";
+import { Router } from "@angular/router";
 
 import { Storage } from "@ionic/storage";
 
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFireDatabase } from "@angular/fire/database";
-
+import { AngularFireDatabase, AngularFireObject } from "@angular/fire/database";
 import * as firebase from "firebase/app";
 
 import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
 
-export interface User {
-  email: string;
-  uid: string;
-  authenticated: boolean;
-}
+import { Observable } from "rxjs";
+import { switchMap } from "rxjs/operators";
+
+import { User } from "../../interfaces/user";
+import { Firebase } from "@ionic-native/firebase/ngx";
 
 @Injectable({
   providedIn: "root"
@@ -23,8 +22,9 @@ export interface User {
 export class AuthenticationService {
   // authenticationState = new BehaviorSubject(false);
 
+  user$: Observable<User>;
+
   authState: any = null;
-  // authToken: any = null;
 
   constructor(
     private storage: Storage,
@@ -32,31 +32,44 @@ export class AuthenticationService {
     private facebook: Facebook,
     private menu: MenuController,
     private db: AngularFireDatabase,
-    public navCtrl: NavController
+    private router: Router
   ) {
+    this.menu.enable(false);
+
     this.afAuth.authState.subscribe(auth => {
       this.authState = auth;
     });
+    this.user$ = this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          console.log("User already logged in: ", user);
+          return this.db.object(`users/${user.uid}`).valueChanges();
+        } else {
+          console.log("No user logged in.");
+          return Observable.of(null);
+        }
+      })
+    );
   }
+
+  // ngOnInit() {
+  //   this.menu.enable(false);
+  // }
 
   // Returns true if user is logged in
   get isAuthenticated(): boolean {
     return this.authState !== null;
   }
 
- onAuthStateChanged() {
+  onAuthStateChanged() {
     this.afAuth.auth.onAuthStateChanged(user => {
-      this.authState = user
+      this.authState = user;
     });
   }
 
   // Returns current user UID
   get currentUserId(): string {
     return this.isAuthenticated ? this.authState.uid : "";
-  }
-
-  ngOnInit() {
-    this.menu.enable(false);
   }
 
   storageControl(action, key?, value?) {
@@ -77,51 +90,68 @@ export class AuthenticationService {
     }
   }
 
-  saveNewUser(username) {
+  private saveNewUser(userCredential: any, username: string) {
+    console.log("currentUserId: ", this.currentUserId);
     let path = `users/${this.currentUserId}`;
 
-    let user = {
-      creation: new Date().toLocaleDateString(),
-      logins: 1,
-      // rewardCount: 0,
-      
+    let user: User = {
+      createDate: new Date().toLocaleDateString(),
       lastLogin: new Date().toLocaleDateString(),
-      id: ""
+      uid: userCredential.uid,
+      email: username,
+      roles: {
+        user: true
+      }
     };
     this.db
       .object(path)
       .update({
-        username: username,
-        creation: user.creation,
-        logins: user.logins,
-        // rewardCount: user.rewardCount,
-        lastLogin: user.lastLogin
+        username: user.email,
+        roles: user.roles
       })
-      .then(response => {
-        user.id = this.currentUserId;
+      .then(() => {
+        user.uid = this.currentUserId;
         return this.storageControl("set", username, user);
       });
 
     return this.storageControl("get", username);
   }
 
-  updateUser(username, userData) {
-    let path = `users/${this.currentUserId}`;
+  // updateUser(username, userData) {
+  //   let path = `users/${this.currentUserId}`;
+  //   console.log("userData", userData);
 
-    let newData = {
-      creation: userData.creation,
-      logins: userData.logins + 1,
-      // rewardCount: userData.rewardCount,
-      lastLogin: new Date().toLocaleDateString(),
-      id: userData.id
-    };
+  //   let newData = {
+  //     createDate: userData.createDate,
+  //     // logins: 1,
+  //     // rewardCount: 0,
 
-    this.db.object(path).update(newData);
+  //     lastLogin: new Date().toLocaleDateString(),
+  //     // logins: userData.logins + 1,
+  //     // rewardCount: userData.rewardCount,
+  //     // lastLogin: new Date().toLocaleDateString(),
+  //     // id: userData.id,
+  //     uid: userData.id,
+  //     email: username
+  //   };
 
-    return this.storageControl("set", username, newData);
+  //   // this.db.object(path).update(newData);
+
+  //   return this.storageControl("set", username, newData);
+  // }
+  updateUser(user: User) {
+    let path = `users/${user.uid}`;
+    this.db
+      .object(path)
+      .update(user)
+      .then(() => {
+        console.log("user updated");
+      });
+
+    // return this.storageControl("set", username, newData);
   }
 
-  async resetPassword(email) {
+  async resetPassword(email: string) {
     try {
       await this.afAuth.auth.sendPasswordResetEmail(email);
     } catch (error) {
@@ -130,7 +160,34 @@ export class AuthenticationService {
   }
 
   async createUserWithEmailAndPassword(email: string, password: string) {
-    await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+    const credential = await this.afAuth.auth.createUserWithEmailAndPassword(
+      email,
+      password
+    );
+    // console.log("Success. Credential: ", credential.user);
+    this.createNewUserDocumentInFirebase(email, credential.user);
+    this.routeSuccessfulLogin();
+    // this.saveNewUser(credential, email);
+    // this.updateUserData(credential.user, email);
+  }
+
+  private createNewUserDocumentInFirebase(
+    email: string,
+    user: firebase.User
+  ): void {
+    let createDate = new Date().toLocaleDateString();
+    const newUser: User = {
+      uid: user.uid,
+      email: email,
+      roles: {
+        user: true
+      },
+      createDate: createDate,
+      lastLogin: createDate
+    };
+    console.log("currentUserId: ", user.uid);
+    let path = `users/${user.uid}`;
+    this.db.object(path).update(newUser);
   }
 
   async logoutUser() {
@@ -140,43 +197,147 @@ export class AuthenticationService {
     console.log("user logged out");
   }
 
-  async doEmailLogin(email: string, password: string) {
-    await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-    // this.authenticationState.next(true);
-    this.menu.enable(true);
-    this.storageControl("get", email).then(storedUser => {
-      if (!storedUser) {
-        console.log("No user found in local storage. Saving new user.");
-        this.saveNewUser(email);
-        // .then(res => this.displayAlert(username, 'New account saved for this user'));
-      } else {
-        console.log("User stored in local storage. Updating user.");
-        this.updateUser(email, storedUser).then(updated =>
-          console.log(email, updated)
-        );
-      }
-    });
+  loginWithEmail(email: string, password: string) {
+    return this.afAuth.auth
+      .signInWithEmailAndPassword(email, password)
+      .then(credential => {
+        this.updateUserData(credential.user, email);
+      });
   }
 
-  async doFacebookLogin() {
-    this.facebook.getLoginStatus().then((response: FacebookLoginResponse) => {
+  private updateUserData(user: firebase.User, email: string) {
+    const userRef: AngularFireObject<any> = this.db.object(`users/{user.uid}`);
+    let lastLogin = new Date().toLocaleDateString();
+    //TODO check if role has been set. If no, set it to 'user'
+    const data = {
+      lastLogin: lastLogin,
+      email: email
+    };
+    return userRef.update(data);
+  }
+
+  canRead(user: User): boolean {
+    const allowed = ["admin", "director", "user"];
+    return this.checkAuthorization(user, allowed);
+  }
+
+  canPost(user: User): boolean {
+    const allowed = ["admin", "director"];
+    return this.checkAuthorization(user, allowed);
+  }
+
+  canUpdateUser(user: User): boolean {
+    const allowed = ["admin"];
+    return this.checkAuthorization(user, allowed);
+  }
+
+  private checkAuthorization(user: User, allowedRoles: string[]): boolean {
+    if (!user) {
+      return false;
+    }
+    for (const role of allowedRoles) {
+      if (user.roles[role]) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  async doEmailLogin(email: string, password: string) {
+    await this.afAuth.auth
+      .signInWithEmailAndPassword(email, password)
+      .then((userCredential: any) => {
+        let loggedInUser: User = {
+          uid: userCredential.user.uid,
+          email: email,
+          lastLogin: new Date().toLocaleDateString()
+        };
+        this.updateUser(loggedInUser);
+        this.routeSuccessfulLogin();
+
+        // this.storageControl("get", email).then(storedUser => {
+        //   if (!storedUser) {
+        //     console.log("No user found in local storage. Saving new user.");
+        //     this.saveNewUser(credential.user, email);
+        //     // .then(res => this.displayAlert(username, 'New account saved for this user'));
+        //   } else {
+        //     console.log("User stored in local storage. Updating user.");
+        //     // this.updateUser(email, storedUser).then(updated =>
+        //     //   console.log(email, updated)
+        //     // );
+        //     const loggedInUser: User = {
+        //       lastLogin: new Date().toLocaleDateString(),
+        //       // logins: userData.logins + 1,
+        //       // rewardCount: userData.rewardCount,
+        //       // lastLogin: new Date().toLocaleDateString(),
+        //       // id: userData.id,
+        //       uid: userData.id,
+        //       email: email
+        //     };
+        //     this.updateUser(email, storedUser).then(updated =>
+        //       console.log(email, updated)
+        //     );
+        //   }
+        // });
+      });
+    // this.authenticationState.next(true);
+  }
+
+  // getProfile(): void {
+  //   this.facebook
+  //     .api("/me?fields=id,name,email", ["public_profile"])
+  //     .then(response => {
+  //       console.log("getProfile response: ", response);
+  //       return response;
+  //     });
+  // }
+
+  doFacebookLogin(): void {
+    let loggedInUser: User = null;
+
+    // const response = await this.facebook.getLoginStatus();
+    this.facebook.getLoginStatus().then(response => {
       if (response.status === "connected") {
         console.log("user already logged into facebook with this app");
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(
           response.authResponse.accessToken
         );
-        this.doFirebaseLogin(facebookCredential);
+        this.doFirebaseLogin(facebookCredential).then((userCredential: any) => {
+          loggedInUser = {
+            uid: userCredential.user.uid,
+            email: userCredential.additionalUserInfo.profile.email,
+            lastLogin: new Date().toLocaleDateString(),
+            profilePic:
+              userCredential.additionalUserInfo.profile.picture.data.url,
+            facebookId: userCredential.additionalUserInfo.profile.id
+          };
+          this.updateUser(loggedInUser);
+          this.routeSuccessfulLogin();
+        });
       } else {
-        console.log("user is not yet logged into facebook to sign in");
+        console.log("user is not yet logged into facebook");
         this.facebook
           .login(["public_profile", "email"])
           .then(
             (res: FacebookLoginResponse) => {
-              console.log("facebook login successfull");
-              const facebookCredential = firebase.auth.FacebookAuthProvider.credential(
+              const facebookCredential_1 = firebase.auth.FacebookAuthProvider.credential(
                 res.authResponse.accessToken
               );
-              this.doFirebaseLogin(facebookCredential);
+              this.doFirebaseLogin(facebookCredential_1).then(
+                (userCredential_1: any) => {
+                  loggedInUser = {
+                    uid: userCredential_1.user.uid,
+                    email: userCredential_1.additionalUserInfo.profile.email,
+                    lastLogin: new Date().toLocaleDateString(),
+                    profilePic:
+                      userCredential_1.additionalUserInfo.profile.picture.data
+                        .url,
+                    facebookId: userCredential_1.additionalUserInfo.profile.id
+                  };
+                  this.updateUser(loggedInUser);
+                  this.routeSuccessfulLogin();
+                }
+              );
             },
             error => {
               console.log(
@@ -184,26 +345,28 @@ export class AuthenticationService {
               );
             }
           )
-          .catch(error => {
-            console.log("Error logging into Facebook", error);
+          .catch(error_1 => {
+            console.log("Error logging into Facebook", error_1);
           });
       }
     });
   }
 
-  async doFirebaseLogin(credential) {
-    console.log("Logging in to firebase");
-    firebase
+  async doFirebaseLogin(credential: firebase.auth.AuthCredential) {
+    return firebase
       .auth()
       .signInAndRetrieveDataWithCredential(credential)
-      .then(success => {
-        console.log("Firebase login success.");
+      .then(response => {
         this.menu.enable(true);
-        console.log("navigating to the home page.");
-        this.navCtrl.navigateForward("");
+        return response;
       })
       .catch(error => {
         console.log("Firebase login failure: " + JSON.stringify(error));
       });
+  }
+
+  private routeSuccessfulLogin() {
+    this.menu.enable(true);
+    this.router.navigateByUrl("/home");
   }
 }

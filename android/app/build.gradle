@@ -55,3 +55,4 @@ try {
     logger.warn("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
 }
 apply plugin: 'com.google.gms.google-services'
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
