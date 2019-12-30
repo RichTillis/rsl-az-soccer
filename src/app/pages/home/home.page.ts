@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { ModalController } from "@ionic/angular";
+import { ModalController, MenuController } from "@ionic/angular";
+
 
 import { ImageModalPage } from "../../components/image-modal/image-modal.page";
 
@@ -36,10 +37,13 @@ export class HomePage implements OnInit {
   };
 
   constructor(
-    private modalController: ModalController
+    private modalController: ModalController,
+    private menu: MenuController
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.menu.enable(true);
+  }
 
   openPreview(img) {
     this.modalController.create({
