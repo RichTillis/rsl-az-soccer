@@ -15,10 +15,39 @@
     <ion-card-header color="primary">
       <ion-card-title>{{post.title}}</ion-card-title>
     </ion-card-header>
-    <img src="assets/images/{{post.img}}.jpg" tappable (click)=openPreview(post.img) />
+    <div *ngIf="post.img">
+      <img src="assets/images/{{post.img}}.jpg" tappable (click)=openPreview(post.img) />
+    </div>
 
-    <ion-card-content class="card-content-background">
-      {{post.body}}
+    <ion-slides [options]="sliderOpts" *ngIf="post.images">
+      <ion-slide *ngFor="let image of post.images">
+        <img src="assets/images/{{image}}.jpg" tappable (click)=openPreview(image) />
+      </ion-slide>
+    </ion-slides>
+
+    <ion-card-content class="card-content-background" *ngIf="post.qwerty">
+      This is content, without any paragraph or header tags,
+      within an ion-card-content element.
+    </ion-card-content>
+    <ion-card-content class="card-content-background" *ngIf="post.body">
+      <ion-label lines="none" >
+        {{post.body}}
+      </ion-label>
+    </ion-card-content>
+    <ion-card-content class="card-content-background" *ngIf="post.body1">
+      <ion-label lines="none" >
+        {{post.body1}}
+      </ion-label>
+    </ion-card-content>
+    <ion-card-content class="card-content-background" *ngIf="post.body2">
+      <ion-label lines="none">
+        {{post.body2}}
+      </ion-label>
+    </ion-card-content>
+    <ion-card-content class="card-content-background" *ngIf="post.body3">
+      <ion-label lines="none">
+        {{post.body3}}
+      </ion-label>
     </ion-card-content>
   </ion-card>
 
