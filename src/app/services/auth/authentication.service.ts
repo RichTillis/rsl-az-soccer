@@ -244,6 +244,7 @@ export class AuthenticationService {
   }
 
   async doEmailLogin(email: string, password: string) {
+    console.log("Trying email login.");
     await this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then((userCredential: any) => {
