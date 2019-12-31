@@ -29,7 +29,7 @@
       <ion-item-divider color="primary">
         <ion-label> {{ division.divisionName }} </ion-label>
       </ion-item-divider>
-      <ion-item color="primary-contrast" *ngFor="let team of division.divisionTeams" routerLink="/app/tabs/teamSchedule/{{ team.id }}">
+      <ion-item color="primary-contrast" *ngFor="let team of division.divisionTeams" routerLink="/team/tabs/teamSchedule/{{ team.id }}">
         <ion-label>{{ team.name }}</ion-label>
       </ion-item>
     </ion-item-group>

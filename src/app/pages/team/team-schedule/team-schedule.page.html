@@ -29,7 +29,7 @@
       </ion-button>
     </div>
   </ion-item>
-  <ion-grid no-padding *ngFor="let game of games" routerLink="/venue-map/{{game.location}}">
+  <ion-grid class="ion-no-padding" *ngFor="let game of games" routerLink="/venue-map/{{game.location}}">
     <ion-row class="schedule-row">
       <ion-col size="2" class="home-away-tag-{{ game.homeAway }}"></ion-col>
       <ion-col size="10">

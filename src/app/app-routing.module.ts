@@ -28,7 +28,7 @@ const routes: Routes = [
       "./pages/auth/forgot-password/forgot-password.module#ForgotPasswordPageModule"
   },
   {
-    path: "app", //TODO change to team
+    path: "team", //TODO change to team
     loadChildren: "./pages/team/team.module#TeamPageModule",
     canActivate: [AuthGuard]
   },

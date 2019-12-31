@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute, Params, ParamMap } from "@angular/router";
 import _ from "lodash";
 
 import { TournamentService } from "../../../services/tournament/tournament.service";
@@ -25,10 +25,15 @@ export class TeamSchedulePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.parent.params.subscribe((params: Params) => {
-      this.teamId = params.teamId;
+    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+      this.teamId = params.get("teamId");
       this.tournamentService.setTeamId(this.teamId);
     });
+    // this.activatedRoute.parent.params.subscribe((params: Params) => {
+    // console.log(params);
+    // this.teamId = params.teamId;
+    // this.tournamentService.setTeamId(this.teamId);
+    // });
     console.log("loading team data for " + this.teamId);
     this.tournamentService.getTournamentData().subscribe(data => {
       console.log(data);
@@ -104,7 +109,7 @@ export class TeamSchedulePage implements OnInit {
   }
 
   removeFromFavs() {
-    console.log('remove from favs');
+    console.log("remove from favs");
     this.isFollowing = false;
     this.favoritesService.removeFav(this.team);
   }
