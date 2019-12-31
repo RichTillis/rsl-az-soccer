@@ -85,7 +85,7 @@ export class TeamsPage implements OnInit {
 
   private allTeams: any;
   private allTeamDivisions: any;
-  divisionFilter = "all";
+  divisionFilter = "All";
   errorMessage = '';
   teams = [];
   queryText: string;
@@ -99,13 +99,9 @@ export class TeamsPage implements OnInit {
 
   ngOnInit(): void {
     this.displayLoader();
-    
-    // this.tournamentTeamsCombine$.subscribe();
-    // this.tournamentTeams$.subscribe(val => console.log(val));
-    // this.test$.subscribe(val => console.log(val));
 
     this.tournamentService.getTournamentData().subscribe(data => {
-      console.log("teams page", data);
+      // console.log("teams page", data);
       this.allTeams = data.teams;
       this.allTeamDivisions = _.chain(data.teams)
         .groupBy("flight")
@@ -113,7 +109,7 @@ export class TeamsPage implements OnInit {
         .map(item => _.zipObject(["divisionName", "divisionTeams"], item))
         .value();
       this.teams = this.allTeamDivisions;
-      console.log("division teams", this.teams);
+      // console.log("division teams", this.teams);
     });
   }
 
