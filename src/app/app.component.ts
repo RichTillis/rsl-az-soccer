@@ -23,24 +23,18 @@ export class AppComponent {
     // {name:'Field Maps', route:'/field-maps', icon:'map'},
     { title: "Venues", route: "/venues", icon: "pin", role: "user" },
     {
-      title: "Tournament Info",
-      route: "https://rslazsoccer.com/jacobs-classic/",
-      icon: "information-circle",
-      role: "user"
-    },
-    {
       title: "Inclement Weather",
       route: "/inclement-weather",
       icon: "rainy",
       role: "user"
     },
     { title: "Contact Us", route: "/contact-us", icon: "mail", role: "user" },
-    {
-      title: "Notifications",
-      route: "/notifications",
-      icon: "notifications",
-      role: "admin"
-    }
+    // {
+    //   title: "Notifications",
+    //   route: "/notifications",
+    //   icon: "notifications",
+    //   role: "admin"
+    // }
   ];
   constructor(
     private router: Router,

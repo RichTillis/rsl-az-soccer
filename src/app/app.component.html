@@ -8,19 +8,23 @@
     <ion-content color="primary">
 
       <ion-list>
-        <ion-menu-toggle auto-hide="false" >
-          <ion-item *ngFor="let menuItem of menuItems" color="primary"  [routerDirection]="'root'"  [routerLink]="[menuItem.route]">
+        <ion-menu-toggle auto-hide="false">
+          <ion-item *ngFor="let menuItem of menuItems" color="primary" [routerDirection]="'root'" [routerLink]="[menuItem.route]">
             <ion-icon slot="start" [name]="menuItem.icon" color="light"></ion-icon>
             <ion-label> {{menuItem.title}} </ion-label>
           </ion-item>
-          <ion-item color="primary" (click)="logout()">
-              <ion-icon slot="start" name="log-out" color="light"></ion-icon>
-              <ion-label> Logout </ion-label>
+          <ion-item color="primary" href="https://fortlowellshootout.org/">
+            <ion-icon slot="start" name="information-circle" color="light"></ion-icon>
+            <ion-label> Additional Tournament Info </ion-label>
           </ion-item>
-        </ion-menu-toggle>        
+          <ion-item color="primary" (click)="logout()">
+            <ion-icon slot="start" name="log-out" color="light"></ion-icon>
+            <ion-label> Logout </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
       </ion-list>
-      
+
     </ion-content>
   </ion-menu>
-  <ion-router-outlet id="mainContent" ></ion-router-outlet>
+  <ion-router-outlet id="mainContent"></ion-router-outlet>
 </ion-app>

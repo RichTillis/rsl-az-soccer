@@ -37,7 +37,7 @@ export class HomePage implements OnInit {
       title: "Kino Sports Complex Rules",
       img: "kinoLogo",
       images: ["clear-bag-web","guest-allowable-items-updated","patron-items-not-allowed-updated","players-and-coaches-updated"],
-      body1: "Our Friday Night Opening Ceremony will adhere to a strict clear bag policy for the safety of all of our athletes, families, and spectators in attendance. Please refer to the Kino Sports Complex – Clear Bag Policy. Please see the accepted and prohibited items lists below.",
+      body1: "Our Friday Night Opening Ceremony will adhere to a strict clear bag policy for the safety of all of our athletes, families, and spectators in attendance. Please refer to the Kino Sports Complex – Clear Bag Policy. Please see the accepted and prohibited items lists above.",
       body2: "Spectators will only be allowed to bring select items into the Kino Sports Complex on game days.",
       body3: "Coaches will be allowed to bring in coolers with sports drinks and water for players.",
       link: ""
