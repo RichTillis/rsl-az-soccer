@@ -12,7 +12,7 @@
   <ion-card>
     <ion-list>
       <ion-list-header class="my-teams-header">Followed Teams</ion-list-header>
-      <ion-item *ngFor="let item of favorites$ | async" routerLink="/app/tabs/teamSchedule/{{item?.team.teamId}}" >
+      <ion-item *ngFor="let item of favorites$ | async" routerLink="/team/tabs/teamSchedule/{{item?.team.teamId}}" >
         <ion-icon slot="start" name="star"></ion-icon>
         {{ item?.team.teamName }}
       </ion-item>
