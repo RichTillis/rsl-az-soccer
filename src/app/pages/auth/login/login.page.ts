@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Platform } from "@ionic/angular";
 
 import { AuthenticationService } from "../../../services/auth/authentication.service";
 import { ToastService } from "../../../services/toast/toast.service";
@@ -14,6 +15,7 @@ import { AlertService } from "../../../services/alert/alert.service";
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
+  isAndroidDevice: boolean = false;
 
   validation_messages = {
     email: [
@@ -29,7 +31,8 @@ export class LoginPage implements OnInit {
     private authService: AuthenticationService,
     private loadingService: LoadingService,
     private toastService: ToastService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private platform: Platform
   ) {}
 
   ngOnInit() {
@@ -37,6 +40,12 @@ export class LoginPage implements OnInit {
       email: ["", Validators.compose([Validators.required, Validators.email])],
       password: ["", Validators.required]
     });
+
+    // console.log(this.platform.platforms());
+
+    if(this.platform.is('android')){
+      this.isAndroidDevice = true;    
+    }
   }
 
   routeToSignUp(): void {
