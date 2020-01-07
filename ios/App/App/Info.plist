@@ -55,12 +55,35 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>ftlowellrush.firebaseio.com</key>
+			<key>api.ionicjs.com</key>
 			<dict>
-				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<key>NSRequiresCertificateTransparency</key>
 				<false/>
+				<key>NSExceptionMinimumTLSVersion</key>
+				<string>TLSv1.0</string>
+				<key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
 				<key>NSIncludesSubdomains</key>
 				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+			<key>ftlowellrush.firebaseio.com</key>
+			<dict>
+				<key>NSRequiresCertificateTransparency</key>
+				<false/>
+				<key>NSExceptionMinimumTLSVersion</key>
+				<string>TLSv1.0</string>
+				<key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
 			</dict>
 			<key>akamaihd.net</key>
 			<dict>
