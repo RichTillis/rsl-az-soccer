@@ -24,7 +24,7 @@ export class TournamentService {
 
   teamId;
 
-  // private readonly CURRENT_TOURNAMENT_ID = 70432;
+  // private readonly CURRENT_TOURNAMENT_ID = 68462;
   private readonly CURRENT_TOURNAMENT_ID = 74306;
   private dbPath = this.baseUrl + '/tournaments/tournaments-data/' + this.CURRENT_TOURNAMENT_ID + '/teams';
 

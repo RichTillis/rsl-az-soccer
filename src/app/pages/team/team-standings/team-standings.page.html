@@ -4,6 +4,9 @@
     <ion-buttons slot="end"> <ion-menu-button></ion-menu-button> </ion-buttons>
     <ion-title>Team Standings</ion-title>
   </ion-toolbar>
+  <a href="https://www.tucsonrealtors.org/" target="_blank">
+    <ion-img src="assets/images/tarsponsorbanner.jpg"></ion-img>
+  </a>
 </ion-header>
 
 <ion-content color="light">
@@ -22,9 +25,12 @@
     <ion-item color="light" *ngFor="let team of flightStandings" routerLink="/team/tabs/teamSchedule/{{team.teamId}}">
       <ion-grid class="width-100">
         <ion-row class="ion-align-self-start">
-          <ion-col class="ion-align-self-start">{{ team?.teamName }}</ion-col>
+          <ion-col class="ion-align-self-start team-name">{{ team?.teamName }}</ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="!team?.matchesPlayed" class="ion-align-self-start">
+          <ion-col class="ion-align-self-start no-game">- No games recorded -</ion-col>
+        </ion-row>
+        <ion-row *ngIf="team?.matchesPlayed">
           <ion-col> MP </ion-col>
           <ion-col> W </ion-col>
           <ion-col> L </ion-col>
@@ -46,3 +52,6 @@
     </ion-item>
   </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-img src="assets/images/tournamentsponsors.png"></ion-img>
+</ion-footer>
