@@ -21,7 +21,7 @@ export class AppComponent {
     { title: "Schedule", route: "/teams", icon: "calendar", role: "user" },
     { title: "Standings", route: "/standings", icon: "trophy", role: "user" },
     // {name:'Field Maps', route:'/field-maps', icon:'map'},
-    { title: "Venues", route: "/venues", icon: "pin", role: "user" },
+    // { title: "Venues", route: "/venues", icon: "pin", role: "user" },
     {
       title: "Inclement Weather",
       route: "/inclement-weather",
