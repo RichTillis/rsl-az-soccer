@@ -19,7 +19,7 @@ export class HomePage implements OnInit {
     },    
     {
       title: "Friday Opening Ceremonies",
-      img: "Olympics-Events-Locator-maps-Kino",
+      img: "Kino-Main-Fields",
       body: "The opening ceremonies have been a part of the Fort Lowell Shootout Soccer Tournament since it was founded. ",
       body2: "The Friday night festivities include a parade, live music, food trucks, games/rides, and more. The big Friday Night event is the one of kind.",
       body3: "Gates open at 3pm. Opening Ceremony, followed directly by the Parade of Teams will begin at 6pm. Soccer Olympics to start at 7:15pm.",
@@ -27,7 +27,7 @@ export class HomePage implements OnInit {
     },
     {
       title: "Soccer Olympics",
-      img: "olympics",
+      img: "Olympics-Events",
       body: "The Soccer Olympics have been a part of the Fort Lowell Shootout Soccer Tournament since it was founded. ",
       body1: "Its a fun and exciting way for young athletes to showcase their technical skills and abilities. Soccer Olympics will start at 7:15pm on Friday night.",
       body2: "Skills challenges include: Juggling, Foot Glof, Dribble Relay, & The Shootout (Penalty Kicks)",
@@ -41,6 +41,15 @@ export class HomePage implements OnInit {
       body2: "Spectators will only be allowed to bring select items into the Kino Sports Complex on game days.",
       body3: "Coaches will be allowed to bring in coolers with sports drinks and water for players.",
       link: ""
+    },
+    {
+      title: "Tournament Field Maps",
+      //img: "kinoLogo",
+      images: ["Kino-entire-complex","Olympics-Events","Kino-North-Fields","Kino-South-Fields"],
+      // body1: "Our Friday Night Opening Ceremony will adhere to a strict clear bag policy for the safety of all of our athletes, families, and spectators in attendance. Please refer to the Kino Sports Complex – Clear Bag Policy. Please see the accepted and prohibited items lists above.",
+      // body2: "Spectators will only be allowed to bring select items into the Kino Sports Complex on game days.",
+      // body3: "Coaches will be allowed to bring in coolers with sports drinks and water for players.",
+      // link: ""
     },
   ];
 
