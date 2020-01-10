@@ -19,11 +19,20 @@ export class HomePage implements OnInit {
     },    
     {
       title: "Friday Opening Ceremonies",
-      img: "Kino-Main-Fields",
+      img: "Kino-Opening-Ceremony",
       body: "The opening ceremonies have been a part of the Fort Lowell Shootout Soccer Tournament since it was founded. ",
       body2: "The Friday night festivities include a parade, live music, food trucks, games/rides, and more. The big Friday Night event is the one of kind.",
       body3: "Gates open at 3pm. Opening Ceremony, followed directly by the Parade of Teams will begin at 6pm. Soccer Olympics to start at 7:15pm.",
       link: ""
+    },
+    {
+      title: "Tucson Roadrunners Tickets!",
+      img: "Roadrunners-Game-FB",
+      body: "The Tucson Roadrunners are proud to partner with The Tucson Association of REALTORS Fort Lowell Shootout! $5 from each ticket purchased through this offer will support the tournament. ",
+      body2: "Everyone is invited to wear their soccer jersey to represent their team and celebrate the Shootout. ",
+      body3: "",
+      link: "http://www.rrtix.com/fort",
+      linkTitle: "Buy Tickets Here!"
     },
     {
       title: "Soccer Olympics",

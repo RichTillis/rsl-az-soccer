@@ -55,6 +55,13 @@
         {{post.body3}}
       </ion-label>
     </ion-card-content>
+    <ion-card-content class="card-content-background" *ngIf="post.link">
+      <ion-item [href]="post.link" target="_blank" lines="none">
+        <ion-label lines="none" color="secondary"> 
+          {{post.linkTitle}}
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
   </ion-card>
 
 </ion-content>
