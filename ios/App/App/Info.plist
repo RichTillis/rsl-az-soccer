@@ -33,7 +33,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>FacebookAppID</key>
 	<string>2190938867832717</string>
 	<key>FacebookDisplayName</key>
@@ -151,7 +151,7 @@
 	<key>IonChannelName</key>
 	<string>Master</string>
 	<key>IonUpdateMethod</key>
-	<string>auto</string>
+	<string>background</string>
 	<key>IonMaxVersions</key>
 	<string>2</string>
 	<key>IonMinBackgroundDuration</key>
