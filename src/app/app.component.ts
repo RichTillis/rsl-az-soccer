@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { Plugins } from "@capacitor/core";
 import { Router } from "@angular/router";
 // import { UtilService } from "./services/util/util.service";
-// import { FcmService } from "./services/push-notifications/fcm.service";
+import { FcmService } from "./services/push-notifications/fcm.service";
 import { AuthenticationService } from "./services/auth/authentication.service";
 import { Platform } from "@ionic/angular";
 
@@ -40,7 +40,7 @@ export class AppComponent {
     private router: Router,
     private authenticationService: AuthenticationService,
     // private utilService: UtilService,
-    // private fcm: FcmService,
+    private fcm: FcmService,
     // public toastCtrl: ToastController,
     public platform: Platform
   ) {
@@ -51,13 +51,13 @@ export class AppComponent {
       console.warn(err);
     });
     platform.ready().then(() => {
-      // if(this.platform.is('ios') || this.platform.is('android')){
-      //   try {
-      //     this.fcm.init();
-      //   } catch (err) {
-      //     console.warn(err);
-      //   }
-      // }
+      if(this.platform.is('ios') || this.platform.is('android')){
+        try {
+          this.fcm.init();
+        } catch (err) {
+          console.warn(err);
+        }
+      }
     });
   }
 
