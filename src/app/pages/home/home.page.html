@@ -55,10 +55,17 @@
         {{post.body3}}
       </ion-label>
     </ion-card-content>
-    <ion-card-content class="card-content-background" *ngIf="post.link">
+    <ion-card-content class="card-content-background no-vertical-padding " *ngIf="post.link">
       <ion-item [href]="post.link" target="_blank" lines="none">
-        <ion-label lines="none" color="secondary"> 
+        <ion-label lines="none" color="secondary" class="standout"> 
           {{post.linkTitle}}
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+    <ion-card-content class="card-content-background no-vertical-padding " *ngIf="post.links">
+      <ion-item *ngFor="let link of post.links" [href]="link.link" target="_blank" lines="none">
+        <ion-label lines="none" color="secondary" class="standout"> 
+          {{link.linkTitle}}
         </ion-label>
       </ion-item>
     </ion-card-content>

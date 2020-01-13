@@ -45,7 +45,25 @@ export class HomePage implements OnInit {
       body: "The Soccer Olympics have been a part of the Fort Lowell Shootout Soccer Tournament since it was founded. ",
       body1: "Its a fun and exciting way for young athletes to showcase their technical skills and abilities. Soccer Olympics will start at 7:15pm on Friday night.",
       body2: "Skills challenges include: Juggling, Foot Glof, Dribble Relay, & The Shootout (Penalty Kicks)",
-      link: ""
+      link: "",
+      links: [
+        { 
+          linkTitle: " Olympics Shootouts Instructions",
+          link: "http://fortlowellshootout.org/wp-content/uploads/2020/01/Shootout-Vol-Instrs-2020.pdf"
+        },
+        {
+          linkTitle: " Olympics Juggling Instructions",
+          link: "http://fortlowellshootout.org/wp-content/uploads/2020/01/Juggling-Vol-Instrs-2020.pdf"
+        },
+        {
+          linkTitle: " Olympics Foot Golf Instructions",
+          link: "http://fortlowellshootout.org/wp-content/uploads/2020/01/Footgolf-Vol-Instrs-2020.pdf"
+        },
+        {
+          linkTitle: " Olympics Dribbling Instructions",
+          link: "http://fortlowellshootout.org/wp-content/uploads/2020/01/Dribbling-Vol-Instrs-2020.pdf"
+        }
+      ]
     },
     {
       title: "Kino Sports Complex Rules",
