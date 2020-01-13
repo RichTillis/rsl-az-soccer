@@ -5,6 +5,7 @@ target 'App' do
   # Add your Pods here
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
+  pod 'Firebase/Analytics'
 
   # Automatic Capacitor Pod dependencies, do not delete
   pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'

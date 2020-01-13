@@ -23,6 +23,8 @@ PODS:
     - FBSDKShareKit/Share (= 5.7.0)
   - FBSDKShareKit/Share (5.7.0):
     - FBSDKCoreKit (~> 5.0)
+  - Firebase/Analytics (6.14.0):
+    - Firebase/Core
   - Firebase/Core (6.14.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 6.1.7)
@@ -106,6 +108,7 @@ DEPENDENCIES:
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - CordovaPlugins (from `../capacitor-cordova-ios-plugins`)
   - CordovaPluginsStatic (from `../capacitor-cordova-ios-plugins`)
+  - Firebase/Analytics
   - Firebase/Core
   - Firebase/Messaging
 
@@ -162,6 +165,6 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   Protobuf: dd1aaea7140debfe4dd0683fb8ef208e527ae153
 
-PODFILE CHECKSUM: 0e4601296ec798908796802b107a0295558d90fd
+PODFILE CHECKSUM: db025d2195b37879f39889bcbb3b52e360154905
 
 COCOAPODS: 1.8.4

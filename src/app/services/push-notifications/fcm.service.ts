@@ -6,20 +6,30 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { ToastController } from "@ionic/angular";
 import { Plugins, PushNotification, PushNotificationToken } from '@capacitor/core';
 const { PushNotifications } = Plugins;
+import { AuthenticationService } from "../auth/authentication.service";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FcmService {
 
+  devices:any = []
+
   constructor(
     private db: AngularFireDatabase,
     public firebaseNative: Firebase,
     private afAuth: AngularFireAuth,
+    public authService: AuthenticationService,
     private platform: Platform,
     private toastController: ToastController
 
-  ) { }
+  ) {
+    let path = `/users/${this.authService.currentUserId}/devices`;
+    this.db.database.ref(path).on("value", snapshot => {
+      this.devices = snapshot.val() || [];
+    });
+  }
 
   init(){
     console.log('ng init');
@@ -27,26 +37,33 @@ export class FcmService {
     PushNotifications.addListener('registrationError', (error: any) => {
       console.log('error on push notification registration ' + JSON.stringify(error))
     })
+    // On success, we should be able to receive notifications
     PushNotifications.addListener('registration', (token: PushNotificationToken) => {
       console.log('token ' + token.value)
-      PushNotifications.addListener('pushNotificationReceived', (notification: PushNotification) => {
-        console.log('notification ' + JSON.stringify(notification));
-        this.presentNotifications(notification)
-        this.saveTokenToFirebase(token.value)
-      })
+      let path = `/users/${this.authService.currentUserId}/devices`
+      this.devices.push(token.value)
+      this.db
+        .object(path)
+        .set(this.devices)
+        .catch(er => {
+          alert(er)
+          console.log("error:");
+          console.log(er);
+        });
+    })
+    PushNotifications.addListener('pushNotificationReceived', (notification: PushNotification) => {
+      console.log('notification ' + JSON.stringify(notification));
+      this.presentNotifications(notification)
     })
     PushNotifications.register();
   }
 
-  async saveTokenToFirebase(token) {
-    console.log("saving token to firebase: " + token)
-    if (!token) return;
-    let path = `devices/${token}`
-    this.db.object(path).update({
-      token,
-      userId: this.afAuth.auth.currentUser.uid
-    });
-  }
+  // async saveTokenToFirebase(token) {
+  //   alert('saving to db')
+  //   console.log("saving token to firebase: " + token)
+  //   if (!token) return;
+    
+  // }
 
   async presentNotifications(notification) {
     console.log('notification: ' + JSON.stringify(notification));

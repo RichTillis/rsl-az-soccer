@@ -1,8 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { ModalController, MenuController } from "@ionic/angular";
+import { FcmService } from "../../services/push-notifications/fcm.service";
+import { Platform } from "@ionic/angular";
+
 
 
 import { ImageModalPage } from "../../components/image-modal/image-modal.page";
+import { FirebaseMessaging } from "@angular/fire";
 
 @Component({
   selector: "app-home",
@@ -71,11 +75,22 @@ export class HomePage implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private menu: MenuController
+    private menu: MenuController,
+    private platform: Platform,
+    private fcm: FcmService
   ) { }
 
   ngOnInit() {
     this.menu.enable(true);
+    this.platform.ready().then(() => {
+      if(this.platform.is('ios') || this.platform.is('android')){
+        try {
+          this.fcm.init();
+        } catch (err) {
+          console.warn(err);
+        }
+      }
+    });
   }
 
   openPreview(img) {

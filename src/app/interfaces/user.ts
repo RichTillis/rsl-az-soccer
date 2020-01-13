@@ -9,4 +9,5 @@ export interface User {
   favorites?: any;
   profilePic?: string;
   facebookId?: string;
+  devices?:any;
 }
