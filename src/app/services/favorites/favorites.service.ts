@@ -5,13 +5,8 @@ import { Subscription } from "rxjs/Subscription";
 
 import { AuthenticationService } from "../auth/authentication.service";
 import { TournamentService } from "../tournament/tournament.service";
-import { map } from "rxjs/operators";
-
-export class Favorite {
-  team: any;
-  tournamentId: number;
-  tournamentName: string;
-}
+import { map, tap } from "rxjs/operators";
+import { Favorite } from "../../interfaces/favorites";
 
 @Injectable({
   providedIn: "root"
@@ -36,7 +31,8 @@ export class FavoritesService {
   getFavorites() {
     let path = `/users/${this.authService.currentUserId}/favorites`;
     return this.afDb.list<Favorite>(path).valueChanges().pipe(
-      map(favorites => favorites.filter(favorite => favorite.tournamentId === this.tournamentId))
+      map(favorites => favorites.filter(favorite => favorite.tournamentId === this.tournamentId)),
+      tap(favorites => console.log('favorites', favorites))
     );
   }
 
