@@ -40,7 +40,8 @@ export class HomePage implements OnInit {
     },
     {
       title: "Soccer Olympics",
-      img: "Olympics-Events",
+      // img: "Olympics-Events",
+      images: ["Olympics-Events","dribbling", "footGolf", "juggling", "shootout"],
       body: "The Soccer Olympics have been a part of the Fort Lowell Shootout Soccer Tournament since it was founded. ",
       body1: "Its a fun and exciting way for young athletes to showcase their technical skills and abilities. Soccer Olympics will start at 7:15pm on Friday night.",
       body2: "Skills challenges include: Juggling, Foot Glof, Dribble Relay, & The Shootout (Penalty Kicks)",
