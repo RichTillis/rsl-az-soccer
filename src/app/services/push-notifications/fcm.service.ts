@@ -69,10 +69,11 @@ export class FcmService {
     console.log('notification: ' + JSON.stringify(notification));
 
     const toast = await this.toastController.create({
+      header: notification.title,
       message: notification.body,
       showCloseButton: true,
       closeButtonText: 'Got it',
-      position: 'middle'
+      position: 'top'
     })
     toast.present()
   }
