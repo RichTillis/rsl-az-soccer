@@ -8,5 +8,8 @@
     "PushNotifications": {
       "presentationOptions": ["badge", "sound", "alert"]
     }
+  },
+  "ios": {
+    "cordovaLinkerFlags": ["-ObjC"]
   }
 }

@@ -145,8 +145,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Capacitor: e548fe61e71fa160367a36387f54483647ca20f6
   CapacitorCordova: 17c1ed13e5303aa5153fb405adb4196cc56b40d5
-  CordovaPlugins: 9ecd16dcbdb2403fe89edf71740e2e8d1a2a86a8
-  CordovaPluginsStatic: ae7d3b1a7518d010aa7ceec66f973d04180f3e59
+  CordovaPlugins: 4e239aaf73be61d83039c550e27160048e3f30b2
+  CordovaPluginsStatic: 3b192fe34334f5836ceac94033323dbc84a9a7f0
   FBSDKCoreKit: 0d2d450fe9447e204fa6e912e0df76dd36693699
   FBSDKLoginKit: 4127e8260b96e0e4cc8ba0c10c95ee63941aa24a
   FBSDKShareKit: 0dc4bd06e11eb2ad30d165132c6c879b8d449ae3

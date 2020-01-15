@@ -7,6 +7,7 @@ import { Platform } from "@ionic/angular";
 
 import { ImageModalPage } from "../../components/image-modal/image-modal.page";
 import { FirebaseMessaging } from "@angular/fire";
+import { AppFlowService } from "../../services/app-flow/app-flow.service";
 
 @Component({
   selector: "app-home",
@@ -78,7 +79,8 @@ export class HomePage implements OnInit {
     private modalController: ModalController,
     private menu: MenuController,
     private platform: Platform,
-    private fcm: FcmService
+    private fcm: FcmService,
+    private appFlow: AppFlowService
   ) { }
 
   ngOnInit() {
@@ -86,9 +88,10 @@ export class HomePage implements OnInit {
     this.platform.ready().then(() => {
       if(this.platform.is('ios') || this.platform.is('android')){
         try {
-          this.fcm.init();
+          this.fcm.init()
+          //this.appFlow.performManualUpdate()
         } catch (err) {
-          console.warn(err);
+          console.warn(err)
         }
       }
     });
