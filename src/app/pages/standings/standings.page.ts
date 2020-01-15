@@ -17,31 +17,42 @@ export class StandingsPage implements OnInit {
   constructor(
     public tournamentService: TournamentService,
     public loadingController: LoadingController
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.displayLoader().then(async (loader: any) => {
-      await this.tournamentService
-        .getTournamentData()
-        .subscribe(data => {
-          console.log(data);
-          this.allTeamDivisions = _.chain(data.standings)
-            .groupBy("flight")
-            .toPairs()
-            .map(item => _.zipObject(["divisionName", "divisionTeams"], item))
-            .value();
+      //   this.tournamentService
+      //     .getTournamentData()
+      //     .subscribe(data => {
+      //       console.log(data);
+      //       this.allTeamDivisions = _.chain(data.standings)
+      //         .groupBy("flight")
+      //         .toPairs()
+      //         .map(item => _.zipObject(["divisionName", "divisionTeams"], item))
+      //         .value();
 
-          this.teams = this.allTeamDivisions;
-          console.log("teams", this.teams);
-        });
-    });
+      //       this.teams = this.allTeamDivisions;
+      //       console.log("teams", this.teams);
+      //     });
+      // });
+      this.tournamentService.tournamentStandingsData$.subscribe((data: any) => {
+        this.allTeamDivisions = _.chain(data)
+          .groupBy("flight")
+          .toPairs()
+          .map(item => _.zipObject(["divisionName", "divisionTeams"], item))
+          .value();
+        this.teams = this.allTeamDivisions;
+        console.log(this.teams);
+      });
+
+    })
   }
 
   async displayLoader() {
     const loading = await this.loadingController.create({
       message: "Getting Teams...",
       spinner: "crescent",
-      duration: 2000
+      duration: 1000
     });
     await loading.present();
     return loading;

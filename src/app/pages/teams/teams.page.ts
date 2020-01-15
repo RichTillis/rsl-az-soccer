@@ -25,22 +25,31 @@ export class TeamsPage implements OnInit {
     public tournamentService: TournamentService,
     public loadingController: LoadingController,
     public router: Router
-  ) {  }
+  ) { }
 
   ngOnInit() {
     this.displayLoader().then(async (loader: any) => {
-      this.tournamentService.getTournamentData().subscribe(data => {
-        // console.log(data);
-        // this.allTeams = data.teams;
-        this.allTeamDivisions = _.chain(data.teams)
+
+      // this.tournamentService.getTournamentData().subscribe(data => {
+      //   // console.log(data);
+      //   // this.allTeams = data.teams;
+      //   this.allTeamDivisions = _.chain(data.teams)
+      //     .groupBy("flight")
+      //     .toPairs()
+      //     .map(item => _.zipObject(["divisionName", "divisionTeams"], item))
+      //     .value();
+      //   this.teams = this.allTeamDivisions;
+      //   console.log("division teams", this.teams);
+      // });
+      this.tournamentService.tournamentTeamData$.subscribe((data: any) => {
+        this.allTeamDivisions = _.chain(data)
           .groupBy("flight")
           .toPairs()
           .map(item => _.zipObject(["divisionName", "divisionTeams"], item))
           .value();
         this.teams = this.allTeamDivisions;
-        // console.log("division teams", this.teams);
       });
-    });
+    })
   }
 
   async displayLoader() {
@@ -88,12 +97,12 @@ export class TeamsPage implements OnInit {
     console.log("division teams", this.teams);
   }
 
-  hideKeyboard(){
+  hideKeyboard() {
     Keyboard.hide();
   }
 
-  onKey(event:any){
-    if(event.key ==='Enter'){
+  onKey(event: any) {
+    if (event.key === 'Enter') {
       Keyboard.hide();
     }
   }

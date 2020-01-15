@@ -29,11 +29,11 @@
 
 <ion-content color="primary-contrast">
   <ion-list>
-    <ion-item-group *ngFor="let division of teams">
+    <ion-item-group *ngFor="let division of teams; trackBy:divisionName">
       <ion-item-divider color="primary">
         <ion-label> {{ division.divisionName }} </ion-label>
       </ion-item-divider>
-      <ion-item color="primary-contrast" *ngFor="let team of division.divisionTeams; last as isLast" routerLink="/team/tabs/teamSchedule/{{ team.id }}" >
+      <ion-item color="primary-contrast" *ngFor="let team of division.divisionTeams; last as isLast; trackBy:id" routerLink="/team/tabs/teamSchedule/{{ team.id }}" >
         <ion-label>{{ team.name }}</ion-label>
         <!-- <span *ngIf="isLast">default</span>         -->
       </ion-item>

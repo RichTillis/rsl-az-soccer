@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
-import { map, groupBy, tap, catchError, filter, mergeMap } from "rxjs/operators";
+import { map, groupBy, tap, catchError, filter, mergeMap, toArray } from "rxjs/operators";
 import "rxjs/add/observable/of";
 
 import { Team } from '../../interfaces/team';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
   providedIn: "root"
@@ -13,19 +14,32 @@ export class TournamentService {
   private readonly baseUrl = "https://ftlowellrush.firebaseio.com";
   currentTourney: any = {};
   currentVenueLocations: any = {};
+  // private readonly CURRENT_TOURNAMENT_ID = 68462;
+  private readonly CURRENT_TOURNAMENT_ID = 74306;
 
   private tourneyData = {};
   private locations = {};
 
   teams: Observable<any[]>;
 
-  private tournamentData: any = {};
+  tournamentStandingsData$ = this.db.list(`tournaments/tournaments-data/${this.CURRENT_TOURNAMENT_ID}/standings`).valueChanges().pipe(
+    tap(items => console.log(items)),
+    // map(teams => teams.map(team => ({
+    //   ...team
+    // }) as Team)),
+  );
+
+  tournamentTeamData$ = this.db.list<Team>(`tournaments/tournaments-data/${this.CURRENT_TOURNAMENT_ID}/teams`).valueChanges().pipe(
+    tap(items => console.log(items)),
+    map(teams => teams.map(team => ({
+      ...team
+    }) as Team)),
+  );
+
   currentTournament: Observable<any>;
 
   teamId;
 
-  // private readonly CURRENT_TOURNAMENT_ID = 68462;
-  private readonly CURRENT_TOURNAMENT_ID = 74306;
   private dbPath = this.baseUrl + '/tournaments/tournaments-data/' + this.CURRENT_TOURNAMENT_ID + '/teams';
 
   tournamentTeams$ = this.http.get<Team[]>(`${this.baseUrl}/tournaments/tournaments-data/${this.CURRENT_TOURNAMENT_ID}/teams.json`)
@@ -43,8 +57,7 @@ export class TournamentService {
       catchError(this.handleError)
     );
 
-  constructor(public http: HttpClient) { 
-  }
+  constructor(public http: HttpClient, private db: AngularFireDatabase) {  }
 
   getTeamId() {
     return this.teamId;
