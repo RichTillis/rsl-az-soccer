@@ -22,7 +22,7 @@
       Unfollow
     </ion-button> -->
   <ion-list *ngFor="let bracket of standingsByBracket | keyvalue">
-    <ion-list-header>
+    <ion-list-header color="primary">
       {{ bracket.key }}
     </ion-list-header>
     <ion-item color="light" *ngFor="let team of bracket.value" routerLink="/team/tabs/teamSchedule/{{team.teamId}}">
