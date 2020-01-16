@@ -11,10 +11,14 @@ ion-col {
   font-weight: 600;
 }
 
-.no-game{
+.no-game {
   padding-left: 1em;
 }
 
-.left-padding{
-  padding-left: 10px;;
+.left-padding {
+  padding-left: 10px;
+}
+
+.min-height-10 {
+  --min-height: 5px;
 }

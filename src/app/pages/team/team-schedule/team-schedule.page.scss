@@ -8,6 +8,7 @@
   position: relative;
   top: 2.4em;
 }
+
 .home-away-tag-home:after {
   content: "H";
   color: #ffffff;
@@ -17,6 +18,7 @@
   font-size: 0.8em;
   font-weight: 800;
 }
+
 .home-away-tag-away:before {
   content: "";
   width: 0;
@@ -27,6 +29,7 @@
   position: relative;
   top: 2.4em;
 }
+
 .home-away-tag-away:after {
   content: "A";
   color: #ffffff;
@@ -47,6 +50,7 @@
   width: 8em;
   font-size: 0.8em;
 }
+
 .match-result {
   transform: skew(20deg, 0);
   display: block;
@@ -69,15 +73,20 @@
 .schedule-location {
   font-size: 0.8em;
 }
+
 .schedule-row {
   border-bottom: 1px solid;
 }
 
-.center-button{
-  width: 100%; 
+.center-button {
+  width: 100%;
   text-align: center;
 }
 
-.left-padding{
-  padding-left: 10px;;
+.left-padding {
+  padding-left: 10px;
+}
+
+.min-height-10 {
+  --min-height: 5px;
 }

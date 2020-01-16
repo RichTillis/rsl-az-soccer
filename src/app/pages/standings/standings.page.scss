@@ -14,6 +14,10 @@ ion-col {
   color: var(--ion-color-tertiary) !important;
 }
 
-.left-padding{
-  padding-left: 10px;;
+.left-padding {
+  padding-left: 10px;
+}
+
+.min-height-10 {
+  --min-height: 5px;
 }

@@ -1,4 +1,4 @@
-.card-content-background{
+.card-content-background {
     background: white;
 }
 
@@ -11,18 +11,24 @@ ion-slides {
     }
 }
 
-.addPadding{
+.addPadding {
     padding-bottom: 12px;
 }
 
-.left-padding{
-    padding-left: 10px;;
+.left-padding {
+    padding-left: 10px;
 }
-.no-vertical-padding{
+
+.no-vertical-padding {
     padding-top: 0px;
-    padding-bottom: 0px;;
+    padding-bottom: 0px;
 }
-.standout{
+
+.standout {
     font-weight: bold;
     text-decoration: underline;
+}
+
+.min-height-10 {
+    --min-height: 5px;
 }
