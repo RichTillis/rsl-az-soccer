@@ -49,21 +49,29 @@ export class HomePage implements OnInit {
       link: "",
       links: [
         { 
-          linkTitle: " Olympics Shootouts Instructions",
-          link: "http://fortlowellshootout.org/wp-content/uploads/2020/01/Shootout-Vol-Instrs-2020.pdf"
+          linkTitle: " Friday Night Schedules",
+          link: "http://fortlowellshootout.org/wp-content/uploads/2020/01/2020-Fri-Olympics-schedules-1.pdf"
         },
         {
-          linkTitle: " Olympics Juggling Instructions",
+          linkTitle: " Saturday Night Schedules",
+          link: "http://fortlowellshootout.org/wp-content/uploads/2020/01/2020-Saturday-Olympics-Schedules.pdf"
+        },
+        {
+          linkTitle: " Juggling Volunteer Instructions",
           link: "http://fortlowellshootout.org/wp-content/uploads/2020/01/Juggling-Vol-Instrs-2020.pdf"
         },
         {
-          linkTitle: " Olympics Foot Golf Instructions",
+          linkTitle: " Foot Golf Volunteer Instructions",
           link: "http://fortlowellshootout.org/wp-content/uploads/2020/01/Footgolf-Vol-Instrs-2020.pdf"
         },
         {
-          linkTitle: " Olympics Dribbling Instructions",
+          linkTitle: " Dribbling Volunteer Instructions",
           link: "http://fortlowellshootout.org/wp-content/uploads/2020/01/Dribbling-Vol-Instrs-2020.pdf"
-        }
+        },
+        { 
+          linkTitle: " More Info",
+          link: "https://fortlowellshootout.org/soccer-olympics/"
+        },
       ]
     },
     {
