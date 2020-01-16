@@ -14,6 +14,7 @@ export class TeamStandingsPage implements OnInit {
   TOURNAMENT_ID = this.tournamentService.getCurrentTournamentId();
   divisionFilter = "flight";
   flightStandings: any[];
+  standingsByBracket: any = {};
   team: any;
   teamId: string;
   isFollowing = false;
@@ -41,8 +42,13 @@ export class TeamStandingsPage implements OnInit {
           data.standings,
           s => s.flight === this.team.flight
         );
-
         console.log(this.flightStandings)
+        
+        this.flightStandings.map(team => {
+          (this.standingsByBracket[team['bracket']] = this.standingsByBracket[team['bracket']] || []).push(team)
+        })
+        console.log(this.standingsByBracket)
+        
       });
   }
 
