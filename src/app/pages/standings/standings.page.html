@@ -24,7 +24,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item-group *ngFor="let division of teams; trackBy:divisionName">
+    <ion-item-group *ngFor="let division of teamsRendered; trackBy:divisionName">
       <ion-item color="primary" class="padding-top">
         <ion-label>{{ division.divisionName }}</ion-label>
       </ion-item>
@@ -57,7 +57,46 @@
         </ion-grid>
       </ion-item>
     </ion-item-group>
+    <!-- <ion-item-group *ngFor="let division of teams; trackBy:divisionName">
+      <ion-item color="primary" class="padding-top">
+        <ion-label>{{ division.divisionName }}</ion-label>
+      </ion-item>
+      <ion-item color="light" *ngFor="let team of division.divisionTeams; trackBy:teamName" routerLink="/team/tabs/teamSchedule/{{team.teamId}}">
+        <ion-grid class="width-100">
+          <ion-row class="ion-align-self-start">
+            <ion-col class="ion-align-self-start">{{ team.teamName }}</ion-col>
+          </ion-row>
+          <ion-row *ngIf="!team?.matchesPlayed" class="ion-align-self-start">
+            <ion-col class="ion-align-self-start no-game">- No games recorded -</ion-col>
+          </ion-row>
+          <ion-row *ngIf="team?.matchesPlayed">
+            <ion-col> MP </ion-col>
+            <ion-col> W </ion-col>
+            <ion-col> L </ion-col>
+            <ion-col> D </ion-col>
+            <ion-col> GF </ion-col>
+            <ion-col> GA </ion-col>
+            <ion-col> Points </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col> {{ team.matchesPlayed }} </ion-col>
+            <ion-col> {{ team.wins }} </ion-col>
+            <ion-col> {{ team.losses }} </ion-col>
+            <ion-col> {{ team.draws }} </ion-col>
+            <ion-col> {{ team.goalsFor }} </ion-col>
+            <ion-col> {{ team.goalsAgainst }} </ion-col>
+            <ion-col> {{ team.points }} </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-item-group> -->
   </ion-list>
+
+  <ion-infinite-scroll threshold="35%" (ionInfinite)="displayMoreTeams($event)">
+    <ion-infinite-scroll-content loadingSpinner="cresent" loadingText="Loading more teams">      
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>
 <ion-footer>
     <ion-img src="assets/images/tournamentsponsors.png"></ion-img>

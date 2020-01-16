@@ -19,6 +19,8 @@ export class TeamsPage implements OnInit {
   divisionFilter = "all";
 
   teams = [];
+  teamsRendered = [];
+
   queryText: string;
 
   constructor(
@@ -48,8 +50,27 @@ export class TeamsPage implements OnInit {
           .map(item => _.zipObject(["divisionName", "divisionTeams"], item))
           .value();
         this.teams = this.allTeamDivisions;
+        console.log(this.teams)
+        this.teamsRendered = this.teams.slice(0, 4);
       });
     })
+  }
+
+  displayMoreTeams(event: any) {
+    let undisplayedDivisionCount = this.teams.length - this.teamsRendered.length;
+
+    if(undisplayedDivisionCount > 0){
+      // console.log('teams length', this.teams.length);      
+      // console.log('rends length', this.teamsRendered.length);
+      let numberOfDivisionsToAdd = undisplayedDivisionCount < 4 ? undisplayedDivisionCount : 4;
+      // console.log('divs to add ', numberOfDivisionsToAdd);
+      let newDivisions = this.teams.slice(this.teamsRendered.length , this.teamsRendered.length + numberOfDivisionsToAdd);
+      // console.log('more divisions ', newDivisions);
+      this.teamsRendered = this.teamsRendered.concat(newDivisions);
+      // console.log(this.teamsRendered);
+    }
+    
+    event.target.complete();
   }
 
   async displayLoader() {
@@ -93,6 +114,7 @@ export class TeamsPage implements OnInit {
     } else {
       this.teams = this.allTeamDivisions;
     }
+    this.teamsRendered = this.teams.slice(0, 4);
 
     console.log("division teams", this.teams);
   }
