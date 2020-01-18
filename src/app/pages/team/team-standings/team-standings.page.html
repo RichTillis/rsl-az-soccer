@@ -42,7 +42,7 @@
           <ion-col> GA </ion-col>
           <ion-col> Points </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="team?.matchesPlayed">
           <ion-col> {{ team?.matchesPlayed }} </ion-col>
           <ion-col> {{ team?.wins }} </ion-col>
           <ion-col> {{ team?.losses }} </ion-col>
