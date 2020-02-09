@@ -6,12 +6,14 @@ import { AdminGuard } from "./guards/admin.guard";
 const routes: Routes = [
   {
     path: "",
-    loadChildren: "./pages/home/home.module#HomePageModule",
+    // loadChildren: "./pages/home/home.module#HomePageModule",
+    loadChildren: "./pages/teams/teams.module#TeamsPageModule",
     canActivate: [AuthGuard]
   },
   {
     path: "home",
-    loadChildren: "./pages/home/home.module#HomePageModule",
+    // loadChildren: "./pages/home/home.module#HomePageModule",
+    loadChildren: "./pages/teams/teams.module#TeamsPageModule",
     canActivate: [AuthGuard]
   },
   {
