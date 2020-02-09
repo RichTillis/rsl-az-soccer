@@ -14,6 +14,7 @@ const { Keyboard } = Capacitor.Plugins;
   styleUrls: ["./teams.page.scss"]
 })
 export class TeamsPage implements OnInit {
+  public pageTitle: string = "Tournament Schedule";
   // private allTeams: any;
   private allTeamDivisions: any;
   divisionFilter = "all";

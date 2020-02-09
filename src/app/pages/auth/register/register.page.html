@@ -1,10 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>New Account</ion-title>
-  </ion-toolbar>
-  <a href="https://www.tucsonrealtors.org/" target="_blank">
-    <ion-img src="assets/images/tarsponsorbanner.jpg"></ion-img>
-  </a>
+  <org-header [pageTitle]="pageTitle"></org-header>
 </ion-header>
 
 <ion-content class="ion-padding">
@@ -68,8 +63,4 @@
   </ion-button>
 
 </ion-content>
-<ion-footer>
-  <ion-toolbar color="primary" class="min-height-10"></ion-toolbar>
-  <ion-img src="assets/images/Sponsors-2020.jpg"></ion-img>
-  <ion-toolbar color="primary" class="min-height-10"></ion-toolbar>
-</ion-footer>
+<org-footer></org-footer>

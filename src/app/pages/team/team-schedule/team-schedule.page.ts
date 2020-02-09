@@ -11,6 +11,7 @@ import { FavoritesService } from "../../../services/favorites/favorites.service"
   styleUrls: ["./team-schedule.page.scss"]
 })
 export class TeamSchedulePage implements OnInit {
+  public pageTitle: string = "Team Schedule";
   teamId: string;
   games: any[];
   isFollowing = false;

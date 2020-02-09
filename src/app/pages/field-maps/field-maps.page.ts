@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./field-maps.page.scss'],
 })
 export class FieldMapsPage implements OnInit {
+  public pageTitle: string = "Field Maps";
 
   constructor() { }
 

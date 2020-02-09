@@ -14,6 +14,8 @@ import { AlertService } from "../../../services/alert/alert.service";
   styleUrls: ["./login.page.scss"]
 })
 export class LoginPage implements OnInit {
+  public pageTitle: string = "Login";
+
   loginForm: FormGroup;
   isAndroidDevice: boolean = false;
 

@@ -11,6 +11,8 @@ import { UtilService } from "../../../services/util/util.service";
   styleUrls: ["./forgot-password.page.scss"]
 })
 export class ForgotPasswordPage implements OnInit {
+  public pageTitle: string = "Forgot Password";
+
   forgotPasswordForm: FormGroup;
 
   validation_messages = {

@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inclement-weather.page.scss'],
 })
 export class InclementWeatherPage implements OnInit {
+  public pageTitle: string = "Inclement Weather";
 
   constructor() { }
 

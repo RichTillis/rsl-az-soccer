@@ -11,6 +11,7 @@ import { runInThisContext } from "vm";
   styleUrls: ["./standings.page.scss"]
 })
 export class StandingsPage implements OnInit {
+  public pageTitle: string = "Tournament Standings";
   TOURNAMENT_ID = this.tournamentService.getCurrentTournamentId();
   private allTeamDivisions: any;
   teams = [];

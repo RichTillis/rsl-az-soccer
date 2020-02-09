@@ -17,6 +17,7 @@ const { Keyboard } = Capacitor.Plugins;
   styleUrls: ["./schedule.page.scss"]
 })
 export class SchedulePage implements OnInit {
+  public pageTitle: string = "Tournament Schedule";
   private allTeams: any;
   private allTeamDivisions: any;
   teams = [];

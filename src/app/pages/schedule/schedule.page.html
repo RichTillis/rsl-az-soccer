@@ -1,11 +1,6 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-icon slot="start" src="assets/images/rsl_az_logo.svg" size="large"></ion-icon>
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Tournament Schedule</ion-title>
-  </ion-toolbar>
+  <org-header [pageTitle]="pageTitle"></org-header>
+
   <ion-toolbar color="secondary">
     <ion-searchbar placeholder="Search" [(ngModel)]="queryText" (ionChange)="updateTeams()" (ionBlur)="hideKeyboard()"
       (ionCancel)="hideKeyboard()" (ionClear)="hideKeyboard()" (window:keydown)="onKey($event)">
@@ -38,3 +33,4 @@
     </ion-item-group>
   </ion-list>
 </ion-content>
+<org-footer></org-footer>

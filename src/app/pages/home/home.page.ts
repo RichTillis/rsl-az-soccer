@@ -4,9 +4,9 @@ import { FcmService } from "../../services/push-notifications/fcm.service";
 import { Platform } from "@ionic/angular";
 
 
-
+// import { OrgHeaderComponent } from '../../components/org-header/org-header.component';
 import { ImageModalPage } from "../../components/image-modal/image-modal.page";
-import { FirebaseMessaging } from "@angular/fire";
+// import { FirebaseMessaging } from "@angular/fire";
 import { AppFlowService } from "../../services/app-flow/app-flow.service";
 
 @Component({
@@ -15,13 +15,14 @@ import { AppFlowService } from "../../services/app-flow/app-flow.service";
   styleUrls: ["./home.page.scss"]
 })
 export class HomePage implements OnInit {
+  public pageTitle: string = "2020 Shootout";
   posts = [
     {
       title: "Welcome to the 2020 Shootout!",
       img: "shootout2020logo",
       body: "This year the Tucson Association of Realtors® Shootout is proudly presented by RSL-AZ Southern Arizona Soccer Club.",
       body1: "We are honored to celebrate our 30th year of this amazing event. We look forward to hosting new and returning teams for another great soccer weekend in Tucson, AZ."
-    },    
+    },
     {
       title: "Friday Opening Ceremonies",
       img: "Kino-Opening-Ceremony",
@@ -42,13 +43,13 @@ export class HomePage implements OnInit {
     {
       title: "Soccer Olympics",
       // img: "Olympics-Events",
-      images: ["Olympics-Events","dribbling", "footGolf", "juggling", "shootout"],
+      images: ["Olympics-Events", "dribbling", "footGolf", "juggling", "shootout"],
       body: "The Soccer Olympics have been a part of the Fort Lowell Shootout Soccer Tournament since it was founded. ",
       body1: "Its a fun and exciting way for young athletes to showcase their technical skills and abilities. Soccer Olympics will start at 7:15pm on Friday night.",
       body2: "Skills challenges include: Juggling, Foot Glof, Dribble Relay, & The Shootout (Penalty Kicks)",
       link: "",
       links: [
-        { 
+        {
           linkTitle: " Friday Night Schedules",
           link: "http://fortlowellshootout.org/wp-content/uploads/2020/01/2020-Fri-Olympics-schedules-1.pdf"
         },
@@ -68,7 +69,7 @@ export class HomePage implements OnInit {
           linkTitle: " Dribbling Volunteer Instructions",
           link: "http://fortlowellshootout.org/wp-content/uploads/2020/01/Dribbling-Vol-Instrs-2020.pdf"
         },
-        { 
+        {
           linkTitle: " More Info",
           link: "https://fortlowellshootout.org/soccer-olympics/"
         },
@@ -77,7 +78,7 @@ export class HomePage implements OnInit {
     {
       title: "Kino Sports Complex Rules",
       img: "kinoLogo",
-      images: ["clear-bag-web","guest-allowable-items-updated","patron-items-not-allowed-updated","players-and-coaches-updated"],
+      images: ["clear-bag-web", "guest-allowable-items-updated", "patron-items-not-allowed-updated", "players-and-coaches-updated"],
       body1: "Our Friday Night Opening Ceremony will adhere to a strict clear bag policy for the safety of all of our athletes, families, and spectators in attendance. Please refer to the Kino Sports Complex – Clear Bag Policy. Please see the accepted and prohibited items lists above.",
       body2: "Spectators will only be allowed to bring select items into the Kino Sports Complex on game days.",
       body3: "Coaches will be allowed to bring in coolers with sports drinks and water for players.",
@@ -86,7 +87,7 @@ export class HomePage implements OnInit {
     {
       title: "Tournament Field Maps",
       //img: "kinoLogo",
-      images: ["Kino-entire-complex","Olympics-Events","Kino-North-Fields","Kino-South-Fields"],
+      images: ["Kino-entire-complex", "Olympics-Events", "Kino-North-Fields", "Kino-South-Fields"],
       // body1: "Our Friday Night Opening Ceremony will adhere to a strict clear bag policy for the safety of all of our athletes, families, and spectators in attendance. Please refer to the Kino Sports Complex – Clear Bag Policy. Please see the accepted and prohibited items lists above.",
       // body2: "Spectators will only be allowed to bring select items into the Kino Sports Complex on game days.",
       // body3: "Coaches will be allowed to bring in coolers with sports drinks and water for players.",
@@ -112,7 +113,7 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.menu.enable(true);
     this.platform.ready().then(() => {
-      if(this.platform.is('ios') || this.platform.is('android')){
+      if (this.platform.is('ios') || this.platform.is('android')) {
         try {
           this.fcm.init()
           this.appFlow.performManualUpdate()

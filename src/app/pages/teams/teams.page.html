@@ -1,14 +1,6 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-icon slot="start" src="assets/images/rsl_az_logo.svg" size="large" class="left-padding"></ion-icon>
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Tournament Schedule</ion-title>
-  </ion-toolbar>
-  <a href="https://www.tucsonrealtors.org/" target="_blank">
-    <ion-img src="assets/images/tarsponsorbanner.jpg"></ion-img>
-  </a>
+  <org-header [pageTitle]="pageTitle"></org-header>
+
   <ion-toolbar color="secondary">
     <ion-searchbar placeholder="Search" [(ngModel)]="queryText" (ionChange)="updateTeams()" (ionBlur)="hideKeyboard()"
       (ionCancel)="hideKeyboard()" (ionClear)="hideKeyboard()" (window:keydown)="onKey($event)">
@@ -54,8 +46,4 @@
   </ion-infinite-scroll>
   
 </ion-content>
-<ion-footer>
-  <ion-toolbar color="primary" class="min-height-10"></ion-toolbar>
-  <ion-img src="assets/images/Sponsors-2020.jpg"></ion-img>
-  <ion-toolbar color="primary" class="min-height-10"></ion-toolbar>
-</ion-footer>
+<org-footer></org-footer>

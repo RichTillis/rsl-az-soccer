@@ -1,11 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-icon slot="start" src="assets/images/rsl_az_logo.svg" size="large"></ion-icon>
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>2019 TAR Shootout</ion-title>
-  </ion-toolbar>
+  <org-header [pageTitle]="pageTitle"></org-header>
 </ion-header>
 
 <ion-content color="primary-contrast" class="ion-padding">
@@ -49,3 +43,4 @@
     soccer olympics.
   </p>
 </ion-content>
+<org-footer></org-footer>

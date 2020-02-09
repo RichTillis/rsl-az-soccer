@@ -1,12 +1,6 @@
 <ion-header>
-    <ion-toolbar color="primary">
-      <ion-icon slot="start" src="assets/images/rsl_az_logo.svg" size="large"></ion-icon>
-      <ion-buttons slot="end">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Field Maps</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <org-header [pageTitle]="pageTitle"></org-header>
+</ion-header>
 
 <ion-content padding color="primary-contrast">
   <ion-list>
@@ -35,3 +29,4 @@
       <img src="assets/images/Kino-South-Fields.jpg" />
   </ion-list>
 </ion-content>
+<org-footer></org-footer>

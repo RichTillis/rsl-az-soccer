@@ -52,4 +52,4 @@ import { firebaseConfig } from "../../firebase.auth";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -11,6 +11,7 @@ import { Observable } from "rxjs";
   styleUrls: ["./my-teams.page.scss"]
 })
 export class MyTeamsPage implements OnInit {
+  public pageTitle: string = "My Favorite Teams";
   favorites$: Observable<any[]>;
 
   constructor(

@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./check-in.page.scss'],
 })
 export class CheckInPage implements OnInit {
+  public pageTitle: string = "Check In";
 
   constructor() { }
 

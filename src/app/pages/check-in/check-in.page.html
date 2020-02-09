@@ -1,12 +1,6 @@
 <ion-header>
-    <ion-toolbar color="primary">
-      <ion-icon slot="start" src="assets/images/rsl_az_logo.svg" size="large"></ion-icon>
-      <ion-buttons slot="end">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Check In</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <org-header [pageTitle]="pageTitle"></org-header>
+</ion-header>
 
 <ion-content padding color="primiary-contrast">
   <p>
@@ -29,3 +23,4 @@
       Out-of Town teams will check in <b>Friday, January 18th at Kino Sports Complex at 2500 E. Ajo Way from 3pm – 9pm.</b>
   </p>
 </ion-content>
+<org-footer></org-footer>

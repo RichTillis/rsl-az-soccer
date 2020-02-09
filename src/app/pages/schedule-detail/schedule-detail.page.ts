@@ -13,6 +13,7 @@ import { t } from "tar";
   styleUrls: ["./schedule-detail.page.scss"]
 })
 export class ScheduleDetailPage implements OnInit {
+  public pageTitle: string = "Team Schedule";
   teamId: string;
   allGames: any[];
   // dateFilter: string;

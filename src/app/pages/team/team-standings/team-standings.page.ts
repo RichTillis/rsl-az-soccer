@@ -11,6 +11,7 @@ import { FavoritesService } from "../../../services/favorites/favorites.service"
   styleUrls: ["./team-standings.page.scss"]
 })
 export class TeamStandingsPage implements OnInit {
+  public pageTitle: string = "Team Standings";
   TOURNAMENT_ID = this.tournamentService.getCurrentTournamentId();
   divisionFilter = "flight";
   flightStandings: any[];

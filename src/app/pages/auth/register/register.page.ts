@@ -14,6 +14,8 @@ import { AlertService } from "../../../services/alert/alert.service";
   styleUrls: ["./register.page.scss"]
 })
 export class RegisterPage implements OnInit {
+  public pageTitle: string = "New Account";
+
   registrationForm: FormGroup;
   isAndroidDevice: boolean = false;
 

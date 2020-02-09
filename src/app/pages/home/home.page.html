@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="primary">
     <ion-icon slot="start" src="assets/images/rsl_az_logo.svg" size="large"  class="left-padding"></ion-icon>
     <ion-buttons slot="end">
@@ -9,15 +9,17 @@
   <a href="https://www.tucsonrealtors.org/" target="_blank">
     <ion-img src="assets/images/tarsponsorbanner.jpg"></ion-img>
   </a>
+</ion-header> -->
+<ion-header>
+  <org-header [pageTitle]="pageTitle"></org-header>
 </ion-header>
-
 <ion-content color="light">
   <!-- <a href="https://www.tucsonrealtors.org/" target="_blank">
     <ion-img src="assets/images/tarsponsorbanner.jpg"></ion-img>
   </a> -->
 
   <ion-card *ngFor="let post of posts">
-    
+
     <ion-card-header color="primary">
       <ion-card-title>{{post.title}}</ion-card-title>
     </ion-card-header>
@@ -36,12 +38,12 @@
       within an ion-card-content element.
     </ion-card-content>
     <ion-card-content class="card-content-background" *ngIf="post.body">
-      <ion-label lines="none" >
+      <ion-label lines="none">
         {{post.body}}
       </ion-label>
     </ion-card-content>
     <ion-card-content class="card-content-background" *ngIf="post.body1">
-      <ion-label lines="none" >
+      <ion-label lines="none">
         {{post.body1}}
       </ion-label>
     </ion-card-content>
@@ -57,14 +59,14 @@
     </ion-card-content>
     <ion-card-content class="card-content-background no-vertical-padding " *ngIf="post.link">
       <ion-item [href]="post.link" target="_blank" lines="none">
-        <ion-label lines="none" color="secondary" class="standout"> 
+        <ion-label lines="none" color="secondary" class="standout">
           {{post.linkTitle}}
         </ion-label>
       </ion-item>
     </ion-card-content>
     <ion-card-content class="card-content-background no-vertical-padding " *ngIf="post.links">
       <ion-item *ngFor="let link of post.links" [href]="link.link" target="_blank" lines="none">
-        <ion-label lines="none" color="secondary" class="standout"> 
+        <ion-label lines="none" color="secondary" class="standout">
           {{link.linkTitle}}
         </ion-label>
       </ion-item>
@@ -72,8 +74,9 @@
   </ion-card>
 
 </ion-content>
-<ion-footer>
+<org-footer></org-footer>
+<!-- <ion-footer>
   <ion-toolbar color="primary" class="min-height-10"></ion-toolbar>
   <ion-img src="assets/images/Sponsors-2020.jpg"></ion-img>
   <ion-toolbar color="primary" class="min-height-10"></ion-toolbar>
-</ion-footer>
+</ion-footer> -->
