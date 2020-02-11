@@ -14,8 +14,9 @@ export class TournamentService {
   private readonly baseUrl = "https://ftlowellrush.firebaseio.com";
   currentTourney: any = {};
   currentVenueLocations: any = {};
-  // private readonly CURRENT_TOURNAMENT_ID = 68462;
-  private readonly CURRENT_TOURNAMENT_ID = 74306;
+  // private readonly CURRENT_TOURNAMENT_ID = 74306;
+  //Jacobs Classic 2020
+  private readonly CURRENT_TOURNAMENT_ID = 76243;
 
   private tourneyData = {};
   private locations = {};
