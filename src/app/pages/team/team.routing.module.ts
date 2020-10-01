@@ -14,7 +14,7 @@ const routes: Routes = [
           {
             path: ":teamId",
             loadChildren:
-              "./team-schedule/team-schedule.module#TeamSchedulePageModule"
+              () => import('./team-schedule/team-schedule.module').then(m => m.TeamSchedulePageModule)
           }
         ]
       },
@@ -24,7 +24,7 @@ const routes: Routes = [
           {
             path: "",
             loadChildren:
-              "./team-standings/team-standings.module#TeamStandingsPageModule"
+              () => import('./team-standings/team-standings.module').then(m => m.TeamStandingsPageModule)
           }
         ]
       },

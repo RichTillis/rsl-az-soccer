@@ -62,7 +62,7 @@ export class AuthenticationService {
   }
 
   onAuthStateChanged() {
-    this.afAuth.auth.onAuthStateChanged(user => {
+    this.afAuth.onAuthStateChanged(user => {
       this.authState = user;
     });
   }
@@ -153,14 +153,14 @@ export class AuthenticationService {
 
   async resetPassword(email: string) {
     try {
-      await this.afAuth.auth.sendPasswordResetEmail(email);
+      await this.afAuth.sendPasswordResetEmail(email);
     } catch (error) {
       return error.code;
     }
   }
 
   async createUserWithEmailAndPassword(email: string, password: string) {
-    const credential = await this.afAuth.auth.createUserWithEmailAndPassword(
+    const credential = await this.afAuth.createUserWithEmailAndPassword(
       email,
       password
     );
@@ -191,14 +191,14 @@ export class AuthenticationService {
   }
 
   async logoutUser() {
-    await this.afAuth.auth.signOut();
+    await this.afAuth.signOut();
     this.menu.enable(false);
     // this.authenticationState.next(false);
     console.log("user logged out");
   }
 
   loginWithEmail(email: string, password: string) {
-    return this.afAuth.auth
+    return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then(credential => {
         this.updateUserData(credential.user, email);
@@ -245,7 +245,7 @@ export class AuthenticationService {
 
   async doEmailLogin(email: string, password: string) {
     console.log("Trying email login.");
-    await this.afAuth.auth
+    await this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((userCredential: any) => {
         let loggedInUser: User = {
