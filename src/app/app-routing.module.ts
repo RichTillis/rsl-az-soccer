@@ -6,14 +6,12 @@ import { AdminGuard } from "./guards/admin.guard";
 const routes: Routes = [
   {
     path: "",
-    // loadChildren: "./pages/home/home.module#HomePageModule",
-    loadChildren: () => import('./pages/teams/teams.module').then(m => m.TeamsPageModule),
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
     canActivate: [AuthGuard]
   },
   {
     path: "home",
-    // loadChildren: "./pages/home/home.module#HomePageModule",
-    loadChildren: () => import('./pages/teams/teams.module').then(m => m.TeamsPageModule),
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
     canActivate: [AuthGuard]
   },
   {
@@ -34,26 +32,26 @@ const routes: Routes = [
     loadChildren: () => import('./pages/team/team.module').then(m => m.TeamPageModule),
     canActivate: [AuthGuard]
   },
-  // {
-  //   path: "rules",
-  //   loadChildren: "./pages/rules/rules.module#RulesPageModule",
-  //   canActivate: [AuthGuard]
-  // },
-  // {
-  //   path: "schedule",
-  //   loadChildren: "./pages/schedule/schedule.module#SchedulePageModule",
-  //   canActivate: [AuthGuard]
-  // },
+  {
+    path: "rules",
+    loadChildren: "./pages/rules/rules.module#RulesPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "schedule",
+    loadChildren: "./pages/schedule/schedule.module#SchedulePageModule",
+    canActivate: [AuthGuard]
+  },
   {
     path: "standings",
     loadChildren: () => import('./pages/standings/standings.module').then(m => m.StandingsPageModule),
     canActivate: [AuthGuard]
   },
-  // {
-  //   path: "about",
-  //   loadChildren: "./pages/about/about.module#AboutPageModule",
-  //   canActivate: [AuthGuard]
-  // },
+  {
+    path: "about",
+    loadChildren: "./pages/about/about.module#AboutPageModule",
+    canActivate: [AuthGuard]
+  },
   {
     path: "my-teams",
     loadChildren: () => import('./pages/my-teams/my-teams.module').then(m => m.MyTeamsPageModule),
