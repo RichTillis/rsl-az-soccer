@@ -3,7 +3,7 @@ import { LoadingController } from "@ionic/angular";
 import * as _ from "lodash";
 
 import { TournamentService } from "../../services/tournament/tournament.service";
-import { runInThisContext } from "vm";
+// import { runInThisContext } from "vm";
 
 @Component({
   selector: "app-standings",
