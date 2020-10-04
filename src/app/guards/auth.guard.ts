@@ -22,16 +22,18 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
     return new Promise((resolve, reject) => {
-      firebase.auth().onAuthStateChanged((user: firebase.User) => {
-        if (user) {
-          resolve(true);
-        } else {
-          console.log("User is not logged in");
-          this.ngZone.run(() => this.router.navigateByUrl("/login"));
-          //this.router.navigateByUrl("/login");
-          resolve(false);
-        }
-      });
+      //TODO - some kind of method prob after ionic 5 / angular 10 / firebase 6 update
+      resolve(true);
+      // firebase.auth().onAuthStateChanged((user: firebase.User) => {
+      //   if (user) {
+      //     resolve(true);
+      //   } else {
+      //     console.log("User is not logged in");
+      //     this.ngZone.run(() => this.router.navigateByUrl("/login"));
+      //     //this.router.navigateByUrl("/login");
+      //     resolve(false);
+      //   }
+      // });
     });
   }
 }

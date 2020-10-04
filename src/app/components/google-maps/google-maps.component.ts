@@ -25,14 +25,15 @@ export class GoogleMapsComponent implements AfterViewInit {
       lng: this.coordinates.longitude
     };
 
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 16,
-      center: POSITION || { lat: 22, lng: 22 }
-    });
-    const marker = new google.maps.Marker({
-      position: POSITION,
-      map: map
-    });
+    // TODO fix this - causes error - doesnt recognize "Google"
+    // const map = new google.maps.Map(document.getElementById("map"), {
+    //   zoom: 16,
+    //   center: POSITION || { lat: 22, lng: 22 }
+    // });
+    // const marker = new google.maps.Marker({
+    //   position: POSITION,
+    //   map: map
+    // });
   }
 }
 

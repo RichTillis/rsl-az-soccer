@@ -68,11 +68,12 @@ export class FcmService {
   async presentNotifications(notification) {
     console.log('notification: ' + JSON.stringify(notification));
 
+    // Todo: ionic 5 upgrade - need to update
     const toast = await this.toastController.create({
       header: notification.title,
       message: notification.body,
-      showCloseButton: true,
-      closeButtonText: 'Got it',
+      // showCloseButton: true,
+      // closeButtonText: 'Got it',
       position: 'top'
     })
     toast.present()

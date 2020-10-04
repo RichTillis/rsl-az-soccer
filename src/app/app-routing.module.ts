@@ -6,100 +6,98 @@ import { AdminGuard } from "./guards/admin.guard";
 const routes: Routes = [
   {
     path: "",
-    // loadChildren: "./pages/home/home.module#HomePageModule",
-    loadChildren: "./pages/teams/teams.module#TeamsPageModule",
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
     canActivate: [AuthGuard]
   },
   {
     path: "home",
-    // loadChildren: "./pages/home/home.module#HomePageModule",
-    loadChildren: "./pages/teams/teams.module#TeamsPageModule",
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
     canActivate: [AuthGuard]
   },
   {
     path: "login",
-    loadChildren: "./pages/auth/login/login.module#LoginPageModule"
+    loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: "register",
-    loadChildren: "./pages/auth/register/register.module#RegisterPageModule"
+    loadChildren: () => import('./pages/auth/register/register.module').then(m => m.RegisterPageModule)
   },
   {
     path: "forgotPassword",
     loadChildren:
-      "./pages/auth/forgot-password/forgot-password.module#ForgotPasswordPageModule"
+      () => import('./pages/auth/forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
   },
   {
     path: "team", //TODO change to team
-    loadChildren: "./pages/team/team.module#TeamPageModule",
+    loadChildren: () => import('./pages/team/team.module').then(m => m.TeamPageModule),
     canActivate: [AuthGuard]
   },
-  // {
-  //   path: "rules",
-  //   loadChildren: "./pages/rules/rules.module#RulesPageModule",
-  //   canActivate: [AuthGuard]
-  // },
-  // {
-  //   path: "schedule",
-  //   loadChildren: "./pages/schedule/schedule.module#SchedulePageModule",
-  //   canActivate: [AuthGuard]
-  // },
+  {
+    path: "rules",
+    loadChildren: "./pages/rules/rules.module#RulesPageModule",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "schedule",
+    loadChildren: "./pages/schedule/schedule.module#SchedulePageModule",
+    canActivate: [AuthGuard]
+  },
   {
     path: "standings",
-    loadChildren: "./pages/standings/standings.module#StandingsPageModule",
+    loadChildren: () => import('./pages/standings/standings.module').then(m => m.StandingsPageModule),
     canActivate: [AuthGuard]
   },
-  // {
-  //   path: "about",
-  //   loadChildren: "./pages/about/about.module#AboutPageModule",
-  //   canActivate: [AuthGuard]
-  // },
+  {
+    path: "about",
+    loadChildren: "./pages/about/about.module#AboutPageModule",
+    canActivate: [AuthGuard]
+  },
   {
     path: "my-teams",
-    loadChildren: "./pages/my-teams/my-teams.module#MyTeamsPageModule",
+    loadChildren: () => import('./pages/my-teams/my-teams.module').then(m => m.MyTeamsPageModule),
     canActivate: [AuthGuard]
   },
   {
     path: "teams",
-    loadChildren: "./pages/teams/teams.module#TeamsPageModule",
+    loadChildren: () => import('./pages/teams/teams.module').then(m => m.TeamsPageModule),
     canActivate: [AuthGuard]
   },
   {
     path: "field-maps",
-    loadChildren: "./pages/field-maps/field-maps.module#FieldMapsPageModule",
+    loadChildren: () => import('./pages/field-maps/field-maps.module').then(m => m.FieldMapsPageModule),
     canActivate: [AuthGuard]
   },
   {
     path: "venues",
-    loadChildren: "./pages/venues/venues.module#VenuesPageModule",
+    loadChildren: () => import('./pages/venues/venues.module').then(m => m.VenuesPageModule),
     canActivate: [AuthGuard]
   },
   {
     path: "contact-us",
-    loadChildren: "./pages/contact-us/contact-us.module#ContactUsPageModule",
+    loadChildren: () => import('./pages/contact-us/contact-us.module').then(m => m.ContactUsPageModule),
     canActivate: [AuthGuard]
   },
   {
     path: "venue-map",
-    loadChildren: "./pages/venue-map/venue-map.module#VenueMapPageModule",
+    loadChildren: () => import('./pages/venue-map/venue-map.module').then(m => m.VenueMapPageModule),
     canActivate: [AuthGuard]
   },
   {
     path: "inclement-weather",
     loadChildren:
-      "./pages/inclement-weather/inclement-weather.module#InclementWeatherPageModule",
+      () => import('./pages/inclement-weather/inclement-weather.module').then(m => m.InclementWeatherPageModule),
     canActivate: [AuthGuard]
   },
   {
     path: "announcements",
     loadChildren:
-      "./pages/announcements/announcements.module#AnnouncementsPageModule",
+      () => import('./pages/announcements/announcements.module').then(m => m.AnnouncementsPageModule),
     canActivate: [AuthGuard]
   },
   {
     path: "notifications",
     loadChildren:
-      "./pages/notifications/notifications.module#NotificationsPageModule",
+      () => import('./pages/notifications/notifications.module').then(m => m.NotificationsPageModule),
     canActivate: [AuthGuard,AdminGuard]
   },
   // {

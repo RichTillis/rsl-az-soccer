@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
+import { Plugins } from '@capacitor/core';
 import { ModalController, MenuController } from "@ionic/angular";
 import { FcmService } from "../../services/push-notifications/fcm.service";
 import { Platform } from "@ionic/angular";
-
+const { Device } = Plugins;
 
 // import { OrgHeaderComponent } from '../../components/org-header/org-header.component';
 import { ImageModalPage } from "../../components/image-modal/image-modal.page";
@@ -113,15 +114,20 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.menu.enable(true);
     this.platform.ready().then(() => {
-      if (this.platform.is('ios') || this.platform.is('android')) {
-        try {
-          this.fcm.init()
-          this.appFlow.performManualUpdate()
-        } catch (err) {
-          console.warn(err)
-        }
-      }
+      this.initializeServices();
     });
+  }
+
+  async initializeServices(){
+    const device = await Device.getInfo();
+    if (device.platform === 'ios' || device.platform === 'android') {
+      try {
+        this.fcm.init()
+        this.appFlow.performManualUpdate()
+      } catch (err) {
+        console.warn(err)
+      }
+    }
   }
 
   openPreview(img) {

@@ -1,5 +1,5 @@
 {
-  "$schema": "./node_modules/@angular-devkit/core/src/workspace/workspace-schema.json",
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "defaultProject": "app",
   "newProjectRoot": "projects",
@@ -14,12 +14,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "progress": false,
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "tsConfig": "tsconfig.app.json",
             "assets": [
               {
                 "glob": "**/*",
@@ -28,14 +27,10 @@
               },
               {
                 "glob": "**/*.svg",
-                "input": "node_modules/@ionic/angular/dist/ionic/svg",
-                "output": "./svg"
-              },
-              {
-                "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
-              }
+              },
+              "src/manifest.webmanifest"
             ],
             "styles": [
               {
@@ -48,7 +43,7 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "production": {              
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -63,7 +58,13 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
             }
           }
         },

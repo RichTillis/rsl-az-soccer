@@ -1,10 +1,14 @@
 <ion-toolbar color="primary">
   <ion-icon slot="start" src="assets/images/rsl_az_logo.svg" size="large" class="left-padding"></ion-icon>
+  <!-- <ion-avatar slot="start">
+    <ion-img [src]="rslLogo"></ion-img>
+  </ion-avatar> -->
   <ion-buttons slot="end">
     <ion-menu-button></ion-menu-button>
   </ion-buttons>
   <ion-title>{{pageTitle}}</ion-title>
 </ion-toolbar>
-<!-- <a href="https://www.tucsonrealtors.org/" target="_blank">
+
+<div (click)="redirectToTarSite($event)">
   <ion-img src="assets/images/tarsponsorbanner.jpg"></ion-img>
-</a> -->
+</div>
