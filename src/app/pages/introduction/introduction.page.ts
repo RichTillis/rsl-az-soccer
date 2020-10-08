@@ -4,7 +4,6 @@ import { Plugins } from '@capacitor/core';
 import { AuthenticationService } from '../../services/auth/authentication.service'
 import { RegisterPage } from '../auth/register/register.page';
 import { LoginPage } from '../auth/login/login.page';
-import { Router } from '@angular/router';
 const { Browser, Device } = Plugins;
 
 import { ModalBaseComponent } from '../../components/modal-base/modal-base.component';
@@ -16,17 +15,16 @@ import { ModalBaseComponent } from '../../components/modal-base/modal-base.compo
   styleUrls: ['./introduction.page.scss'],
 })
 export class IntroductionPage implements OnInit {
+  public pageTitle: string = "2021 Shootout!";
 
   constructor(
     private modalController: ModalController,
     private routerOutlet: IonRouterOutlet,
     private actionSheetController: ActionSheetController,
     private authService: AuthenticationService,
-    private router: Router
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   async openTerms(e) {
     e.preventDefault();
@@ -44,57 +42,58 @@ export class IntroductionPage implements OnInit {
       presentingElement: this.routerOutlet.nativeEl,
       swipeToClose: true,
     });
-
     await modal.present();
   }
 
   async openSignup() {
-    const buttons = [
-      {
-        text: 'Sign up with Email',
-        icon: 'mail',
-        handler: () => {
-          this.openEmailSignup();
-        },
-      },
-      {
-        text: 'Sign up with Google',
-        icon: 'logo-google',
-        handler: () => {
-          this.openGoogleSignup();
-        }
-      },
-      {
-        text: 'Sign up with Facebook',
-        icon: 'logo-facebook',
-        handler: () => {
-          this.openFacebookSignup();
-        }
-      }
-    ];
+    this.openEmailSignup();
+    // temporary until all signins are implemented
 
-    const device = await Device.getInfo();
+    // const buttons = [
+    //   {
+    //     text: 'Sign up with Email',
+    //     icon: 'mail',
+    //     handler: () => {
+    //       this.openEmailSignup();
+    //     },
+    //   },      
+      // {
+      //   text: 'Sign up with Google',
+      //   icon: 'logo-google',
+      //   handler: () => {
+      //     this.openGoogleSignup();
+      //   }
+      // },
+      // {
+      //   text: 'Sign up with Facebook',
+      //   icon: 'logo-facebook',
+      //   handler: () => {
+      //     this.openFacebookSignup();
+      //   }
+      // }
+    // ];
 
-    if (device.platform === 'ios') {
-      buttons.push({
-        text: 'Sign in with Apple',
-        icon: 'logo-apple',
-        handler: () => {
-          this.openAppleSignup();
-        }
-      })
-    }
+    // const device = await Device.getInfo();
 
-    const actionSheet = await this.actionSheetController.create({
-      cssClass: 'custom-action-sheet',
-      buttons
-    });
-    await actionSheet.present();
+    // if (device.platform === 'ios') {
+    //   buttons.push({
+    //     text: 'Sign in with Apple',
+    //     icon: 'logo-apple',
+    //     handler: () => {
+    //       this.openAppleSignup();
+    //     }
+    //   })
+    // }
+
+    // const actionSheet = await this.actionSheetController.create({
+    //   cssClass: 'custom-action-sheet',
+    //   buttons
+    // });
+    // await actionSheet.present();
   }
 
   openGoogleSignup() {
     this.authService.googleSignup().then((res) => {
-      //remove this - auth state subscription will take care of it
 
       // this.router.navigateByUrl('/home');
     }, err => {
@@ -119,7 +118,6 @@ export class IntroductionPage implements OnInit {
         rootPage: LoginPage,
       },
     });
-
     await modal.present();
   }
 
