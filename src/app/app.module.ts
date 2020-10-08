@@ -11,7 +11,6 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 
 import { Facebook } from "@ionic-native/facebook/ngx";
-import { GooglePlus } from "@ionic-native/google-plus/ngx";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
