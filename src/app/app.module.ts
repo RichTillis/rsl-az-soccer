@@ -18,6 +18,7 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 import { FcmService } from "./services/push-notifications/fcm.service";
 
 // Why is this here??
+// because its a pop-up modal. should maybe be lazy-loaded as part of Teams module?
 import { ScheduleDetailPageModule } from './pages/schedule-detail/schedule-detail.module';
 
 import { ImageModalPageModule } from "./components/image-modal/image-modal.module";

@@ -15,7 +15,7 @@
 .bottom-padding-1em {
   padding-bottom: 1em;
 }
-.auth-routes{
+.auth-routes {
   color: var(--ion-color-primary);
   font-size: small;
 }
@@ -47,6 +47,14 @@
   color: var(--ion-color-danger);
 }
 
-.min-height-10{
+.min-height-10 {
+  --min-height: 5px;
+}
+
+.left-padding {
+  padding-left: 10px;
+}
+
+.min-height-5 {
   --min-height: 5px;
 }
