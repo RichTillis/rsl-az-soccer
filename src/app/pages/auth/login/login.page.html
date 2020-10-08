@@ -1,55 +1,70 @@
 <ion-header>
-  <org-header [pageTitle]="pageTitle"></org-header>
+  <ion-toolbar color="primary">
+    <ion-icon slot="start" src="assets/images/rsl_az_logo.svg" size="large" class="left-padding"></ion-icon>
+    <ion-title>Log In</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div (click)="redirectToTarSite($event)">
+    <ion-img src="assets/images/tarsponsorbanner.jpg"></ion-img>
+  </div>
+  <ion-toolbar color="primary" class="min-height-5"></ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <div class="ion-text-center logo"><img src="assets/images/RSL_AZ_logo_smaller.png" /></div>
 
-  <form [formGroup]="loginForm" novalidate>
-    <ion-item>
-      <ion-input formControlName="email" placeholder="Email" type="text"></ion-input>
-    </ion-item>
-    <div>
-      <ng-container *ngFor="let validation of validation_messages.email">
-        <div class="error-message"
-          *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
-          {{ validation.message }}
-        </div>
-      </ng-container>
-    </div>
+  <form [formGroup]="loginForm" (ngSubmit)="signInWithEmailAndPassword()">
 
     <ion-item>
-      <ion-input formControlName="password" placeholder="Password" type="password"></ion-input>
+      <ion-input formControlName="email" placeholder="Email address" type="text" autofocus="true" clearInput="true">
+      </ion-input>
     </ion-item>
-    <div>
-      <ng-container *ngFor="let validation of validation_messages.password">
-        <div class="error-message"
-          *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
-          {{ validation.message }}
-        </div>
-      </ng-container>
-    </div>
-  </form>
 
-  <ion-button color="primary" expand="block" (click)="loginWithEmail()" [disabled]="loginForm.invalid">Login</ion-button>
+    <ion-item>
+      <ion-input placeholder="Password" type="password" formControlName="password" clearInput="true"></ion-input>
+    </ion-item>
 
-  <ion-grid class="bottom-padding-2em">
-    <ion-row>
-      <ion-col>
-        <div class="ion-text-center">
-          <ion-button fill="clear" class="auth-routes" (click)="routeToForgotPassword()">Forgot Password?</ion-button>
-        </div>
-      </ion-col>
-      <ion-col>
-        <div class="ion-text-center">
-          <ion-button fill="clear" class="auth-routes" (click)="routeToSignUp()">New User?</ion-button>
-        </div>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+        <ion-button expand="block" type="submit" [fill]="loginForm.controls.email.value != '' ? 'solid':'outline'"
+          [disabled]="!loginForm.valid">Log In
+        </ion-button>
       </ion-col>
     </ion-row>
-  </ion-grid>
 
-  <ion-button size="large" fill="clear" (click)="loginWithFacebook()"><img src="assets/images/facebookLoginBtn.png" />
-  </ion-button>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12">
+        <ion-nav-link router-direction="forward" [component]="resetPasswordPage">
+          <ion-button expand="block" size="small" type="button" fill="clear" color="primary">
+            Forgot Your password?
+          </ion-button>
+        </ion-nav-link>
+      </ion-col>
 
+      <ion-col size="10">
+        <ion-button disabled expand="block" type="button" (click)="openGoogleSignup()" color="dark" fill="outline">
+          <ion-icon name="logo-google" slot="start"></ion-icon>
+          Sign In with Google
+        </ion-button>
+
+        <ion-button disabled expand="block" type="button" (click)="openFacebookSignup()" color="dark" fill="outline">
+          <ion-icon name="logo-facebook" slot="start"></ion-icon>
+          Sign In with Facebook
+        </ion-button>
+
+        <!-- TODO - only if ios device -->
+        <ion-button *ngIf="false" disabled expand="block" type="button" (click)="openAppleSignup()" color="dark"
+          fill="outline">
+          <ion-icon name="logo-apple" slot="start"></ion-icon>
+          Sign In with Apple
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>
 <org-footer></org-footer>
