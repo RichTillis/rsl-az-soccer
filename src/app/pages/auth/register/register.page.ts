@@ -57,4 +57,8 @@ export class RegisterPage implements OnInit {
   close() {
     this.modalController.dismiss();
   }
+
+  redirectToTarSite(){
+    // /https://www.tucsonrealtors.org/
+  }
 }

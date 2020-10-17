@@ -84,4 +84,16 @@ export class LoginPage implements OnInit {
     }
   }
 
+  openGoogleSignup(){
+
+  }
+
+  openFacebookSignup(){
+
+  }
+
+  redirectToTarSite(){
+    // /https://www.tucsonrealtors.org/
+  }
+
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, AlertController, IonNav } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthenticationService } from '../../../services/auth/authentication.service';
 
 
@@ -10,14 +11,19 @@ import { AuthenticationService } from '../../../services/auth/authentication.ser
 })
 export class ResetPasswordPage implements OnInit {
   email = '';
+  resetPasswordForm: FormGroup;
 
   constructor(
+    private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private loadingController: LoadingController,
     private alertController: AlertController,
     private nav: IonNav) { }
 
   ngOnInit() {
+    this.resetPasswordForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]]
+    });
   }
 
   async sendResetEmail() {
@@ -52,6 +58,14 @@ export class ResetPasswordPage implements OnInit {
         await alert.present();
       }
     );
+  }
+
+  close() {
+    // this.modalController.dismiss();
+  }
+
+  redirectToTarSite(){
+    // /https://www.tucsonrealtors.org/
   }
 
 }
