@@ -4,6 +4,7 @@
   "bundledWebRuntime": false,
   "webDir": "www",
   "linuxAndroidStudioPath": "/opt/android-studio/bin/studio.sh",
+  "windowsAndroidStudioPath": "C:/Users/rtillis/AppData/Local/JetBrains/Toolbox/apps/AndroidStudio/ch-0/201.6858069/bin/studio64.exe",
   "plugins": {
     "PushNotifications": {
       "presentationOptions": ["badge", "sound", "alert"]

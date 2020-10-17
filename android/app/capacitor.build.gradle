@@ -10,7 +10,7 @@ android {
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
 
-    implementation "com.facebook.android:facebook-android-sdk:5.5.2"
+    implementation "com.facebook.android:facebook-android-sdk:5.13.0"
 }
 apply from: "../../node_modules/cordova-plugin-ionic/src/android/cordovapluginionic.gradle"
 

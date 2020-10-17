@@ -3,7 +3,7 @@
   <string name="app_name">rsl-az</string>
   <string name="title_activity_main">RSL AZ</string>
   <string name="package_name">com.rslazsoccer.app</string>
-  <string name="fileprovider_authority">com.rslazsoccer.app.fileprovider</string>
+  <!-- <string name="fileprovider_authority">com.rslazsoccer.app.fileprovider</string> -->
   <string name="custom_url_scheme">com.rslazsoccer.app</string>
   <string name="fb_app_id">2190938867832717</string>
   <string name="fb_app_name">RSL-AZ</string>
