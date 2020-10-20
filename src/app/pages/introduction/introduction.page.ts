@@ -4,10 +4,8 @@ import { Plugins } from '@capacitor/core';
 import { AuthenticationService } from '../../services/auth/authentication.service'
 import { RegisterPage } from '../auth/register/register.page';
 import { LoginPage } from '../auth/login/login.page';
-const { Browser, Device } = Plugins;
-
 import { ModalBaseComponent } from '../../components/modal-base/modal-base.component';
-
+const { Browser, Device } = Plugins;
 
 @Component({
   selector: 'app-introduction',
@@ -21,7 +19,7 @@ export class IntroductionPage implements OnInit {
     private modalController: ModalController,
     private routerOutlet: IonRouterOutlet,
     private actionSheetController: ActionSheetController,
-    private authService: AuthenticationService,
+    private authService: AuthenticationService
   ) { }
 
   ngOnInit() { }
@@ -46,24 +44,21 @@ export class IntroductionPage implements OnInit {
   }
 
   async openSignup() {
-    this.openEmailSignup();
-    // temporary until all signins are implemented
-
-    // const buttons = [
-    //   {
-    //     text: 'Sign up with Email',
-    //     icon: 'mail',
-    //     handler: () => {
-    //       this.openEmailSignup();
-    //     },
-    //   },      
-      // {
-      //   text: 'Sign up with Google',
-      //   icon: 'logo-google',
-      //   handler: () => {
-      //     this.openGoogleSignup();
-      //   }
-      // },
+    const buttons = [
+      {
+        text: 'Sign up with Email',
+        icon: 'mail',
+        handler: () => {
+          this.openEmailSignup();
+        },
+      },      
+      {
+        text: 'Sign up with Google',
+        icon: 'logo-google',
+        handler: () => {
+          this.openGoogleSignup();
+        }
+      },
       // {
       //   text: 'Sign up with Facebook',
       //   icon: 'logo-facebook',
@@ -71,31 +66,29 @@ export class IntroductionPage implements OnInit {
       //     this.openFacebookSignup();
       //   }
       // }
-    // ];
+    ];
 
-    // const device = await Device.getInfo();
+    const device = await Device.getInfo();
 
-    // if (device.platform === 'ios') {
-    //   buttons.push({
-    //     text: 'Sign in with Apple',
-    //     icon: 'logo-apple',
-    //     handler: () => {
-    //       this.openAppleSignup();
-    //     }
-    //   })
-    // }
+    if (device.platform === 'ios') {
+      buttons.push({
+        text: 'Sign in with Apple',
+        icon: 'logo-apple',
+        handler: () => {
+          this.openAppleSignup();
+        }
+      })
+    }
 
-    // const actionSheet = await this.actionSheetController.create({
-    //   cssClass: 'custom-action-sheet',
-    //   buttons
-    // });
-    // await actionSheet.present();
+    const actionSheet = await this.actionSheetController.create({
+      cssClass: 'custom-action-sheet',
+      buttons
+    });
+    await actionSheet.present();
   }
 
   openGoogleSignup() {
     this.authService.googleSignup().then((res) => {
-
-      // this.router.navigateByUrl('/home');
     }, err => {
       //Cancelled the sign up
     });

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, AlertController, IonNav } from '@ionic/angular';
+import { LoadingController, AlertController, ModalController, IonNav } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthenticationService } from '../../../services/auth/authentication.service';
+import { Plugins } from '@capacitor/core';
 
+const { Browser } = Plugins;
 
 @Component({
   selector: 'app-reset-password',
@@ -18,7 +20,9 @@ export class ResetPasswordPage implements OnInit {
     private authenticationService: AuthenticationService,
     private loadingController: LoadingController,
     private alertController: AlertController,
-    private nav: IonNav) { }
+    private modalController: ModalController,
+    private nav: IonNav
+    ) { }
 
   ngOnInit() {
     this.resetPasswordForm = this.formBuilder.group({
@@ -61,11 +65,12 @@ export class ResetPasswordPage implements OnInit {
   }
 
   close() {
-    // this.modalController.dismiss();
+    this.modalController.dismiss();
   }
 
-  redirectToTarSite(){
-    // /https://www.tucsonrealtors.org/
+  async redirectToTarSite(e) {
+    e.preventDefault();
+    await Browser.open({ url: 'https://www.tucsonrealtors.org/' });
   }
 
 }

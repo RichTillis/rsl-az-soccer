@@ -8,7 +8,12 @@
   "plugins": {
     "PushNotifications": {
       "presentationOptions": ["badge", "sound", "alert"]
-    }
+    },
+    "GoogleAuth": {
+      "scopes": ["profile", "email"],
+      "serverClientId": "297033223289-t8rta8aqptejctds19uslbq1d2vv1e78.apps.googleusercontent.com",
+      "forceCodeForRefreshToken": true
+      }
   },
   "ios": {
     "cordovaLinkerFlags": ["-ObjC"]

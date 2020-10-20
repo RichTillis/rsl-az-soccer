@@ -123,7 +123,8 @@ export class HomePage implements OnInit {
     if (device.platform === 'ios' || device.platform === 'android') {
       try {
         this.fcm.init()
-        this.appFlow.performManualUpdate()
+        // wrap this in an environment var. in dev = false, in prd = true
+        // this.appFlow.performManualUpdate()
       } catch (err) {
         console.warn(err)
       }

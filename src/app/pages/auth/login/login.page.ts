@@ -1,29 +1,38 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ModalController, AlertController, LoadingController } from '@ionic/angular';
 import { ResetPasswordPage } from '../reset-password/reset-password.page';
 import { AuthenticationService } from "../../../services/auth/authentication.service";
 import { Plugins } from '@capacitor/core';
 
-const { Device } = Plugins;
+const { Browser, Device } = Plugins;
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.page.html",
   styleUrls: ["./login.page.scss"]
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
   loginForm: FormGroup;
   resetPasswordPage = ResetPasswordPage;
   iosDevice: boolean = false;
+
+  // This does not feel like a good solution. Once Google auth is successful this page looses 
+  // scope or something and cannot be closed. This subscription knows when login has completed 
+  // and forces closed this modal
+  private authState = this.authService.authenticationState.subscribe((data) => {
+    const loggedIn = data;
+    if (loggedIn) {
+      this.close();
+    }
+  });
 
   constructor(
     public formBuilder: FormBuilder,
     private authService: AuthenticationService,
     private loadingController: LoadingController,
     private alertController: AlertController,
-    private modalController: ModalController,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -32,8 +41,15 @@ export class LoginPage implements OnInit {
       password: ['', Validators.required]
     });
 
-    // obv this needs work
-    const foo = this.isIosDevice();
+    Device.getInfo().then((device) => {
+      if (device.platform === 'ios') {
+        this.iosDevice = true;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.authState.unsubscribe();
   }
 
   async signInWithEmailAndPassword() {
@@ -76,24 +92,20 @@ export class LoginPage implements OnInit {
     this.modalController.dismiss();
   }
 
-  async isIosDevice() {
-    const device = await Device.getInfo();
-
-    if (device.platform === 'ios') {
-      this.iosDevice = true;
-    }
+  openGoogleSignup() {
+    this.authService.googleSignup().then((res) => {
+    }, err => {
+      //Cancelled the sign up
+    });
   }
 
-  openGoogleSignup(){
-
-  }
-
-  openFacebookSignup(){
+  openFacebookSignup() {
 
   }
 
-  redirectToTarSite(){
-    // /https://www.tucsonrealtors.org/
+  async redirectToTarSite(e) {
+    e.preventDefault();
+    await Browser.open({ url: 'https://www.tucsonrealtors.org/' });
   }
 
 }

@@ -13,4 +13,5 @@
   <string name="ionic_max_versions">2</string>
   <string name="ionic_min_background_duration">30</string>
   <string name="ionic_update_api">https://api.ionicjs.com</string>
+  <string name="server_client_id">297033223289-t8rta8aqptejctds19uslbq1d2vv1e78.apps.googleusercontent.com</string>
 </resources>
