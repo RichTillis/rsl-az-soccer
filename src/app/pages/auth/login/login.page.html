@@ -8,7 +8,7 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <div (click)="redirectToTarSite()">
+  <div (click)="redirectToTarSite($event)">
     <ion-img src="assets/images/tarsponsorbanner.jpg"></ion-img>
   </div>
   <ion-toolbar color="primary" class="min-height-5"></ion-toolbar>
@@ -46,7 +46,7 @@
       </ion-col>
 
       <ion-col size="10">
-        <ion-button disabled expand="block" type="button" (click)="openGoogleSignup()" color="dark" fill="outline">
+        <ion-button expand="block" type="button" (click)="openGoogleSignup()" color="dark" fill="outline">
           <ion-icon name="logo-google" slot="start"></ion-icon>
           Sign In with Google
         </ion-button>

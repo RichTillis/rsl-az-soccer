@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
 import { ModalController, AlertController, LoadingController } from "@ionic/angular";
+import { Plugins } from '@capacitor/core';
 
 import { AuthenticationService } from "../../../services/auth/authentication.service";
+const { Browser } = Plugins;
+
 
 @Component({
   selector: "app-register",
@@ -15,12 +17,11 @@ export class RegisterPage implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    private router: Router,
     private authService: AuthenticationService,
     private loadingController: LoadingController,
     private alertController: AlertController,
     private modalController: ModalController,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.registrationForm = this.formBuilder.group({
@@ -33,7 +34,7 @@ export class RegisterPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
     this.authService
-      .signupUserWithEmailAndPassword(        
+      .signupUserWithEmailAndPassword(
         this.registrationForm.value
       )
       .then(
@@ -58,7 +59,9 @@ export class RegisterPage implements OnInit {
     this.modalController.dismiss();
   }
 
-  redirectToTarSite(){
-    // /https://www.tucsonrealtors.org/
+  async redirectToTarSite(e) {
+    e.preventDefault();
+    await Browser.open({ url: 'https://www.tucsonrealtors.org/' });
   }
+
 }

@@ -33,7 +33,7 @@ export class AppComponent {
       this.menu.enable(true);
       this.router.navigate(['/home']);
     }
-  })
+  });
 
   constructor(
     private router: Router,

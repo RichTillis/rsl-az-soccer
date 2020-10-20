@@ -7,6 +7,7 @@ import { AngularFireDatabase, AngularFireObject } from "@angular/fire/database";
 import { auth } from "firebase/app";
 
 import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
+import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
 
 import { BehaviorSubject } from "rxjs";
@@ -66,7 +67,7 @@ export class AuthenticationService {
     return this.authenticationState ? this.getUserId() : "";
   }
 
-  // still needed?
+  // still needed? No
   storageControl(action, key?, value?) {
     if (action == "set") {
       return this.storage.set(key, value);
@@ -218,6 +219,7 @@ export class AuthenticationService {
     // might be fixed at a future time so check your IDE linting!
     const googleUser = await Plugins.GoogleAuth.signIn(null) as any;
 
+    console.log('Google auth response: ', googleUser);
     const credential = auth.GoogleAuthProvider.credential(
       googleUser.authentication.idToken
     );
