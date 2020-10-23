@@ -1,0 +1,34 @@
+.card-content-background {
+    background: white;
+}
+
+ion-slides {
+    background: #e6e6e6;
+
+    img {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+.addPadding {
+    padding-bottom: 12px;
+}
+
+.left-padding {
+    padding-left: 10px;
+}
+
+.no-vertical-padding {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.standout {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.min-height-10 {
+    --min-height: 5px;
+}

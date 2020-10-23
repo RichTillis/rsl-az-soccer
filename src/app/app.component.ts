@@ -20,6 +20,7 @@ export class AppComponent {
     { title: "Venues", route: "/venues", icon: "pin" },
     { title: "Inclement Weather", route: "/inclement-weather", icon: "rainy" },
     { title: "Contact Us", route: "/contact-us", icon: "mail" },
+    { title: "Manage Posts", route: "/posts", icon: "albums" },
   ];
 
   private authState = this.authenticationService.authenticationState.subscribe((data) => {
