@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ModalController, AlertController, LoadingController } from '@ionic/angular';
+import { ModalController, AlertController, LoadingController, MenuController } from '@ionic/angular';
 import { ResetPasswordPage } from '../reset-password/reset-password.page';
 import { AuthenticationService } from "../../../services/auth/authentication.service";
 import { Plugins } from '@capacitor/core';
+import { Router } from "@angular/router";
 
 const { Browser, Device } = Plugins;
 
@@ -21,8 +22,8 @@ export class LoginPage implements OnInit, OnDestroy {
   // scope or something and cannot be closed. This subscription knows when login has completed 
   // and forces closed this modal
   private authState = this.authService.authenticationState.subscribe((data) => {
-    const loggedIn = data;
-    if (loggedIn) {
+    const isLoggedIn = data;
+    if (isLoggedIn) {
       this.close();
     }
   });
@@ -32,7 +33,9 @@ export class LoginPage implements OnInit, OnDestroy {
     private authService: AuthenticationService,
     private loadingController: LoadingController,
     private alertController: AlertController,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private menu: MenuController,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -60,8 +63,12 @@ export class LoginPage implements OnInit, OnDestroy {
       .signInWithEmailAndPassword(this.loginForm.value)
       .then(
         (res) => {
+          console.log('login successful - routing')
           loading.dismiss();
           this.close();
+          // this.authService.authenticationState.next(true);
+          // this.menu.enable(true);
+          // this.router.navigate(['/home']);
         },
         async (err) => {
           loading.dismiss();

@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { MenuController } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
@@ -24,13 +23,11 @@ export class AuthenticationService {
     private storage: Storage,
     private afAuth: AngularFireAuth,
     private facebook: Facebook,
-    private menu: MenuController,
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
   ) {
-    this.menu.enable(false);
 
     this.afAuth.authState.subscribe(auth => {
-      // console.log(auth)
+      console.log('log in status: ',auth)
       auth === null ? this.authenticationState.next(false) : this.authenticationState.next(true);
     });
 
@@ -104,6 +101,11 @@ export class AuthenticationService {
 
   async signupUserWithEmailAndPassword({ email, password }): Promise<any>  {
     const credential = await this.afAuth.createUserWithEmailAndPassword(email, password);
+    console.log('what did i get back? ',credential);
+    if(credential !== null){
+      console.log('login success. Routing now');
+      this.authenticationState.next(true);
+    }
     return this.createNewUserDocumentInFirebase(email, credential.user);
   }
 
@@ -126,7 +128,10 @@ export class AuthenticationService {
   }
 
   async signOut() {
-    await this.afAuth.signOut();
+    const logOutResult = await this.afAuth.signOut();
+    this.authenticationState.next(false);
+    console.log('signout - logged out');
+    // this.router.navigate(['/']);
   }
 
   private updateUserData(user: firebase.User, email: string) {
@@ -140,10 +145,12 @@ export class AuthenticationService {
     return userRef.update(data);
   }
 
-  signInWithEmailAndPassword({ email, password }) {
-    return this.afAuth.signInWithEmailAndPassword(email, password).then((result) => {
-      return result;
-    });
+  async signInWithEmailAndPassword({ email, password }) {
+    const userCredential = await this.afAuth.signInWithEmailAndPassword(email, password);
+    if(userCredential){
+      this.authenticationState.next(true);
+    }
+    return userCredential;
   }
 
   // getProfile(): void {
@@ -225,7 +232,10 @@ export class AuthenticationService {
     );
 
     const afUser = await this.afAuth.signInWithCredential(credential);
-
+    if(afUser !== null){
+      console.log('google login success. Routing now');
+      this.authenticationState.next(true);
+    }
     return this.updateUserData(
       afUser.user,
       googleUser.givenName,

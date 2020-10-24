@@ -16,7 +16,7 @@ export class OrgHeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('pagetitle: ', this.pageTitle);
+    // console.log('pagetitle: ', this.pageTitle);
   }
 
   async redirectToTarSite(e){
