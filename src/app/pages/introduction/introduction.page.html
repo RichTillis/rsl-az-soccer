@@ -1,6 +1,12 @@
-<ion-header>
-  <org-header [pageTitle]="pageTitle"></org-header>
-</ion-header>
+<ion-toolbar color="primary">
+  <ion-icon slot="start" src="assets/images/rsl_az_logo.svg" size="large" class="left-padding"></ion-icon>
+  <ion-title>Welcome!</ion-title>
+</ion-toolbar>
+<div (click)="redirectToTarSite($event)">
+  <ion-img src="assets/images/tarsponsorbanner.jpg"></ion-img>
+</div>
+<ion-toolbar color="primary" class="min-height-5"></ion-toolbar>
+
 <ion-content color="light">
   <ion-slides pager="true">
     <!-- Slide 1 -->
