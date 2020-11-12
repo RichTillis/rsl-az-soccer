@@ -5,8 +5,8 @@
   <string name="package_name">com.rslazsoccer.app</string>
   <!-- <string name="fileprovider_authority">com.rslazsoccer.app.fileprovider</string> -->
   <string name="custom_url_scheme">com.rslazsoccer.app</string>
-  <string name="fb_app_id">2190938867832717</string>
-  <string name="fb_app_name">RSL-AZ</string>
+  <string name="fb_app_id">826192771492509</string>
+  <string name="fb_app_name">2021 Fort Lowell Shootout</string>
   <string name="ionic_app_id">4a8aae1c</string>
   <string name="ionic_channel_name">Master</string>
   <string name="ionic_update_method">none</string>
