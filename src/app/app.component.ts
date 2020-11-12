@@ -45,6 +45,7 @@ export class AppComponent {
     private toastController: ToastController
   ) {
     this.menu.enable(false);
+    this.authenticationService.init();
     SplashScreen.hide().catch(err => {
       console.warn(err);
     });

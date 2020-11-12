@@ -83,17 +83,17 @@ export class LoginPage implements OnInit, OnDestroy {
       )
   }
 
-  loginWithFacebook(): void {
-    // this.loginPocessing();
+  // loginWithFacebook(): void {
+  //   // this.loginPocessing();
 
-    this.authService.doFacebookLogin();
-    // .then(response => {
-    //   console.log("login successful?");
-    //   console.log("loggin in response: ", response);
-    //   this.resetLoginForm();
-    //   this.loginSuccess();
-    // });
-  }
+  //   this.authService.facebookLogin();
+  //   // .then(response => {
+  //   //   console.log("login successful?");
+  //   //   console.log("loggin in response: ", response);
+  //   //   this.resetLoginForm();
+  //   //   this.loginSuccess();
+  //   // });
+  // }
 
   close() {
     this.modalController.dismiss();
@@ -107,7 +107,7 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   openFacebookSignup() {
-
+    this.authService.facebookLogin();
   }
 
   async redirectToTarSite(e) {
