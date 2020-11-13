@@ -59,13 +59,13 @@ export class IntroductionPage implements OnInit {
           this.openGoogleSignup();
         }
       },
-      // {
-      //   text: 'Sign up with Facebook',
-      //   icon: 'logo-facebook',
-      //   handler: () => {
-      //     this.openFacebookSignup();
-      //   }
-      // }
+      {
+        text: 'Sign up with Facebook',
+        icon: 'logo-facebook',
+        handler: () => {
+          this.openFacebookSignup();
+        }
+      }
     ];
 
     const device = await Device.getInfo();
@@ -99,7 +99,7 @@ export class IntroductionPage implements OnInit {
   }
 
   openFacebookSignup() {
-    //TODO
+    this.authService.facebookLogin();
   }
 
   async openLogin() {
