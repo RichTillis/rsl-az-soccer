@@ -1,9 +1,95 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>post-create</ion-title>
-  </ion-toolbar>
+  <org-header [pageTitle]="pageTitle"></org-header>
 </ion-header>
 
-<ion-content>
+<ion-content color="light">
+
+  <form [formGroup]="createPostForm" (ngSubmit)="createPost()">
+    <ion-item>
+      <ion-label>Title</ion-label>
+      <ion-input formControlName="title" placeholder="Post Title" type="text" autofocus="true" clearInput="true">
+      </ion-input>
+    </ion-item>
+    <!-- <dynamic-form-item [formGroup]="createPostForm" [formArray]="createPostForm.controls.images" [item]="'image'" ></dynamic-form-item> -->
+
+    <div formArrayName="images" margin-bottom>
+      <section [formGroupName]="i" *ngFor="let image of createPostForm.controls.images.controls; let i = index">
+        <ion-item-group>
+          <ion-item-divider color="light">Image #{{ i + 1 }}</ion-item-divider>
+          <ion-item>
+            <ion-label>Image</ion-label>
+            <ion-input formControlName="image" placeholder="url" type="text" clearInput="true">
+            </ion-input>
+          </ion-item>
+
+          <span float-right ion-button icon-left clear *ngIf="createPostForm.controls.images.length > 1"
+            (click)="removeImageField(i)">
+            <ion-icon name="close-circle"></ion-icon>
+            Remove
+          </span>
+        </ion-item-group>
+      </section>
+    </div>
+    <span ion-button float-left icon-left clear (click)="addNewImageField()">
+      <ion-icon name="add-circle"></ion-icon>
+      Add a new image
+    </span>
+
+    <div formArrayName="body" margin-bottom>
+      <section [formGroupName]="i" *ngFor="let line of createPostForm.controls.body.controls; let i = index">
+        <ion-item-group>
+          <ion-item-divider color="light">Body Line #{{ i + 1 }}</ion-item-divider>
+          <ion-item>
+            <ion-label>Body</ion-label>
+            <ion-input formControlName="line" placeholder="Text" type="text" clearInput="true">
+            </ion-input>
+          </ion-item>
+
+          <span float-right ion-button icon-left clear *ngIf="createPostForm.controls.body.length > 1"
+            (click)="removeLineField(i)">
+            <ion-icon name="close-circle"></ion-icon>
+            Remove
+          </span>
+        </ion-item-group>
+      </section>
+    </div>
+    <span ion-button float-left icon-left clear (click)="addNewLineField()">
+      <ion-icon name="add-circle"></ion-icon>
+      Add a new line
+    </span>
+
+
+    <div formArrayName="links" margin-bottom>
+      <section [formGroupName]="i" *ngFor="let link of createPostForm.controls.links.controls; let i = index">
+        <ion-item-group>
+          <ion-item-divider color="light">Link #{{ i + 1 }}</ion-item-divider>
+          <ion-item>
+            <ion-label>Link</ion-label>
+            <ion-input formControlName="link" placeholder="url" type="text" clearInput="true">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Link Title</ion-label>
+            <ion-input formControlName="linkTitle" placeholder="Link Title" type="text" clearInput="true">
+            </ion-input>
+          </ion-item>
+
+          <span float-right ion-button icon-left clear *ngIf="createPostForm.controls.links.length > 1"
+            (click)="removeLinkField(i)">
+              <ion-icon name="close-circle"></ion-icon>
+            Remove
+          </span>
+        </ion-item-group>
+      </section>
+    </div>
+    <span ion-button float-left icon-left clear (click)="addNewLinkField()">
+      <ion-icon name="add-circle"></ion-icon>
+      Add a new link
+    </span>
+
+    <ion-button expand="block" type="submit">Create</ion-button>
+
+  </form>
 
 </ion-content>
+<org-footer></org-footer>

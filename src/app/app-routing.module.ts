@@ -102,6 +102,11 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin),
     loadChildren: () => import('./pages/posts/posts.module').then( m => m.PostsPageModule)
   },
+  {
+    path: 'post',
+    ...canActivate(redirectUnauthorizedToLogin),
+    loadChildren: () => import('./pages/post/post.module').then( m => m.PostPageModule)
+  },
 
   // {
   //   path: "notifications",

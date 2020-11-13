@@ -1,9 +1,54 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>post-edit</ion-title>
-  </ion-toolbar>
+  <org-header [pageTitle]="pageTitle"></org-header>
 </ion-header>
 
-<ion-content>
+<ion-content color="light">
 
+  <form [formGroup]="editPostForm" (ngSubmit)="savePost()">
+    <ion-card>
+      <ion-card-header color="primary">
+        <ion-item color="primary">
+          <ion-card-title>
+            <ion-input formControlName="title" placeholder="Post Title" type="text" autofocus="true" clearInput="true">
+            </ion-input>
+          </ion-card-title>
+        </ion-item>
+      </ion-card-header>
+      <div>
+        <img src="assets/images/{{post.img}}.jpg" tappable (click)=openPreview(post.img) />
+      </div>
+
+      <!-- <ion-slides [options]="sliderOpts" *ngIf="post.images">
+      <ion-slide *ngFor="let image of post.images">
+        <img src="assets/images/{{image}}.jpg" tappable (click)=openPreview(image) />
+      </ion-slide>
+     </ion-slides> -->
+      <ion-card-content class="card-content-background">
+        <ion-item lines="none">
+          <ion-label lines="none">
+            <ion-textarea formControlName="body" placeholder="Post Body" type="text" clearInput="true">
+            </ion-textarea>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+      <ion-card-content class="card-content-background no-vertical-padding ">
+        <ion-item lines="none">
+          <ion-label lines="none" color="secondary" class="standout">
+            <ion-input formControlName="link" placeholder="Link" type="text" clearInput="true">
+            </ion-input>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+      <ion-card-content class="card-content-background no-vertical-padding ">
+        <ion-item lines="none">
+          <ion-label lines="none" color="secondary" class="standout">
+            <ion-input formControlName="linkTitle" placeholder="Link Title" type="text" clearInput="true">
+            </ion-input>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+      <ion-button expand="block" type="submit">Update</ion-button>
+    </ion-card>
+  </form>
 </ion-content>
+<org-footer></org-footer>

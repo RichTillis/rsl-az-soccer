@@ -1,0 +1,22 @@
+<div formArrayName="itemName" margin-bottom>
+  <section [formGroupName]="i" *ngFor="let control of formArray.controls; let i = index">
+    <ion-item-group>
+      <ion-item-divider color="light">{{itemName}} #{{ i + 1 }}</ion-item-divider>
+      <ion-item>
+        <ion-label>{{itemName}}</ion-label>
+        <ion-input formControlName="image" placeholder="url" type="text" clearInput="true">
+        </ion-input>
+      </ion-item>
+
+      <span float-right ion-button icon-left clear *ngIf="formArray.length > 1"
+        (click)="removeItem(i)">
+        <ion-icon name="close"></ion-icon>
+        Remove
+      </span>
+    </ion-item-group>
+  </section>
+</div>
+<span ion-button float-left icon-left clear (click)="addNewItem()">
+  <ion-icon name="add"></ion-icon>
+  Add a new {{itemName}}
+</span>

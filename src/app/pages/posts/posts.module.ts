@@ -9,6 +9,8 @@ import { PostsPageRoutingModule } from './posts-routing.module';
 import { ComponentsModule } from '../../components/components.module';
 
 import { PostsPage } from './posts.page';
+import { PostEditPageModule } from '../post-edit/post-edit.module';
+import { PostCreatePageModule } from '../post-create/post-create.module';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import { PostsPage } from './posts.page';
     FormsModule,
     IonicModule,
     PostsPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    PostEditPageModule,
+    PostCreatePageModule
   ],
   declarations: [PostsPage]
 })

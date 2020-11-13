@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
 import { PostCreatePageRoutingModule } from './post-create-routing.module';
+
+import { ComponentsModule } from '../../components/components.module';
 
 import { PostCreatePage } from './post-create.page';
 
@@ -12,8 +14,10 @@ import { PostCreatePage } from './post-create.page';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
-    PostCreatePageRoutingModule
+    PostCreatePageRoutingModule,
+    ComponentsModule
   ],
   declarations: [PostCreatePage]
 })

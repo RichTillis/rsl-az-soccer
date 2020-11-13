@@ -1,9 +1,9 @@
 <ion-header>
   <org-header [pageTitle]="pageTitle"></org-header>
 </ion-header>
+
 <ion-content color="light">
-  <ion-card *ngFor="let post of posts">
-    <div *ngIf="post.status == 'active'">
+  <ion-card>
     <ion-card-header color="primary">
       <ion-card-title>{{post.title}}</ion-card-title>
     </ion-card-header>
@@ -28,8 +28,27 @@
         </ion-label>
       </ion-item>
     </ion-card-content>
-  </div>
+    <ion-card-content>
+      <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+      <ion-fab-button color="dark">
+        <ion-icon md="caret-up" ios="chevron-up-circle-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top">
+        <ion-fab-button color="light" (click)="openEdit()">
+          <ion-icon name="create"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button *ngIf="post.status != 'archive'" color="light" (click)="markAsArchive()">
+          <ion-icon name="archive"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button *ngIf="post.status != 'active'" color="light" (click)="markAsActive()">
+          <ion-icon name="push"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button *ngIf="post.status != 'draft'" color="light" (click)="markAsDraft()">
+          <ion-icon name="alert"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+      </ion-fab>
+    </ion-card-content>
   </ion-card>
-
 </ion-content>
 <org-footer></org-footer>

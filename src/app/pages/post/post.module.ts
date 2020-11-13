@@ -1,24 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PostEditPageRoutingModule } from './post-edit-routing.module';
+import { PostPageRoutingModule } from './post-routing.module';
 
+import { PostPage } from './post.page';
 import { ComponentsModule } from '../../components/components.module';
-
-import { PostEditPage } from './post-edit.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
-    PostEditPageRoutingModule,
+    PostPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [PostEditPage]
+  declarations: [PostPage]
 })
-export class PostEditPageModule {}
+export class PostPageModule {}

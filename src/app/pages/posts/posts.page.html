@@ -3,60 +3,33 @@
 </ion-header>
 
 <ion-content color="light">
-  <ion-card *ngFor="let post of posts">
-
-    <ion-card-header color="primary">
-      <ion-card-title>{{post.title}}</ion-card-title>
-    </ion-card-header>
-    <div *ngIf="post.img">
-      <img src="assets/images/{{post.img}}.jpg" tappable (click)=openPreview(post.img) />
+  <ion-segment [(ngModel)]="filter" value="active">
+    <ion-segment-button value="active">
+      <ion-label>Active</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="draft">
+      <ion-label>Draft</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="archived">
+      <ion-label>Archived</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-list>
+    <ion-item button (click)="openCreate()">
+      <ion-icon name="add"></ion-icon>
+      <ion-label>
+        <h2>Create New Post</h2>
+      </ion-label>
+    </ion-item>
+    <div [ngSwitch]="filter" *ngFor="let post of posts">
+      <ion-list>
+        <ion-item *ngSwitchCase="post.status" button (click)="openPost(post)" detail>
+          <ion-label>
+            <h2>{{post.title}}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
     </div>
-
-    <ion-slides [options]="sliderOpts" *ngIf="post.images">
-      <ion-slide *ngFor="let image of post.images">
-        <img src="assets/images/{{image}}.jpg" tappable (click)=openPreview(image) />
-      </ion-slide>
-    </ion-slides>
-
-    <ion-card-content class="card-content-background" *ngIf="post.qwerty">
-      This is content, without any paragraph or header tags,
-      within an ion-card-content element.
-    </ion-card-content>
-    <ion-card-content class="card-content-background" *ngIf="post.body">
-      <ion-label lines="none">
-        {{post.body}}
-      </ion-label>
-    </ion-card-content>
-    <ion-card-content class="card-content-background" *ngIf="post.body1">
-      <ion-label lines="none">
-        {{post.body1}}
-      </ion-label>
-    </ion-card-content>
-    <ion-card-content class="card-content-background" *ngIf="post.body2">
-      <ion-label lines="none">
-        {{post.body2}}
-      </ion-label>
-    </ion-card-content>
-    <ion-card-content class="card-content-background" *ngIf="post.body3">
-      <ion-label lines="none">
-        {{post.body3}}
-      </ion-label>
-    </ion-card-content>
-    <ion-card-content class="card-content-background no-vertical-padding " *ngIf="post.link">
-      <ion-item [href]="post.link" target="_blank" lines="none">
-        <ion-label lines="none" color="secondary" class="standout">
-          {{post.linkTitle}}
-        </ion-label>
-      </ion-item>
-    </ion-card-content>
-    <ion-card-content class="card-content-background no-vertical-padding " *ngIf="post.links">
-      <ion-item *ngFor="let link of post.links" [href]="link.link" target="_blank" lines="none">
-        <ion-label lines="none" color="secondary" class="standout">
-          {{link.linkTitle}}
-        </ion-label>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-
+  </ion-list>
 </ion-content>
 <org-footer></org-footer>
