@@ -134,7 +134,7 @@ export class AuthenticationService {
   }
 
   private updateUserData(user: firebase.User, email: string) {
-    const userRef: AngularFireObject<any> = this.db.object(`users/{user.uid}`);
+    const userRef: AngularFireObject<any> = this.db.object(`users/${user.uid}`);
     let lastLogin = new Date().toLocaleDateString();
     //TODO check if role has been set. If no, set it to 'user'
     const data = {
@@ -228,27 +228,48 @@ export class AuthenticationService {
 
   async nativeFacebookAuth(): Promise<void> {
     try {
-      const response = await this.facebook.login(["public_profile", "email"]);
+      const facebookLoginResponse = await this.facebook.login(["public_profile", "email"]);
 
-      console.log(response);
+      console.log(facebookLoginResponse);
 
-      if (response.authResponse) {
+      if (facebookLoginResponse.authResponse) {
         // User is signed-in Facebook.
-        const unsubscribe = firebase.auth().onAuthStateChanged(firebaseUser => {
+        const unsubscribe = firebase.auth().onAuthStateChanged(async firebaseUser => {
           unsubscribe();
           // Check if we are already signed-in Firebase with the correct user.
-          if (!this.isUserEqual(response.authResponse, firebaseUser)) {
+          if (!this.isUserEqual(facebookLoginResponse.authResponse, firebaseUser)) {
             // Build Firebase credential with the Facebook auth token.
             const credential = firebase.auth.FacebookAuthProvider.credential(
-              response.authResponse.accessToken
+              facebookLoginResponse.authResponse.accessToken
             );
             // Sign in with the credential from the Facebook user.
-            firebase
-              .auth()
-              .signInWithCredential(credential)
-              .catch(error => {
-                console.log(error);
-              });
+            const afUser = await this.afAuth.signInWithCredential(credential);
+            if (afUser !== null) {
+              console.log('facebook login success. Routing now');
+              this.authenticationState.next(true);
+            }
+            const fbUserId = facebookLoginResponse.authResponse.userID;
+            const faceBookUserData = await this.getFacebookUserData(fbUserId);
+            console.log('faceBookUserData: ',faceBookUserData);
+            return this.updateUserData(
+              afUser.user,
+              faceBookUserData.email
+              //faceBookUserData.picture.data.url,
+              //faceBookUserData.name
+            );
+
+
+
+
+
+            // firebase
+            //   .auth()
+            //   .signInWithCredential(credential).then(authUser=>{
+
+            //   })
+            //   .catch(error => {
+            //     console.log(error);
+            //   });
           } else {
             // User is already signed-in Firebase with the correct user.
             console.log("already signed in");
@@ -261,6 +282,17 @@ export class AuthenticationService {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  getFacebookUserData(fbUserId: string): Promise<any> {
+    return this.facebook.api('/' + fbUserId + '/?fields=id,email,name,picture', ['public_profile'])
+      .then(apiResponse => {
+        console.log('graphQl response: ', apiResponse);
+        return apiResponse;
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
   async browserFacebookAuth(): Promise<void> {

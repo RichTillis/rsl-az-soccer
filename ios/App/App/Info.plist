@@ -36,9 +36,32 @@
 				<string>com.googleusercontent.apps.297033223289-e32esl5ge3meuds5sso1cp2qbmg369q1</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb826192771492509</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAdvertiserIDCollectionEnabled</key>
+	<false/>
+	<key>FacebookAppID</key>
+	<string>826192771492509</string>
+	<key>FacebookAutoLogAppEventsEnabled</key>
+	<false/>
+	<key>FacebookDisplayName</key>
+	<string>2021 Fort Lowell Shootout</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbshareextension</string>
+		<string>fb-messenger-api</string>
+		<string>fbapi</string>
+		<string>fbauth2</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
