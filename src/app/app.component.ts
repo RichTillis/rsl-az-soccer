@@ -1,8 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Plugins } from "@capacitor/core";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "./services/auth/authentication.service";
 import { MenuController, Platform, LoadingController, AlertController, ToastController } from "@ionic/angular";
+import { map, tap } from "rxjs/operators";
+import { User } from "./interfaces/user";
+import { menuItems } from './app-menu-items';
 
 const { SplashScreen, StatusBar } = Plugins;
 
@@ -10,30 +13,8 @@ const { SplashScreen, StatusBar } = Plugins;
   selector: "app-root",
   templateUrl: "app.component.html"
 })
-export class AppComponent {
-  public menuItems = [
-    { title: "Home", route: "/home", icon: "home" },
-    { title: "My Teams", route: "/my-teams", icon: "star" },
-    { title: "Schedule", route: "/teams", icon: "calendar" },
-    { title: "Standings", route: "/standings", icon: "trophy" },
-    { title: 'Field Maps', route: '/field-maps', icon: 'map' },
-    { title: "Venues", route: "/venues", icon: "pin" },
-    { title: "Inclement Weather", route: "/inclement-weather", icon: "rainy" },
-    { title: "Contact Us", route: "/contact-us", icon: "mail" },
-  ];
-
-  private authState = this.authenticationService.authenticationState.subscribe((data) => {
-    console.log('authState. Logged in: ', data);
-    const loggedIn = data;
-    if (!loggedIn) {
-      this.menu.enable(false);
-      this.router.navigate(['/']);
-    }
-    else {
-      this.menu.enable(true);
-      this.router.navigate(['/home']);
-    }
-  });
+export class AppComponent implements OnInit {
+  allowedMenuItems = [];
 
   constructor(
     private router: Router,
@@ -46,13 +27,52 @@ export class AppComponent {
   ) {
     this.menu.enable(false);
     this.authenticationService.init();
+    
     SplashScreen.hide().catch(err => {
       console.warn(err);
     });
     StatusBar.hide().catch(err => {
       console.warn(err);
     });
+
+    this.authenticationService.authenticationState.subscribe(user => {
+      if (user) {
+        this.menu.isOpen().then(data => {
+          if (!data) {
+            this.menu.enable(true);
+          }
+        });
+        this.router.navigate(['/home']);
+      }
+      else {
+        this.menu.isOpen().then(data => {
+          if (!data) {
+            this.menu.enable(false);
+          }
+        });
+        this.router.navigate(['/']);
+      }
+    });
+
+    this.authenticationService.currentFirebaseUser$.subscribe(firebaseUser => {
+      if (firebaseUser) {
+        this.authenticationService.users$.pipe(
+          tap(users => console.log(users)),
+          tap(() => console.log(firebaseUser.uid)),
+          map(users => users.find(users => users.key === firebaseUser.uid))
+        ).subscribe((user: User) => {
+          console.log("my subscribe: ", user);
+          this.allowedMenuItems = menuItems.filter(menuItem => {
+            return menuItem.roles.find(role => {
+              return role === user.role;
+            })
+          });
+        })
+      }
+    });
   }
+
+  ngOnInit() {  }
 
   async logout() {
     const loading = await this.loadingController.create();
@@ -63,6 +83,7 @@ export class AppComponent {
         loading.dismiss();
         const toast = await this.toastController.create({
           message: 'Successfully logged out. See ya next time!',
+          color: 'tertiary',
           duration: 2000
         });
 

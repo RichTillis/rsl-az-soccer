@@ -1,18 +1,15 @@
 import { Injectable, NgZone } from "@angular/core";
 import { Platform } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFireDatabase, AngularFireObject } from "@angular/fire/database";
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from "@angular/fire/database";
 import { auth } from "firebase/app";
-
 import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook/ngx";
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
-
-import { BehaviorSubject } from "rxjs";
-
+import { BehaviorSubject, Observable } from "rxjs";
 import { User } from "../../interfaces/user";
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -20,19 +17,33 @@ import { User } from "../../interfaces/user";
 export class AuthenticationService {
   authenticationState = new BehaviorSubject(false);
   loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
+  currentFirebaseUser$: BehaviorSubject<firebase.User> = new BehaviorSubject<firebase.User>(null);
+  usersRef: AngularFireList<User>;
+  users$: Observable<User[]>;
   constructor(
-    private storage: Storage,
     private afAuth: AngularFireAuth,
     private facebook: Facebook,
     private db: AngularFireDatabase,
     private zone: NgZone,
     private platform: Platform
   ) {
+    this.usersRef = db.list('users');
+    this.users$ = this.usersRef.snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    );
 
+    // Do we need this AND the init()??
     this.afAuth.authState.subscribe(auth => {
-      console.log('log in status: ', auth)
-      auth === null ? this.authenticationState.next(false) : this.authenticationState.next(true);
+      console.log('log in status: ', auth);
+      if (auth === null) {
+        this.authenticationState.next(false);
+        this.currentFirebaseUser$.next(null);
+      } else {
+        this.authenticationState.next(true);
+        this.currentFirebaseUser$.next(auth)
+      }
     });
   }
   init(): void {
@@ -43,45 +54,6 @@ export class AuthenticationService {
     });
   }
 
-  // Returns true if user is logged in
-  // get isAuthenticated(): boolean {
-  //   return this.authState !== null;
-  // }
-
-  // onAuthStateChanged() {
-  //   this.afAuth.onAuthStateChanged(user => {
-  //     this.authState = user;
-  //   });
-  // }
-
-  // Returns current user UID
-  // get currentUserId(): string {
-  //   return this.isAuthenticated ? this.authState.uid : "";
-  // }
-
-  get currentUserId(): string {
-    return this.authenticationState ? this.getUserId() : "";
-  }
-
-  // still needed? No
-  storageControl(action, key?, value?) {
-    if (action == "set") {
-      return this.storage.set(key, value);
-    }
-    if (action == "get") {
-      return this.storage.get(key);
-    }
-    if (action == "delete") {
-      if (!key) {
-        // this.displayAlert('Warning', 'About to delete all user data');
-        return this.storage.clear();
-      } else {
-        // this.displayAlert(key, 'Deleting this users data');
-        return this.storage.remove(key);
-      }
-    }
-  }
-
   updateUser(user: User) {
     let path = `users/${user.uid}`;
     this.db
@@ -90,8 +62,6 @@ export class AuthenticationService {
       .then(() => {
         console.log("user updated");
       });
-
-    // return this.storageControl("set", username, newData);
   }
 
   resetPassword(email: string) {
@@ -114,9 +84,7 @@ export class AuthenticationService {
     const newUser: User = {
       uid: user.uid,
       email: email,
-      roles: {
-        user: true
-      },
+      role: 'user',
       // createDate: firebase.firestore.FieldValue.serverTimestamp(),
       createDate: createDate,
       lastLogin: createDate
@@ -167,63 +135,6 @@ export class AuthenticationService {
     } else {
       this.browserFacebookAuth();
     }
-
-    // let loggedInUser: User = null;
-
-    // this.facebook.getLoginStatus().then(response => {
-    //   if (response.status === "connected") {
-    //     console.log("user already logged into facebook with this app");
-    //     const facebookCredential = auth.FacebookAuthProvider.credential(
-    //       response.authResponse.accessToken
-    //     );
-    //     this.doFirebaseLogin(facebookCredential).then((userCredential: any) => {
-    //       loggedInUser = {
-    //         uid: userCredential.user.uid,
-    //         email: userCredential.additionalUserInfo.profile.email,
-    //         lastLogin: new Date().toLocaleDateString(),
-    //         profilePic:
-    //           userCredential.additionalUserInfo.profile.picture.data.url,
-    //         facebookId: userCredential.additionalUserInfo.profile.id
-    //       };
-    //       this.updateUser(loggedInUser);
-    //       this.routeSuccessfulLogin();
-    //     });
-    //   } else {
-    //     console.log("user is not yet logged into facebook");
-    //     this.facebook
-    //       .login(["public_profile", "email"])
-    //       .then(
-    //         (res: FacebookLoginResponse) => {
-    //           const facebookCredential_1 = firebase.auth.FacebookAuthProvider.credential(
-    //             res.authResponse.accessToken
-    //           );
-    //           this.doFirebaseLogin(facebookCredential_1).then(
-    //             (userCredential_1: any) => {
-    //               loggedInUser = {
-    //                 uid: userCredential_1.user.uid,
-    //                 email: userCredential_1.additionalUserInfo.profile.email,
-    //                 lastLogin: new Date().toLocaleDateString(),
-    //                 profilePic:
-    //                   userCredential_1.additionalUserInfo.profile.picture.data
-    //                     .url,
-    //                 facebookId: userCredential_1.additionalUserInfo.profile.id
-    //               };
-    //               this.updateUser(loggedInUser);
-    //               this.routeSuccessfulLogin();
-    //             }
-    //           );
-    //         },
-    //         error => {
-    //           console.log(
-    //             "Error logging into Facebook" + JSON.stringify(error)
-    //           );
-    //         }
-    //       )
-    //       .catch(error_1 => {
-    //         console.log("Error logging into Facebook", error_1);
-    //       });
-    //   }
-    // });
   }
 
   async nativeFacebookAuth(): Promise<void> {
@@ -250,26 +161,13 @@ export class AuthenticationService {
             }
             const fbUserId = facebookLoginResponse.authResponse.userID;
             const faceBookUserData = await this.getFacebookUserData(fbUserId);
-            console.log('faceBookUserData: ',faceBookUserData);
+            console.log('faceBookUserData: ', faceBookUserData);
             return this.updateUserData(
               afUser.user,
               faceBookUserData.email
               //faceBookUserData.picture.data.url,
               //faceBookUserData.name
             );
-
-
-
-
-
-            // firebase
-            //   .auth()
-            //   .signInWithCredential(credential).then(authUser=>{
-
-            //   })
-            //   .catch(error => {
-            //     console.log(error);
-            //   });
           } else {
             // User is already signed-in Firebase with the correct user.
             console.log("already signed in");
@@ -349,4 +247,9 @@ export class AuthenticationService {
   getUserId() {
     return auth().currentUser.uid;
   }
+
+  get currentUserId(): string {
+    return this.authenticationState ? this.getUserId() : "";
+  }
+
 }

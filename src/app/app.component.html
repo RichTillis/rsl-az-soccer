@@ -9,7 +9,7 @@
 
       <ion-list>
         <ion-menu-toggle auto-hide="false">
-          <ion-item *ngFor="let menuItem of menuItems" color="primary" [routerDirection]="'root'" [routerLink]="[menuItem.route]">
+          <ion-item *ngFor="let menuItem of allowedMenuItems" color="primary" [routerDirection]="'root'" [routerLink]="[menuItem.route]">
             <ion-icon slot="start" [name]="menuItem.icon" color="light"></ion-icon>
             <ion-label> {{menuItem.title}} </ion-label>
           </ion-item>
