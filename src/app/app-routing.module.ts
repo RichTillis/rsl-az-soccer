@@ -1,12 +1,18 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
+import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo, customClaims } from '@angular/fire/auth-guard';
+import { pipe } from "rxjs";
 
 // Send unauthorized users to login
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/introduction']);
 
 // Automatically log in users
 const redirectLoggedInToApp = () => redirectLoggedInTo(['/home']);
+
+// TODO: how to authorize routes via roles AND authentication????
+// 'claims' does not feel like a solid solution 
+// Role-base Auth using angularFire
+// const adminOnly = () => pipe(customClaims, map(claims => claims.role === 'admin'));
 
 const routes: Routes = [
   {
