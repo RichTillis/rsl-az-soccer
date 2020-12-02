@@ -34,7 +34,7 @@ export class AuthenticationService {
       )
     );
 
-    // Do we need this AND the init()??
+    // Do we need this AND the init()?? No but I can't get it to work without both
     this.afAuth.authState.subscribe(auth => {
       console.log('log in status: ', auth);
       if (auth === null) {
@@ -45,6 +45,13 @@ export class AuthenticationService {
         this.currentFirebaseUser$.next(auth)
       }
     });
+
+    this.afAuth.onAuthStateChanged(firebaseUser => {
+      this.zone.run(() => {
+        firebaseUser ? this.loggedIn.next(true) : this.loggedIn.next(false);
+      });
+    });
+
   }
   init(): void {
     this.afAuth.onAuthStateChanged(firebaseUser => {

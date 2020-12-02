@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   ) {
     this.menu.enable(false);
     this.authenticationService.init();
-    
+
     SplashScreen.hide().catch(err => {
       console.warn(err);
     });
@@ -40,39 +40,40 @@ export class AppComponent implements OnInit {
         this.menu.isOpen().then(data => {
           if (!data) {
             this.menu.enable(true);
+            this.router.navigate(['/home']);
           }
         });
-        this.router.navigate(['/home']);
+        // this.router.navigate(['/home']);
       }
       else {
         this.menu.isOpen().then(data => {
           if (!data) {
             this.menu.enable(false);
+            this.router.navigate(['/']);
           }
         });
-        this.router.navigate(['/']);
+        // this.router.navigate(['/']);
       }
     });
 
     this.authenticationService.currentFirebaseUser$.subscribe(firebaseUser => {
       if (firebaseUser) {
         this.authenticationService.users$.pipe(
-          tap(users => console.log(users)),
-          tap(() => console.log(firebaseUser.uid)),
+          // tap(users => console.log(users)),
+          // tap(() => console.log(firebaseUser.uid)),
           map(users => users.find(users => users.key === firebaseUser.uid))
         ).subscribe((user: User) => {
-          console.log("my subscribe: ", user);
           this.allowedMenuItems = menuItems.filter(menuItem => {
             return menuItem.roles.find(role => {
               return role === user.role;
-            })
+            });
           });
-        })
+        });
       }
     });
   }
 
-  ngOnInit() {  }
+  ngOnInit() { }
 
   async logout() {
     const loading = await this.loadingController.create();
